@@ -16,7 +16,12 @@ alias la='ls -laFG'
 alias l='ls -CFG'
 
 # zplug
-export ZPLUG_HOME=~/.zplug
+if [ "`uname -s`" = "Linux" ]; then
+	export ZPLUG_HOME=~/.zplug
+elif [ "`uname -s`" = "Darwin" ]; then
+	export ZPLUG_HOME=/usr/local/opt/zplug
+fi
+
 source $ZPLUG_HOME/init.zsh
 
 ## プラグイン一覧
