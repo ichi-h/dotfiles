@@ -1,0 +1,14 @@
+[user]
+	email = ippee.music@gmail.com
+	name = ippee
+[core]
+	autocrlf = false
+	filemode = false
+	quotepath = false
+[color]
+	ui = auto
+[http]
+	postBuffer = 16M
+[init]
+	defaultBranch = main
+
