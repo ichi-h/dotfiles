@@ -16,7 +16,7 @@ alias la='ls -laFG'
 alias l='ls -CFG'
 
 # zplug
-export ZPLUG_HOME=/usr/local/opt/zplug
+export ZPLUG_HOME=~/.zplug
 source $ZPLUG_HOME/init.zsh
 
 ## プラグイン一覧
