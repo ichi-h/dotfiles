@@ -1,9 +1,11 @@
-#!/bin/sh
+#!/bin/bash
 
-ln -s ~/dotfiles/.gitconfig ~/.gitconfig
-ln -s ~/dotfiles/.zshenv ~/.zshenv
-ln -s ~/dotfiles/.zshrc ~/.zshrc
-ln -s ~/dotfiles/.vimrc ~/.vimrc
-ln -s ~/dotfiles/ignore ~/.config/git/ignore
-ln -s ~/dotfiles/.mycmd ~/.mycmd
+links=(~/.gitconfig ~/.zshenv ~/.zshrc ~/.vimrc ~/.config/git/ignore ~/.mycmd)
 
+for link in ${links[@]}; do
+  if [ ! -e $link ]; then
+    file_name=`basename $link`
+    ln -s ~/dotfiles/$file_name $link
+    echo Create $link sylink.
+  fi
+done
