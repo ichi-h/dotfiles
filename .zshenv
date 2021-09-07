@@ -1,3 +1,4 @@
+# For osx
 if [ `uname -s` = "Darwin" ]; then
   # pyenv
   export PYENV_ROOT="$HOME/.pyenv"
@@ -16,11 +17,18 @@ if [ `uname -s` = "Darwin" ]; then
   export RUSTUP_HOME="$RUST_HOME"/rustup
   export CARGO_HOME="$HOME"/.cargo
   source "$CARGO_HOME"/env
+
+  # Path
+  export PATH="$PATH:/Users/ippee/.local/bin"
+  export PATH="$PATH:/Users/ippee/.mycmd/bin"
+fi
+
+# For Linux
+if [ `uname -s` = "Linux" ]; then
+  export PATH="$PATH:/home/ippee/.mycmd/bin"
 fi
 
 # Path
-export PATH="$PATH:/Users/ippee/.local/bin"
 export PATH="$PATH:/usr/local/bin/"
 export PATH="$PATH:/usr/local/sbin/"
-export PATH="$PATH:/Users/ippee/.mycmd/bin"
 
