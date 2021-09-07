@@ -1,4 +1,4 @@
-
+# pyenv 
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 if command -v pyenv 1>/dev/null 2>&1; then
@@ -22,5 +22,5 @@ source "$CARGO_HOME"/env
 export PATH="$PATH:/Users/ippee/.local/bin"
 export PATH="$PATH:/usr/local/bin/"
 export PATH="$PATH:/usr/local/sbin/"
-export PATH="$PATH:/User/ippee/.mycmd/bin"
+export PATH="$PATH:/Users/ippee/.mycmd/bin"
 
