@@ -29,6 +29,12 @@ function command_not_found_handler {
   return 127
 }
 
+# zstyle
+autoload -U colors ; colors ; zstyle ':completion:*' list-colors "${LS_COLORS}"
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+zstyle ':completion:*' menu select
+
 # zinit
 ## Added by Zinit's installer
 if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
