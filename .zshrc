@@ -19,15 +19,18 @@ alias l='ls -CFG'
 
 # (WSL) Omit the ext of Windows exec
 # https://unix.stackexchange.com/questions/612352/how-to-run-windows-executables-from-terminal-without-the-explicitly-specifying-t
-function command_not_found_handler {
-  for ext in ${(s:;:)${PATHEXT-".com;.exe;.bat;.cmd;.vbs;.vbe;.js;.jse;.wsf;.wsh;.msc"}}; do
-  if (( $+commands[$1$ext] )); then
-    exec -- "$1$ext" "${@:2}"
-  fi
-  done
-  print -ru2 "command not found: $1"
-  return 127
-}
+if [ `uname -s` = "Linux" ]; then
+  function command_not_found_handler {
+    exts=".exe;.com;.bat;.cmd;.vbs;.vbe;.js;.jse;.wsf;.wsh;.msc;"$PATHEXT
+    for ext in ${(s:;:)${exts}}; do
+      if [ $+commands[$1$ext] -eq 1 ]; then
+        exec -- "$1$ext" "${@:2}"
+      fi
+    done
+    print -ru2 "command not found: $1"
+    return 127
+  }
+fi
 
 # zstyle
 autoload -U colors ; colors ; zstyle ':completion:*' list-colors "${LS_COLORS}"
