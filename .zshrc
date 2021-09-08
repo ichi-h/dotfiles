@@ -29,29 +29,44 @@ function command_not_found_handler {
   return 127
 }
 
-# zplug
-if [ "`uname -s`" = "Linux" ]; then
-	export ZPLUG_HOME=~/.zplug
-elif [ "`uname -s`" = "Darwin" ]; then
-	export ZPLUG_HOME=/usr/local/opt/zplug
+# zinit
+## Added by Zinit's installer
+if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
+  print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
+  command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
+  command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \
+    print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
+    print -P "%F{160}▓▒░ The clone has failed.%f%b"
 fi
 
-source $ZPLUG_HOME/init.zsh
+source "$HOME/.zinit/bin/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
 
-## プラグイン一覧
-zplug "zplug/zplug", hook-build:'zplug --self-manage'
-zplug "zsh-users/zsh-autosuggestions"
-zplug "zsh-users/zsh-syntax-highlighting"
-zplug "ippee/ys", as:theme
+## Load a few important annexes, without Turbo
+## (this is currently required for annexes)
+zinit light-mode for \
+  zinit-zsh/z-a-rust \
+  zinit-zsh/z-a-as-monitor \
+  zinit-zsh/z-a-patch-dl \
+  zinit-zsh/z-a-bin-gem-node
 
-## プラグインのインストール
-if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    fi
+## Oh My Zsh Setup
+setopt promptsubst
+
+zinit for \
+  OMZL::prompt_info_functions.zsh \
+  OMZL::theme-and-appearance.zsh \
+  OMZT::ys.zsh-theme
+zinit snippet OMZL::git.zsh
+zinit ice atload"unalias grv"
+zinit snippet OMZP::git
+
+## Plugins
+zinit light zsh-users/zsh-autosuggestions
+zinit light zdharma/history-search-multi-word
+
+# For osx
+if [ `uname -s` = "Darwin" ]; then
+  zinit light zdharma/fast-syntax-highlighting
 fi
-
-## コマンドの読み込み
-zplug load
-
