@@ -15,6 +15,18 @@ HISTFILESIZE=2000
 alias la='ls -laFG'
 alias l='ls -CFG'
 
+# (WSL) .exeの省略
+# https://unix.stackexchange.com/questions/612352/how-to-run-windows-executables-from-terminal-without-the-explicitly-specifying-t
+function command_not_found_handler {
+  for ext in ${(s:;:)${PATHEXT-".com;.exe;.bat;.cmd;.vbs;.vbe;.js;.jse;.wsf;.wsh;.msc"}}; do
+    if (( $+commands[$1$ext] )); then
+      exec -- "$1$ext" "${@:2}"
+    fi
+  done
+  print -ru2 "command not found: $1"
+  return 127
+}
+
 # zplug
 if [ "`uname -s`" = "Linux" ]; then
 	export ZPLUG_HOME=~/.zplug
