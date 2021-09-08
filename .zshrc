@@ -1,23 +1,23 @@
-# 補完の有効化
+# Activate completion
 autoload -Uz compinit && compinit
 
-# cdの省略
+# Omit cd command
 setopt auto_cd
 alias ...='cd ../..'
 alias ....='cd ../../..'
 
-# コマンドの履歴
+# Command history
 export HISTFILE=${HOME}/.zsh_history
 export HISTSIZE=1000
 export HISTFILESIZE=2000
 export SAVEHIST=1000
 setopt INC_APPEND_HISTORY
 
-# alias
+# Aliases
 alias la='ls -laFG'
 alias l='ls -CFG'
 
-# (WSL) .exeの省略
+# (WSL) Omit the ext of Windows exec
 # https://unix.stackexchange.com/questions/612352/how-to-run-windows-executables-from-terminal-without-the-explicitly-specifying-t
 function command_not_found_handler {
   for ext in ${(s:;:)${PATHEXT-".com;.exe;.bat;.cmd;.vbs;.vbe;.js;.jse;.wsf;.wsh;.msc"}}; do
