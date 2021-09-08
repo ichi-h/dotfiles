@@ -8,8 +8,10 @@ alias ....='cd ../../..'
 
 # コマンドの履歴
 export HISTFILE=${HOME}/.zsh_history
-HISTSIZE=1000
-HISTFILESIZE=2000
+export HISTSIZE=1000
+export HISTFILESIZE=2000
+export SAVEHIST=1000
+setopt INC_APPEND_HISTORY
 
 # alias
 alias la='ls -laFG'
