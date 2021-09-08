@@ -63,7 +63,7 @@ set whichwrap=b,s,h,l,<,>,[,]
 " シンタックスハイライトを有効化
 syntax on
 
-" タブ幅を４に変更
-set tabstop=4
-set shiftwidth=4
+" タブ幅を２に変更
+set tabstop=2
+set shiftwidth=2
 
