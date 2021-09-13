@@ -6,6 +6,22 @@ repo = 'Shougo/dein.vim'
 repo    = 'vim-airline/vim-airline'
 depends = ['vim-airline-themes']
 
+[[plugins]]
+repo    = 'lambdalisue/glyph-palette.vim'
+depends = ['fern.vim']
+
+[[plugins]]
+repo    = 'lambdalisue/nerdfont.vim'
+depends = ['fern.vim']
+
+[[plugins]]
+repo    = 'lambdalisue/fern-renderer-nerdfont.vim'
+depends = ['fern.vim']
+
+[[plugins]]
+repo    = 'lambdalisue/fern-git-status.vim'
+depends = ['fern.vim']
+
 # 依存関係を指定したからと言って、自動でインストールはされない（ここは NeoBundle と違う）
 [[plugins]]
 repo = 'vim-airline/vim-airline-themes'
