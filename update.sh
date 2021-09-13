@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Create the .config directory
+if [ ! -e ~/.config ]; then
+  mkdir -p ~/.config/git
+fi
+
 # Create the sylinks of the dotfiles
 links=(~/.gitconfig ~/.zshenv ~/.zshrc ~/.vimrc ~/.config/git/ignore ~/.mycmd ~/dein.vim)
 for link in ${links[@]}; do
