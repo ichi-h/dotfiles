@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Create the sylinks of the dotfiles
-links=(~/.gitconfig ~/.zshenv ~/.zshrc ~/.vimrc ~/.config/git/ignore ~/.mycmd)
+links=(~/.gitconfig ~/.zshenv ~/.zshrc ~/.vimrc ~/.config/git/ignore ~/.mycmd ~/dein.vim)
 for link in ${links[@]}; do
   if [ ! -e $link ]; then
     file_name=`basename $link`
