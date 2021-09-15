@@ -75,7 +75,14 @@ zinit snippet OMZP::git
 zinit light zsh-users/zsh-autosuggestions
 zinit light zdharma/history-search-multi-word
 
+zinit ice atclone"chmod +x zlitefetch.zsh"
+zinit light ippee/zlitefetch
+
 # For osx
 if [ `uname -s` = "Darwin" ]; then
   zinit light zdharma/fast-syntax-highlighting
 fi
+
+# Display system information
+zlitefetch
+
