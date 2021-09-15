@@ -26,6 +26,8 @@ fi
 # For Linux
 if [ `uname -s` = "Linux" ]; then
   export PATH="$PATH:/home/ippee/.mycmd/bin"
+  export winHome="$HOME/win_home"
+  export project="$HOME/win_project"
 fi
 
 # Path
