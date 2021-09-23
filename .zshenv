@@ -29,6 +29,8 @@ if [ `uname -s` = "Linux" ]; then
   export PATH="$PATH:$HOME/.local/bin"
   export win_home="$HOME/win_home"
   export win_project="$HOME/win_project"
+
+  . "$HOME/.cargo/env"
 fi
 
 # Path
