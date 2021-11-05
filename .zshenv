@@ -30,6 +30,12 @@ if [ `uname -s` = "Linux" ]; then
   export win_home="$HOME/win_home"
   export win_project="$HOME/win_project"
 
+  # nvm
+  [ -z "$NVM_DIR" ] && export NVM_DIR="$HOME/.nvm"
+  source /usr/share/nvm/nvm.sh
+  source /usr/share/nvm/bash_completion
+  source /usr/share/nvm/install-nvm-exec
+
   . "$HOME/.cargo/env"
 fi
 
