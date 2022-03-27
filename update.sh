@@ -6,7 +6,7 @@ if [ ! -e ~/.config ]; then
 fi
 
 # Create the sylinks of the dotfiles
-links=(~/.gitconfig ~/.zshenv ~/.zshrc ~/.vimrc ~/.config/git/ignore ~/.mycmd ~/dein.vim)
+links=(~/.gitconfig ~/.zshenv ~/.zshrc ~/.vimrc ~/.config/git/ignore ~/.mycmd ~/dein.vim ~/.tmux.conf)
 for link in ${links[@]}; do
   if [ ! -e $link ]; then
     file_name=`basename $link`
