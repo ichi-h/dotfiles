@@ -38,7 +38,10 @@ if [ `uname -s` = "Linux" ]; then
 
   export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
-  # . "$HOME/.cargo/env"
+  # ngrok
+  export PATH="$PATH:$HOME/.ngrok2/bin"
+
+  . "$HOME/.cargo/env"
 fi
 
 # Path
