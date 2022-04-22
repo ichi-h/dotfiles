@@ -102,7 +102,3 @@ export TYPEWRITTEN_CURSOR="block"
 
 autoload -U promptinit; promptinit
 prompt typewritten
-
-# Language
-
-export LANG=en_US
