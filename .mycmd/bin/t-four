@@ -6,7 +6,7 @@ tmux select-pane -t 0
 tmux split-window -h
 tmux select-pane -t 0
 
-if [ -n $1 ]; then
+if [ -n "$1" ]; then
   name=`echo $1 | sed -e "s/^\/.*\///g"`
   tmux rename-window $name
 
