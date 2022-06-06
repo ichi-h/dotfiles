@@ -1,7 +1,11 @@
 #!/bin/bash
 
-# Create the .config directory
+# Create directories
 if [ ! -e ~/.config ]; then
+  mkdir -p ~/.config
+fi
+
+if [ ! -e ~/.config/git ]; then
   mkdir -p ~/.config/git
 fi
 
