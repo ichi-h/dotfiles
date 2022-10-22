@@ -62,9 +62,6 @@ if [ $USER_DEVICE = "wsl" ]; then
   fpath=($fpath "/home/ichi/.zfunctions")
 
   export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-
-  # ngrok
-  export PATH="$PATH:$HOME/.ngrok2/bin"
 fi
 
 # Path
