@@ -1,5 +1,10 @@
+#!/usr/bin/zsh
+
+source ~/.env
+
 # For osx
-if [ `uname -s` = "Darwin" ]; then
+
+if [ $USER_DEVICE = "mac" ]; then
   # pyenv
   export PYENV_ROOT="$HOME/.pyenv"
   export PATH="$PYENV_ROOT/bin:$PATH"
@@ -24,11 +29,10 @@ if [ `uname -s` = "Darwin" ]; then
 fi
 
 # For Linux
-if [ `uname -s` = "Linux" ]; then
+
+if [ $USER_DEVICE = "ubuntu" ]; then
   export PATH="$PATH:$HOME/.mycmd/bin"
   export PATH="$PATH:$HOME/.local/bin"
-  export win_home="$HOME/win_home"
-  export win_project="$HOME/win_project"
 
   # nvm
   export NVM_DIR="$HOME/.nvm"
@@ -44,8 +48,25 @@ if [ `uname -s` = "Linux" ]; then
   . "$HOME/.cargo/env"
 fi
 
+# For WSL
+if [ $USER_DEVICE = "wsl" ]; then
+  export PATH="$PATH:$HOME/.mycmd/bin"
+  export PATH="$PATH:$HOME/.local/bin"
+  export win_home="$HOME/win_home"
+  export win_project="$HOME/win_project"
+
+  # nvm
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+  fpath=($fpath "/home/ichi/.zfunctions")
+
+  export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+  # ngrok
+  export PATH="$PATH:$HOME/.ngrok2/bin"
+fi
+
 # Path
 export PATH="$PATH:/usr/local/bin/"
 export PATH="$PATH:/usr/local/sbin/"
-
-source ~/.env
