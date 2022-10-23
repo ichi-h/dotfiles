@@ -1,32 +1,54 @@
 #!/usr/bin/zsh
 
-# Activate completion
+source ~/.env
 
-autoload -Uz compinit && compinit
+# For osx
 
-# Omit cd command
+if [ $USER_DEVICE = "mac" ]; then
+  # pyenv
+  export PYENV_ROOT="$HOME/.pyenv"
+  export PATH="$PYENV_ROOT/bin:$PATH"
+  if command -v pyenv 1>/dev/null 2>&1; then
+    eval "$(pyenv init -)"
+  fi
 
-setopt auto_cd
-alias ...='cd ../..'
-alias ....='cd ../../..'
+  # nvm
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# Command history
+  # Rust
+  export RUST_HOME=/usr/local/lib/rust
+  export RUSTUP_HOME="$RUST_HOME"/rustup
+  export CARGO_HOME="$HOME"/.cargo
+  source "$CARGO_HOME"/env
+fi
 
-export HISTFILE=${HOME}/.zsh_history
-export HISTSIZE=1000
-export HISTFILESIZE=2000
-export SAVEHIST=1000
-setopt INC_APPEND_HISTORY
+# For Linux
 
-# Aliases
+if [ $USER_DEVICE = "ubuntu" ]; then
+  # nvm
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-alias la='ls -laFG'
-alias l='ls -CFG'
+  export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
-# (WSL) Omit the ext of Windows exec
-# https://unix.stackexchange.com/questions/612352/how-to-run-windows-executables-from-terminal-without-the-explicitly-specifying-t
+  # ngrok
+  export PATH="$PATH:$HOME/.ngrok2/bin"
 
-if [ `uname -s` = "Linux" ]; then
+  # deno
+  export DENO_INSTALL="$HOME/.deno"
+  export PATH="$DENO_INSTALL/bin:$PATH"
+
+  . "$HOME/.cargo/env"
+fi
+
+# For WSL
+
+if [ $USER_DEVICE = "wsl" ]; then
+  # (WSL) Omit the ext of Windows exec
+  # https://unix.stackexchange.com/questions/612352/how-to-run-windows-executables-from-terminal-without-the-explicitly-specifying-t
   function command_not_found_handler {
     exts=".exe;.com;.bat;.cmd;.vbs;.vbe;.js;.jse;.wsf;.wsh;.msc;"$PATHEXT
     for ext in ${(s:;:)${exts}}; do
@@ -37,7 +59,25 @@ if [ `uname -s` = "Linux" ]; then
     print -ru2 "command not found: $1"
     return 127
   }
+
+  export win_home="$HOME/win_home"
+  export win_project="$HOME/win_project"
+
+  # nvm
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+  export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 fi
+
+# Command history
+
+export HISTFILE=${HOME}/.zsh_history
+export HISTSIZE=1000
+export HISTFILESIZE=2000
+export SAVEHIST=1000
+setopt INC_APPEND_HISTORY
 
 # zstyle
 
@@ -100,5 +140,6 @@ export TYPEWRITTEN_CURSOR="block"
 
 ## Set typewritten ZSH as a prompt
 
+fpath=($fpath "$HOME/.zfunctions")
 autoload -U promptinit; promptinit
 prompt typewritten
