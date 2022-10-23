@@ -21,7 +21,7 @@ if [ ! -e ~/.config/git ]; then
 fi
 
 # Create the sylinks of the dotfiles
-links=(~/.gitconfig ~/.zshenv ~/.zshrc ~/.vimrc ~/.config/git/ignore ~/.mycmd ~/dein.vim ~/.tmux.conf ~/.env)
+links=(~/.gitconfig ~/.zshenv ~/.zshrc ~/.vimrc ~/.config/git/ignore ~/dein.vim ~/.tmux.conf ~/.env)
 for link in ${links[@]}; do
   if [ ! -e $link ]; then
     file_name=`basename $link`
@@ -30,8 +30,8 @@ for link in ${links[@]}; do
   fi
 done
 
-# Change the permission of the script files in .mycmd/bin/
-scripts=`find .mycmd/bin/ -type f`
+# Change the permission of the script files in ~/dotfiles/bin/
+scripts=`find ~/dotfiles/bin/ -type f`
 for script in ${scripts[@]}; do
   chmod 700 $script
 done

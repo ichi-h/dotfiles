@@ -12,5 +12,5 @@ alias l='ls -CFG'
 export PATH="$PATH:/usr/local/bin/"
 export PATH="$PATH:/usr/local/sbin/"
 
-export PATH="$PATH:$HOME/.mycmd/bin"
+export PATH="$PATH:$HOME/dotfiles/bin"
 export PATH="$PATH:$HOME/.local/bin"
