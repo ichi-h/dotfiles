@@ -38,12 +38,15 @@ if [ $USER_DEVICE = "ubuntu" ]; then
   export NVM_DIR="$HOME/.nvm"
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-  fpath=($fpath "/home/ichi/.zfunctions")
 
   export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
   # ngrok
   export PATH="$PATH:$HOME/.ngrok2/bin"
+
+  # deno
+  export DENO_INSTALL="/home/ichi/.deno"
+  export PATH="$DENO_INSTALL/bin:$PATH"
 
   . "$HOME/.cargo/env"
 fi
@@ -59,7 +62,6 @@ if [ $USER_DEVICE = "wsl" ]; then
   export NVM_DIR="$HOME/.nvm"
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-  fpath=($fpath "/home/ichi/.zfunctions")
 
   export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 fi
@@ -67,3 +69,4 @@ fi
 # Path
 export PATH="$PATH:/usr/local/bin/"
 export PATH="$PATH:/usr/local/sbin/"
+fpath=($fpath "/home/ichi/.zfunctions")
