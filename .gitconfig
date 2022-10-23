@@ -1,14 +1,13 @@
 [user]
-	email = 85932406+ichi-h@users.noreply.github.com
-	name = ichi-h
+  email = 85932406+ichi-h@users.noreply.github.com
+  name = ichi-h
 [core]
-	autocrlf = false
-	filemode = false
-	quotepath = false
+  autocrlf = false
+  filemode = false
+  quotepath = false
 [color]
-	ui = auto
+  ui = auto
 [http]
-	postBuffer = 16M
+  postBuffer = 16M
 [init]
-	defaultBranch = main
-
+  defaultBranch = main
