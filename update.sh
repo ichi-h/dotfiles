@@ -1,4 +1,15 @@
-#!/bin/bash
+#!/usr/bin/bash
+
+# Clone tmux-plugins/tpm
+if [ ! -e ~/.tmux/plugins/tpm ]; then
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+fi
+
+# Install typewritten
+npm list -g --depth=0 | grep 'typewritten' >/dev/null
+if [ $? -eq 1 ]; then
+  npm install -g typewritten
+fi
 
 # Create directories
 if [ ! -e ~/.config ]; then
