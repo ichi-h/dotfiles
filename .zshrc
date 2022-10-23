@@ -1,5 +1,21 @@
 #!/usr/bin/zsh
 
+export HISTFILE=${HOME}/.zsh_history
+export HISTSIZE=1000
+export HISTFILESIZE=2000
+export SAVEHIST=1000
+setopt INC_APPEND_HISTORY
+
+autoload -Uz compinit && compinit # activate completion
+
+setopt auto_cd # omit cd command
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias la='ls -laFG'
+alias l='ls -CFG'
+
+export PATH="$PATH:$HOME/dotfiles/bin"
+
 source ~/.env
 
 # For osx
@@ -70,14 +86,6 @@ if [ $USER_DEVICE = "wsl" ]; then
 
   export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 fi
-
-# Command history
-
-export HISTFILE=${HOME}/.zsh_history
-export HISTSIZE=1000
-export HISTFILESIZE=2000
-export SAVEHIST=1000
-setopt INC_APPEND_HISTORY
 
 # zstyle
 
