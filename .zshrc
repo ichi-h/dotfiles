@@ -63,21 +63,10 @@ fi
 # For WSL
 
 if [ $USER_DEVICE = "wsl" ]; then
-  # (WSL) Omit the ext of Windows exec
-  # https://unix.stackexchange.com/questions/612352/how-to-run-windows-executables-from-terminal-without-the-explicitly-specifying-t
-  function command_not_found_handler {
-    exts=".exe;.com;.bat;.cmd;.vbs;.vbe;.js;.jse;.wsf;.wsh;.msc;"$PATHEXT
-    for ext in ${(s:;:)${exts}}; do
-      if [ $+commands[$1$ext] -eq 1 ]; then
-        exec -- "$1$ext" "${@:2}"
-      fi
-    done
-    print -ru2 "command not found: $1"
-    return 127
-  }
-
   export win_home="$HOME/win_home"
   export win_project="$HOME/win_project"
+
+  export PATH="$PATH:$HOME/.ngrok/bin"
 
   # nvm
   export NVM_DIR="$HOME/.nvm"
