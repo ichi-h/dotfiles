@@ -61,6 +61,7 @@ if [ $USER_DEVICE = "wsl" ]; then
   export win_project="$HOME/win_project"
 
   export PATH="$PATH:$HOME/.ngrok/bin"
+  export TERM="xterm-256color"
 
   # nvm
   export NVM_DIR="$HOME/.nvm"
