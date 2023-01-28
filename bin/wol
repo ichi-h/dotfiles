@@ -1,0 +1,9 @@
+#!/usr/bin/zsh
+
+if [ $1 = ubuntu ]; then
+  wakeonlan d8:5e:d3:a3:18:2d
+elif [ $1 = arch ]; then
+  wakeonlan c8:7f:54:0c:47:af
+else
+  echo "Invalid argument, must be 'ubuntu' or 'arch'." 1>&2
+fi
