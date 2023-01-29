@@ -1,0 +1,3 @@
+#!/usr/bin/zsh
+
+sudo mount.cifs --verbose -o vers=2.1,username=$SMB_USER,password=$SMB_PASSWORD $SMB_PATH $SMB_MOUNT_PATH
