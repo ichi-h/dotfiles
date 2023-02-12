@@ -1,87 +1,68 @@
 " ####################
-"     キーマップ
+"        Keymap
 " ####################
 
 inoremap <silent> jj <ESC>
-inoremap <silent> っｊ <ESC>
 nmap <CR> i<CR><ESC>
 nmap <BS> i<BS><ESC>
 nmap <Space> i<Space><ESC>
 nmap gr gT
-nnoremap <silent><C-e> :Fern . -reveal=% -drawer -toggle -width=30 <CR>
 
 
 " ####################
-"      プラグイン
+"        Plugin
 " ####################
-
-augroup my-glyph-palette
-  autocmd! *
-  autocmd FileType fern call glyph_palette#apply()
-  autocmd FileType nerdtree,startify call glyph_palette#apply()
-augroup END
-
-let g:fern#default_hidden=1
-let g:fern#renderer = 'nerdfont'
 
 
 
 " ####################
-"       初期設定
+"   General setting
 " ####################
 
 source $VIMRUNTIME/defaults.vim
 
-" エンコード設定
 set fileencodings=utf-8
 
-" 行数表示
-set relativenumber
+syntax on
 
-" カーソルライン表示
+set tabstop=2
+set shiftwidth=2
+
+set number
 set cursorline
 highlight CursorLine cterm=NONE ctermfg=NONE ctermbg=black
 
-" カーソルの形を変更
+" Cursor shape
 if has('vim_starting')
-  " 挿入モード時に点滅の縦線カーソル
+  " Insert mode
   let &t_SI .= "\e[5 q"
-  " ノーマルモード時に点滅の箱型カーソル
+  " Normal mode
   let &t_EI .= "\e[1 q"
-  " 置換モード時に非点滅の下線カーソル
+  " Replace mode
   let &t_SR .= "\e[4 q"
 endif
 
-" 検索ハイライトを有効化
+" Highlight search
 set hlsearch
 
-" インクリメントサーチの有効化
+" Incremental search
 set incsearch
 
-" インデントを賢くする
 set smartindent
 
-" クリップボードを共通に
 set clipboard+=unnamed
 
-" ステータスラインを強化
+" Enhance status line
 set laststatus=2
 
-" コマンドラインをTabで補完
+" Conplete command line with Tab
 set wildmenu
 
-" Beep音を消す
+" Mute bell
 set belloff=all
 
-"行頭行末の左右移動で行をまたぐ
+" Move to the next line when the cursor is at the end of the line
 set whichwrap=b,s,h,l,<,>,[,]
-
-" シンタックスハイライトを有効化
-syntax on
-
-" タブ幅を２に変更
-set tabstop=2
-set shiftwidth=2
 
 
 
@@ -89,12 +70,9 @@ set shiftwidth=2
 "       dein.vim
 " ####################
 
-" プラグインが実際にインストールされるディレクトリ
 let s:dein_dir = expand('~/.cache/dein')
-" dein.vim 本体
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 
-" dein.vim がなければ github から落としてくる
 if &runtimepath !~# '/dein.vim'
   if !isdirectory(s:dein_repo_dir)
     execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
@@ -102,27 +80,20 @@ if &runtimepath !~# '/dein.vim'
   execute 'set runtimepath^=' . s:dein_repo_dir
 endif
 
-" 設定開始
 if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
 
-  " プラグインリストを収めた TOML ファイル
-  " 予め TOML ファイル（後述）を用意しておく
   let g:rc_dir    = expand('~/dein.vim')
   let s:toml      = g:rc_dir . '/dein.toml'
   let s:lazy_toml = g:rc_dir . '/dein_lazy.toml'
 
-  " TOML を読み込み、キャッシュしておく
   call dein#load_toml(s:toml,      {'lazy': 0})
   call dein#load_toml(s:lazy_toml, {'lazy': 1})
 
-  " 設定終了
   call dein#end()
   call dein#save_state()
 endif
 
-" もし、未インストールものものがあったらインストール
 if dein#check_install()
   call dein#install()
 endif
-
