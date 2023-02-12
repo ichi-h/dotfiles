@@ -1,5 +1,10 @@
 #!/usr/bin/zsh
 
+if [ $# -ne 1 ]; then
+  echo "Usage: wol <ubuntu or arch>" 1>&2
+  exit 1
+fi
+
 if [ $1 = ubuntu ]; then
   wakeonlan d8:5e:d3:a3:18:2d
 elif [ $1 = arch ]; then
