@@ -57,6 +57,8 @@ fi
 # For Arch
 
 if [ $USER_DEVICE = "arch" ]; then
+  export TERM=xterm
+
   # nvm
   export NVM_DIR="$HOME/.nvm"
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -66,6 +68,13 @@ if [ $USER_DEVICE = "arch" ]; then
 
   # ngrok
   export PATH="$PATH:$HOME/.ngrok/bin"
+
+  # pnpm
+  export PNPM_HOME="/home/ichi/.local/share/pnpm"
+  case ":$PATH:" in
+    *":$PNPM_HOME:"*) ;;
+    *) export PATH="$PNPM_HOME:$PATH" ;;
+  esac
 fi
 
 # For WSL
