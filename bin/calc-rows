@@ -1,0 +1,73 @@
+# 引数の数を確認
+if [ "$#" -lt 2 ]; then
+    echo "使用法: $0 <ディレクトリパス> -e=<拡張子1>,<拡張子2>,...,<拡張子n> [-x=<除外するディレクトリパス1>,<除外するディレクトリパス2>,...,<除外するディレクトリパスn>]"
+    exit 1
+fi
+
+# ディレクトリパスを取得
+directory="$1"
+
+# ディレクトリが存在するか確認
+if [ ! -d "$directory" ]; then
+    echo "エラー: ディレクトリ '$directory' は存在しません。"
+    exit 1
+fi
+
+# 拡張子を取得
+shift  # ディレクトリパスを削除
+extensions=()
+excludes=()
+while [ "$#" -gt 0 ]; do
+    case "$1" in
+        -e=*|--extensions=*)
+            e=(${1#*=})
+            extensions=(${e//,/ })
+            ;;
+        -x=*|--excludes=*)
+            x=(${1#*=})
+            excludes=(${x//,/ })
+            ;;
+        *)
+            echo "エラー: 不明なオプション '$1' が指定されました。"
+            exit 1
+            ;;
+    esac
+    shift
+done
+
+# 拡張子が指定されているか確認
+if [ ${#extensions[@]} -eq 0 ]; then
+    echo "エラー: 拡張子が指定されていません。"
+    exit 1
+fi
+
+# 合計行数を初期化
+total_lines=0
+
+# 拡張子ごとに処理
+for ext in "${extensions[@]}"; do
+    # 指定された拡張子のファイルを検索し、行数を取得して合算
+    count=$(find "$directory" -wholename "*.$ext" -type f -exec cat {} \; | wc -l)
+    total_lines=$((total_lines + count))
+done
+
+# 除外するディレクトリが指定されているか確認
+if [ ${#excludes[@]} -ne 0 ]; then
+    # 除外するディレクトリごとに処理
+    for exclude in "${excludes[@]}"; do
+        # 除外するディレクトリが存在するか確認
+        if [ ! -d "$exclude" ]; then
+            echo "エラー: ディレクトリ '$exclude' は存在しません。"
+            exit 1
+        fi
+
+        # 除外するディレクトリ内にあるファイルの行数を拡張子を考慮して取得して合算
+        for ext in "${extensions[@]}"; do
+            count=$(find "$exclude" -wholename "*.$ext" -type f -exec cat {} \; | wc -l)
+            total_lines=$((total_lines - count))
+        done
+    done
+fi
+
+# 結果を出力
+echo "合計行数: $total_lines"
