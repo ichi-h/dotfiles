@@ -3,6 +3,12 @@ if [ ! -e ~/.tmux/plugins/tpm ]; then
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 fi
 
+# Install volta and node
+if [ ! -e ~/.volta ]; then
+  curl https://get.volta.sh | bash
+  volta install node
+fi
+
 # Install typewritten
 npm list -g --depth=0 | grep 'typewritten' >/dev/null
 if [ $? -eq 1 ]; then
