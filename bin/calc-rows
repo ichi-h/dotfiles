@@ -57,8 +57,8 @@ if [ ${#excludes[@]} -ne 0 ]; then
     for exclude in "${excludes[@]}"; do
         # 除外するディレクトリが存在するか確認
         if [ ! -d "$exclude" ]; then
-            echo "エラー: ディレクトリ '$exclude' は存在しません。"
-            exit 1
+            echo -e "Warning: 除外するディレクトリ '$exclude' は存在しません。\n"
+            continue
         fi
 
         # 除外するディレクトリ内にあるファイルの行数を拡張子を考慮して取得して合算
