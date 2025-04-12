@@ -70,4 +70,4 @@ if [ ${#excludes[@]} -ne 0 ]; then
 fi
 
 # 結果を出力
-echo "合計行数: $total_lines"
+echo "$total_lines"
