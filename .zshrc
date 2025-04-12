@@ -94,6 +94,16 @@ if [ $USER_DEVICE = "fedora" ]; then
     *":$PNPM_HOME:"*) ;;
     *) export PATH="$PNPM_HOME:$PATH" ;;
   esac
+
+  # Golang
+  export PATH="$PATH:/usr/local/go/bin"
+  export GOPATH="$HOME/go"
+  export GOBIN="$GOPATH/bin"
+  export PATH="$PATH:$GOBIN"
+
+  # Deno
+  export DENO_INSTALL="$HOME/.deno"
+  export PATH="$DENO_INSTALL/bin:$PATH"
 fi
 
 # For WSL
