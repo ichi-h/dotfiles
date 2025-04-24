@@ -1,3 +1,1 @@
-#!/usr/bin/zsh
-
 pwsh.exe -c "shutdown -s -t 0"

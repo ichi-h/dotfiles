@@ -1,5 +1,3 @@
-#!/usr/bin/zsh
-
 if [ $# -ne 1 ]; then
   echo "Usage: wol <win or arch>" 1>&2
   exit 1
