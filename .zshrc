@@ -25,10 +25,6 @@ if [ $USER_DEVICE = "mac" ]; then
   if command -v pyenv 1>/dev/null 2>&1; then
     eval "$(pyenv init -)"
   fi
-
-  # volta
-  export VOLTA_HOME="$HOME/.volta"
-  export PATH="$VOLTA_HOME/bin:$PATH"
 fi
 
 # For Ubuntu (deprecated)
@@ -55,10 +51,6 @@ fi
 
 if [ $USER_DEVICE = "arch" ]; then
   export TERM=xterm
-
-  # volta
-  export VOLTA_HOME="$HOME/.volta"
-  export PATH="$VOLTA_HOME/bin:$PATH"
 
   export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
