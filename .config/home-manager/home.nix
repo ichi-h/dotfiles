@@ -48,6 +48,7 @@
     ".gitconfig".source = ../../.gitconfig;
     ".vimrc".source = ../../.vimrc;
     ".config/git".source = ../git;
+    ".config/home-manager/home.nix".source = ../home-manager/home.nix;
 
     ".zsh/typewritten".source = pkgs.fetchFromGitHub {
       owner = "reobin";
