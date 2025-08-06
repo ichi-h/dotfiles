@@ -115,7 +115,10 @@
       source ~/dotfiles/.env
       PRIMARY_COLOR="#d5ccff"
 
-      fastfetch --color $PRIMARY_COLOR
+      fastfetch \
+        --color $PRIMARY_COLOR \
+        --localip-show-ipv4 false \
+        --localip-show-ipv6 false
 
       ZSH_THEME="typewritten"
       export TYPEWRITTEN_SYMBOL="λ "
