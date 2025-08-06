@@ -38,7 +38,6 @@
     zsh
     curl
     tmux
-    vim
     fastfetch
   ];
 
@@ -113,6 +112,7 @@
     '';
     initContent = ''
       source ~/dotfiles/.env
+
       PRIMARY_COLOR="#d5ccff"
 
       fastfetch \
