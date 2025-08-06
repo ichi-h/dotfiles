@@ -1,1 +1,0 @@
-pwsh.exe -c "shutdown -s -t 0"
