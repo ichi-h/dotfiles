@@ -12,9 +12,13 @@ alias ....='cd ../../..'
 alias la='ls -laFG'
 alias l='ls -CFG'
 
-export PATH="$PATH:$HOME/dotfiles/bin"
-
 source ~/.env
+
+# For Development Server
+
+if [ $USER_DEVICE = "dev-server" ]; then
+  # nothing
+fi
 
 # For osx
 
@@ -25,19 +29,6 @@ if [ $USER_DEVICE = "mac" ]; then
   if command -v pyenv 1>/dev/null 2>&1; then
     eval "$(pyenv init -)"
   fi
-
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-fi
-
-# For Fedora
-
-if [ $USER_DEVICE = "fedora" ]; then
-  # nvm
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 fi
 
 # For WSL
@@ -46,21 +37,13 @@ if [ $USER_DEVICE = "wsl" ]; then
   export win_home="$HOME/win_home"
   export win_project="$HOME/win_project"
 
-  export PATH="$PATH:$HOME/.ngrok/bin"
   export TERM="xterm-256color"
-
-  # nvm
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 fi
 
 # For Raspberry Pi
 
 if [ $USER_DEVICE = "raspberrypi" ]; then
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+  # nothing
 fi
 
 # zstyle
