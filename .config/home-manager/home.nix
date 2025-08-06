@@ -47,13 +47,19 @@
     "dein.vim".source = ../../dein.vim;
     ".gitconfig".source = ../../.gitconfig;
     ".vimrc".source = ../../.vimrc;
-    ".tmux.conf".source = ../../.tmux.conf;
     ".config/git".source = ../git;
 
     ".zsh/typewritten".source = pkgs.fetchFromGitHub {
       owner = "reobin";
       repo = "typewritten";
       rev = "v1.5.2";
+      sha256 = "sha256-ZHPe7LN8AMr4iW0uq3ZYqFMyP0hSXuSxoaVSz3IKxCc=";
+    };
+
+    ".tmux/plugins/tpm".source = pkgs.fetchFromGitHub {
+      owner = "tmux-plugins";
+      repo = "tpm";
+      rev = "v3.1.0";
       sha256 = "sha256-ZHPe7LN8AMr4iW0uq3ZYqFMyP0hSXuSxoaVSz3IKxCc=";
     };
   };
@@ -143,5 +149,30 @@
         };
       }
     ];
+  };
+
+  programs.tmux = {
+    enable = true;
+    mouse = true;
+    extraConfig = ''
+      set -g prefix C-t
+      unbind C-b
+
+      bind h select-pane -L
+      bind j select-pane -D
+      bind k select-pane -U
+      bind l select-pane -R
+
+      # tmux theme
+      set -g @plugin 'dracula/tmux'
+      set -g @dracula-show-powerline true
+      set -g @dracula-show-flags true
+      set -g @dracula-plugins "weather"
+      set -g @dracula-show-fahrenheit false
+      set -g @dracula-show-left-icon 
+
+      # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+      run '~/.tmux/plugins/tpm/tpm'
+    '';
   };
 }
