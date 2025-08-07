@@ -1,10 +1,13 @@
-{ config, pkgs, ... }:
+{ config, pkgs, system, ... }:
 
+let
+  homeDir = if system == "darwin" then "/Users/ichi" else "/home/ichi";
+in
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "ichi";
-  home.homeDirectory = "/home/ichi";
+  home.homeDirectory = homeDir;
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -36,6 +39,7 @@
     # '')
 
     zsh
+    git
     curl
     tmux
     fastfetch
@@ -49,6 +53,7 @@
     ".vimrc".source = ../../.vimrc;
     ".config/git".source = ../git;
     ".config/home-manager/home.nix".source = ../home-manager/home.nix;
+    ".config/alacritty".source = ../alacritty;
 
     ".zsh/typewritten".source = pkgs.fetchFromGitHub {
       owner = "reobin";
@@ -124,8 +129,7 @@
 
       fastfetch \
         --color $PRIMARY_COLOR \
-        --localip-show-ipv4 false \
-        --localip-show-ipv6 false
+        --structure "os:host:kernal:uptime:shell:terminal:cpu:gpu:memory:swap:disk:locale"
 
       ZSH_THEME="typewritten"
       export TYPEWRITTEN_SYMBOL="λ "
@@ -157,6 +161,7 @@
     mouse = true;
     extraConfig = ''
       set -g prefix C-t
+      set -g mouse off
       unbind C-b
 
       bind h select-pane -L
