@@ -38,8 +38,6 @@ in
     #   echo "Hello, ${config.home.username}!"
     # '')
 
-    zsh
-    git
     curl
     tmux
     fastfetch
