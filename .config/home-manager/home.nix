@@ -51,6 +51,7 @@ in
     ".gitconfig".source = ../../.gitconfig;
     ".vimrc".source = ../../.vimrc;
     ".config/git".source = ../git;
+    ".config/alacritty/alacritty.toml".source = ../alacritty/alacritty.toml;
 
     ".zsh/typewritten".source = pkgs.fetchFromGitHub {
       owner = "reobin";
@@ -126,8 +127,7 @@ in
 
       fastfetch \
         --color $PRIMARY_COLOR \
-        --localip-show-ipv4 false \
-        --localip-show-ipv6 false
+        --structure "os:host:kernal:uptime:shell:terminal:cpu:gpu:memory:swap:disk:locale"
 
       ZSH_THEME="typewritten"
       export TYPEWRITTEN_SYMBOL="λ "
@@ -159,6 +159,7 @@ in
     mouse = true;
     extraConfig = ''
       set -g prefix C-t
+      set -g mouse off
       unbind C-b
 
       bind h select-pane -L
