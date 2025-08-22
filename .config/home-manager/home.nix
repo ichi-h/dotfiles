@@ -49,13 +49,6 @@ in
     ".vimrc".source = ../../.vimrc;
     ".config/home-manager/home.nix".source = ../home-manager/home.nix;
     ".config/alacritty".source = ../alacritty;
-
-    ".zsh/typewritten".source = pkgs.fetchFromGitHub {
-      owner = "reobin";
-      repo = "typewritten";
-      rev = "v1.5.2";
-      sha256 = "sha256-ZHPe7LN8AMr4iW0uq3ZYqFMyP0hSXuSxoaVSz3IKxCc=";
-    };
   };
 
   # Home Manager can also manage your environment variables through
@@ -80,71 +73,4 @@ in
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-
-  programs.zsh = {
-    enable = true;
-    enableCompletion = true;
-    syntaxHighlighting.enable = true;
-    autosuggestion.enable = true;
-    autocd = true;
-    history = {
-      append = true;
-      ignoreAllDups = true;
-      path = "${config.home.homeDirectory}/.zsh_history";
-      save = 1000;
-      size = 1000;
-      share = true;
-    };
-    historySubstringSearch = {
-      enable = true;
-    };
-    shellAliases = {
-      "..." = "cd ../..";
-      "...." = "cd ../../..";
-      "la" = "ls -laFG";
-      "l" = "ls -CFG";
-    };
-    envExtra = ''
-      export PATH="$PATH:$HOME/dotfiles/bin"
-      export PATH="$PATH:$HOME/.local/bin"
-      export PATH="$PATH:/usr/local/bin/"
-      export PATH="$PATH:/usr/local/sbin/"
-    '';
-    initContent = ''
-      source ~/dotfiles/.env
-
-      export NVM_DIR="$HOME/.nvm"
-      [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-      [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-      PRIMARY_COLOR="#d5ccff"
-
-      fastfetch \
-        --color $PRIMARY_COLOR \
-        --structure "os:host:kernal:uptime:shell:terminal:cpu:gpu:memory:swap:disk:locale"
-
-      ZSH_THEME="typewritten"
-      export TYPEWRITTEN_SYMBOL="λ "
-      export DRACULA_TYPEWRITTEN_COLOR_MAPPINGS="primary:$PRIMARY_COLOR;secondary:#9580ff;info_neutral_1:#d0ffcc;info_neutral_2:#ffffcc;info_special:#ff9580;info_negative:#ff5555;notice:#ffff80;accent:$PRIMARY_COLOR"
-      export TYPEWRITTEN_COLOR_MAPPINGS="$DRACULA_TYPEWRITTEN_COLOR_MAPPINGS"
-      export TYPEWRITTEN_PROMPT_LAYOUT="pure"
-      export TYPEWRITTEN_CURSOR="block"
-
-      fpath=($fpath "$HOME/.zsh/typewritten")
-      autoload -U promptinit; promptinit
-      prompt typewritten
-    '';
-    plugins = [
-      {
-        name = "zsh-nix-shell";
-        file = "nix-shell.plugin.zsh";
-        src = pkgs.fetchFromGitHub {
-          owner = "chisui";
-          repo = "zsh-nix-shell";
-          rev = "v0.8.0";
-          sha256 = "1lzrn0n4fxfcgg65v0qhnj7wnybybqzs4adz7xsrkgmcsr0ii8b7";
-        };
-      }
-    ];
-  };
 }
