@@ -26,17 +26,19 @@
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = {
             inherit inputs outputs;
-            system = "linux";
+            vars = import ./vars;
+            enableGuiPkg = false;
           };
-          modules = [ ./.config/home-manager/home.nix ];
+          modules = [ ./home/linux/home.nix ];
         };
         "darwin" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-darwin;
           extraSpecialArgs = {
             inherit inputs outputs;
-            system = "darwin";
+            vars = import ./vars;
+            enableGuiPkg = true;
           };
-          modules = [ ./.config/home-manager/home.nix ];
+          modules = [ ./home/darwin/home.nix ];
         };
       };
     };
