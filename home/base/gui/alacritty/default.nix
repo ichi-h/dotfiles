@@ -1,4 +1,4 @@
-{ enableGuiPkg }: { pkgs, ... }:
+{ pkgs, enableGuiPkg,... }:
 {
   programs.alacritty = {
     enable = enableGuiPkg;
