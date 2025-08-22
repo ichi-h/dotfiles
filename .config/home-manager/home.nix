@@ -39,7 +39,6 @@ in
     # '')
 
     curl
-    tmux
     fastfetch
   ];
 
@@ -58,13 +57,6 @@ in
       repo = "typewritten";
       rev = "v1.5.2";
       sha256 = "sha256-ZHPe7LN8AMr4iW0uq3ZYqFMyP0hSXuSxoaVSz3IKxCc=";
-    };
-
-    ".tmux/plugins/tpm".source = pkgs.fetchFromGitHub {
-      owner = "tmux-plugins";
-      repo = "tpm";
-      rev = "v3.1.0";
-      sha256 = "sha256-CeI9Wq6tHqV68woE11lIY4cLoNY8XWyXyMHTDmFKJKI=";
     };
   };
 
@@ -156,35 +148,5 @@ in
         };
       }
     ];
-  };
-
-  programs.tmux = {
-    enable = true;
-    mouse = true;
-    extraConfig = ''
-      set -g prefix C-t
-      set -g mouse off
-      unbind C-b
-
-      bind h select-pane -L
-      bind j select-pane -D
-      bind k select-pane -U
-      bind l select-pane -R
-
-      set-option -g status-left '#H:[#P]'
-      set-option -g status-right '#(wifi) [%Y-%m-%d %H:%M]'
-
-      # tmux theme
-      set -g @plugin 'dracula/tmux'
-      set -g @dracula-plugins "attached-clients"
-      set -g @dracula-clients-minimum 1
-      set -g @dracula-show-empty-plugins false
-      set -g @dracula-show-powerline true
-      set -g @dracula-show-flags true
-      set -g @dracula-show-left-icon 
-
-      # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
-      run '~/.tmux/plugins/tpm/tpm'
-    '';
   };
 }
