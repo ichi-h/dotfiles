@@ -4,5 +4,6 @@
     ./neovim
     ./tmux
     ./zsh
+    ./core.nix
   ];
 }
