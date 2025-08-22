@@ -46,9 +46,7 @@ in
   # plain files is through 'home.file'.
   home.file = {
     "dein.vim".source = ../../dein.vim;
-    ".gitconfig".source = ../../.gitconfig;
     ".vimrc".source = ../../.vimrc;
-    ".config/git".source = ../git;
     ".config/home-manager/home.nix".source = ../home-manager/home.nix;
     ".config/alacritty".source = ../alacritty;
 
