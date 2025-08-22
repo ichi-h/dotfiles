@@ -1,9 +1,9 @@
-{ config, pkgs, ... }:
+{ config, pkgs, vars ... }:
 {
   imports = [
     ../base/cli
     ../base/gui
     ../base/home.nix
   ];
-  home.homeDirectory = "/Users/ichi";
+  home.homeDirectory = "/Users/${vars.username}";
 }

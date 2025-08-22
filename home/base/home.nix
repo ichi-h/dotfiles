@@ -1,5 +1,6 @@
+{ vars, ... }:
 {
-  home.username = "ichi";
+  home.username = vars.username;
   home.stateVersion = "25.05";
   programs.home-manager.enable = true;
 }

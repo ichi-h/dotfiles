@@ -1,8 +1,8 @@
-{ pkgs, ... }:
+{ pkgs, vars, ... }:
 {
   programs.git = {
     enable = true;
-    userName = "ichi-h";
+    userName = vars.userid;
     userEmail = "85932406+ichi-h@users.noreply.github.com";
 
     extraConfig = {
