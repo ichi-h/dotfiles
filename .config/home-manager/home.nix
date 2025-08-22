@@ -48,7 +48,6 @@ in
     "dein.vim".source = ../../dein.vim;
     ".vimrc".source = ../../.vimrc;
     ".config/home-manager/home.nix".source = ../home-manager/home.nix;
-    ".config/alacritty".source = ../alacritty;
   };
 
   # Home Manager can also manage your environment variables through
