@@ -1,4 +1,4 @@
-{ config, pkgs, vars ... }:
+{ config, pkgs, vars, ... }:
 {
   imports = [
     ../base/cli

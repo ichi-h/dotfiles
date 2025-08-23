@@ -23,7 +23,7 @@
       "la" = "ls -laFG";
       "l" = "ls -CFG";
     };
-    envExtra = builtins.readFile ./zshenv;
+    envExtra = builtins.readFile ./.zshenv;
     initContent = builtins.readFile ./.zshrc;
     plugins = [
       {
