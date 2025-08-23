@@ -22,7 +22,7 @@
     in
     {
       homeConfigurations = {
-        "linux" = home-manager.lib.homeManagerConfiguration {
+        "linux-x86" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = {
             inherit inputs outputs;
@@ -31,8 +31,17 @@
           };
           modules = [ ./home/linux/home.nix ];
         };
+        "linux-arm64" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.aarch64-linux;
+          extraSpecialArgs = {
+            inherit inputs outputs;
+            vars = import ./vars;
+            enableGuiPkg = false;
+          };
+          modules = [ ./home/linux/home.nix ];
+        };
         "darwin" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-darwin;
+          pkgs = nixpkgs.legacyPackages.aarch64-darwin;
           extraSpecialArgs = {
             inherit inputs outputs;
             vars = import ./vars;

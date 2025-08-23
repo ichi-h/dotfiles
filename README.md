@@ -14,8 +14,11 @@ cd dotfiles
 cp .env.sample .env
 vim .env # edit .env
 
-# For Linux
-nix run nixpkgs#home-manager -- switch --flake .#linux
+# For Linux (x86_64)
+nix run nixpkgs#home-manager -- switch --flake .#linux-x86
+
+# For Linux (arm64)
+nix run nixpkgs#home-manager -- switch --flake .#linux-arm64
 
 # For Darwin
 nix run nixpkgs#home-manager -- switch --flake .#darwin
