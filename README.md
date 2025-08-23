@@ -1,9 +1,8 @@
 # dotfiles
 
-Install Nix and Home Manager in advance.
+Install Nix in advance or use NixOS.
 
 - [Nix Installer](https://github.com/DeterminateSystems/nix-installer)
-- [Home Manager](https://nix-community.github.io/home-manager)
 
 ## Usage
 
@@ -16,8 +15,8 @@ cp .env.sample .env
 vim .env # edit .env
 
 # For Linux
-home-manager switch --flake .#linux
+nix run nixpkgs#home-manager -- switch --flake .#linux
 
 # For Darwin
-home-manager switch --flake .#darwin
+nix run nixpkgs#home-manager -- switch --flake .#darwin
 ```
