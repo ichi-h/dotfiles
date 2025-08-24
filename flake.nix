@@ -21,6 +21,15 @@
       inherit (self) outputs;
     in
     {
+      nixosConfigurations = {
+        ayakashi = inputs.nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./hosts/ayakashi/configuration.nix
+          ];
+        };
+      };
+
       homeConfigurations = {
         "linux-x86" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
