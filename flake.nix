@@ -27,7 +27,7 @@
           extraSpecialArgs = {
             inherit inputs outputs;
             vars = import ./vars;
-            enableGuiPkg = false;
+            enableGuiPkg = true;
           };
           modules = [ ./home/linux/home.nix ];
         };
