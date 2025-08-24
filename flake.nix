@@ -24,6 +24,10 @@
       nixosConfigurations = {
         ayakashi = inputs.nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
+          extraSpecialArgs = {
+            inherit inputs outputs;
+            vars = import ./vars;
+          };
           modules = [
             ./hosts/ayakashi/configuration.nix
           ];
