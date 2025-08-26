@@ -23,7 +23,7 @@
       nixpkgs,
       home-manager,
       vscode-server,
-      sops-nix
+      sops-nix,
       ...
     }@inputs:
     let
