@@ -4,7 +4,7 @@
     enable = true;
     settings = {
       AllowUsers = [ vars.username ];
-      LogLevel = "VERBOSE";
+      LogLevel = "INFO";
       PermitRootLogin = "no";
       PasswordAuthentication = false;
       KbdInteractiveAuthentication = false;
