@@ -1,5 +1,7 @@
 { pkgs, vars, ... }:
 {
+  users.mutableUsers = false;
+
   users.users."${vars.username}" = {
     home = "/home/${vars.username}";
     isNormalUser = true;
