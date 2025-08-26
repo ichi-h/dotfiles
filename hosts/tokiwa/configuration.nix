@@ -28,7 +28,14 @@ in
   sops = {
     age.keyFile = keyFile;
     defaultSopsFile = ./secrets.yaml;
+    secrets = {
+      hashed-user-passwd-tokiwa.neededForUsers = true;
+      tailscale-ip-address-tokiwa.neededForUsers = true;
+    };
   };
+
+
+  users.users."${vars.username}".hashedPasswordFile = config.sops.secrets.hashed-user-passwd-tokiwa.path;
 
   environment.variables = {
     SOPS_AGE_KEY_FILE = keyFile;
