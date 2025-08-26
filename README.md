@@ -14,6 +14,9 @@ cd dotfiles
 cp .env.sample .env
 vim .env # edit .env
 
+# Rebuild NixOS
+sudo nixos-rebuild switch --flake .#(environment)
+
 # For Linux (x86_64)
 nix run nixpkgs#home-manager -- switch --flake .#linux-x86
 
