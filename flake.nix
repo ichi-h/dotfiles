@@ -25,14 +25,14 @@
     in
     {
       nixosConfigurations = {
-        ayakashi = inputs.nixpkgs.lib.nixosSystem {
+        tokiwa = inputs.nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = {
             inherit inputs outputs;
             vars = import ./vars;
           };
           modules = [
-            ./hosts/ayakashi/configuration.nix
+            ./hosts/tokiwa/configuration.nix
             vscode-server.nixosModules.default
             ({ config, pkgs, ... }: {
               services.vscode-server.enable = true;
