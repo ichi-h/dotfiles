@@ -1,4 +1,7 @@
-{ config, pkgs, ... }:
+{ config, pkgs, vars, ... }:
+let
+  keyFile = "/home/${vars.username}/dotfiles/sops/age/tokiwa.txt";
+in
 {
   imports = [
     ./hardware-configuration.nix
@@ -21,4 +24,13 @@
   };
 
   services.vscode-server.enable = true;
+
+  sops = {
+    age.keyFile = keyFile;
+    defaultSopsFile = ./secrets.yaml;
+  };
+
+  environment.variables = {
+    SOPS_AGE_KEY_FILE = keyFile;
+  };
 }
