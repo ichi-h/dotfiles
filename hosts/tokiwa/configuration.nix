@@ -27,8 +27,6 @@ in
     variant = "";
   };
 
-  services.vscode-server.enable = true;
-
   sops = {
     age.keyFile = keyFile;
     defaultSopsFile = ./secrets.yaml;
