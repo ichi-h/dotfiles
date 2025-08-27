@@ -29,4 +29,21 @@ in
     # needed if you use swap
     kubelet.extraOpts = "--fail-swap-on=false";
   };
+
+  systemd.services.k8s-pem-permissions = {
+    description = "Fix Kubernetes pem permissions";
+    wants = ["kubelet.service"];
+    wantedBy = ["multi-user.target"];
+    requires = ["kubelet.service"];
+    requiredBy = ["kubelet.service"];
+    after = ["kubelet.service"];
+    serviceConfig = {
+      User = "root";
+      Type = "oneshot";
+    };
+    script = ''
+      chmod +r /var/lib/kubernetes/secrets/cluster-admin.pem
+      chmod +r /var/lib/kubernetes/secrets/cluster-admin-key.pem
+    '';
+  };
 }
