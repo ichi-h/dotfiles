@@ -1,8 +1,9 @@
 {
   imports = [
     ./core.nix
+    ./docker.nix
     ./networking.nix
-    ./podman.nix
+    # ./podman.nix
     ./programs.nix
     ./ssh.nix
     ./tailscale.nix
