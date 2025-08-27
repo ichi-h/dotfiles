@@ -31,7 +31,6 @@ in
     defaultSopsFile = ./secrets.yaml;
     secrets = {
       hashed-user-passwd-tokiwa.neededForUsers = true;
-      tailscale-ip-address-tokiwa.neededForUsers = true;
     };
   };
 
