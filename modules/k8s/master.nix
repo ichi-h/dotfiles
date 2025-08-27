@@ -30,8 +30,8 @@ in
     kubelet.extraOpts = "--fail-swap-on=false";
   };
 
-  systemd.services.k8s-pem-permissions = {
-    description = "Fix Kubernetes pem permissions";
+  systemd.services.k8s-setup = {
+    description = "Kubernetes setup";
     wants = ["kubelet.service"];
     wantedBy = ["multi-user.target"];
     requires = ["kubelet.service"];
@@ -44,6 +44,10 @@ in
     script = ''
       chmod +r /var/lib/kubernetes/secrets/cluster-admin.pem
       chmod +r /var/lib/kubernetes/secrets/cluster-admin-key.pem
+      if [ ! -e "$HOME/.kube/config" ]; then
+        mkdir -p $HOME/.kube
+        ln -s /etc/kubernetes/cluster-admin.kubeconfig "$HOME/.kube/config"
+      fi
     '';
   };
 }
