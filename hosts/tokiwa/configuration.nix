@@ -6,7 +6,7 @@ in
   imports = [
     ./hardware-configuration.nix
     ../../modules/base
-    # ../../modules/k8s/master.nix
+    ../../modules/k8s/master.nix
   ];
 
   networking.hostName = "tokiwa"; # Define your hostname.
