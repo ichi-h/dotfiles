@@ -39,6 +39,18 @@
             sops-nix.nixosModules.sops
           ];
         };
+
+        hanaakari = inputs.nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = {
+            inherit inputs outputs;
+            vars = import ./vars;
+          };
+          modules = [
+            ./hosts/hanaakari/configuration.nix
+            sops-nix.nixosModules.sops
+          ];
+        };
       };
 
       homeConfigurations = {
