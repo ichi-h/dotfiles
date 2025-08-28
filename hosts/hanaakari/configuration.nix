@@ -6,7 +6,7 @@ in
   imports = [
     ./hardware-configuration.nix
     ../../modules/base
-    # ../../modules/k8s/node.nix
+    ../../modules/k8s/node.nix
   ];
 
   networking.hostName = "hanaakari"; # Define your hostname.

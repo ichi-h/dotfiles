@@ -31,4 +31,11 @@ in
     # needed if you use swap
     kubelet.extraOpts = "--fail-swap-on=false";
   };
+
+  systemd.tmpfiles.rules = [
+    "d /var/lib/kubelet 0755 root root -"
+    "d /var/lib/kubelet/pki 0755 root root -"
+    "d /var/lib/kubernetes 0755 root root -"
+    "d /opt/cni/bin 0755 root root -"
+  ];
 }
