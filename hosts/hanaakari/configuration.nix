@@ -24,5 +24,5 @@
     variant = "";
   };
 
-  users.users."${vars.username}".hashedPasswordFile = vars.secrets.hashed-user-passwd-hanaakari;
+  users.users."${vars.username}".hashedPassword = vars.secrets.hashed-user-passwd-hanaakari;
 }

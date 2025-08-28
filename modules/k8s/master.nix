@@ -1,7 +1,7 @@
 
 { pkgs, vars, ... }:
 let
-  cfg = import ./config.nix vars;
+  cfg = import ./config.nix { inherit vars; };
 in
 {
   # resolve master hostname
