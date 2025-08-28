@@ -9,7 +9,7 @@ SECONDARY_COLOR="#9580ff"
 
 fastfetch \
   --color $PRIMARY_COLOR \
-  --structure "os:host:kernal:uptime:shell:terminal:cpu:gpu:memory:swap:disk:locale"
+  --structure "title:separator:os:host:kernal:uptime:shell:terminal:cpu:gpu:memory:swap:disk:locale"
 
 ZSH_THEME="typewritten"
 export TYPEWRITTEN_SYMBOL="λ "
