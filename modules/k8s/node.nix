@@ -1,10 +1,10 @@
-{ config, pkgs, ... }:
+{ pkgs, vars, ... }:
 let
-  vars = import ./vars.nix;
+  cfg = import ./config.nix vars;
 in
 {
   # resolve master hostname
-  networking.extraHosts = "${vars.kubeMasterIP} ${vars.kubeMasterHostname}";
+  networking.extraHosts = "${cfg.kubeMasterIP} ${cfg.kubeMasterHostname}";
 
   # packages for administration tasks
   environment.systemPackages = with pkgs; [
@@ -14,11 +14,11 @@ in
   ];
 
   services.kubernetes = let
-    api = "https://${vars.kubeMasterHostname}:${toString vars.kubeMasterAPIServerPort}";
+    api = "https://${cfg.kubeMasterHostname}:${toString cfg.kubeMasterAPIServerPort}";
   in
   {
     roles = ["node"];
-    masterAddress = vars.kubeMasterHostname;
+    masterAddress = cfg.kubeMasterHostname;
     easyCerts = true;
 
     # point kubelet and other services to kube-apiserver

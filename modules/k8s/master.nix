@@ -1,10 +1,11 @@
-{ config, pkgs, ... }:
+
+{ pkgs, vars, ... }:
 let
-  vars = import ./vars.nix;
+  cfg = import ./config.nix vars;
 in
 {
   # resolve master hostname
-  networking.extraHosts = "${vars.kubeMasterIP} ${vars.kubeMasterHostname}";
+  networking.extraHosts = "${cfg.kubeMasterIP} ${cfg.kubeMasterHostname}";
 
   # packages for administration tasks
   environment.systemPackages = with pkgs; [
@@ -15,12 +16,12 @@ in
 
   services.kubernetes = {
     roles = ["master" "node"];
-    masterAddress = vars.kubeMasterHostname;
-    apiserverAddress = "https://${vars.kubeMasterHostname}:${toString vars.kubeMasterAPIServerPort}";
+    masterAddress = cfg.kubeMasterHostname;
+    apiserverAddress = "https://${cfg.kubeMasterHostname}:${toString cfg.kubeMasterAPIServerPort}";
     easyCerts = true;
     apiserver = {
-      securePort = vars.kubeMasterAPIServerPort;
-      advertiseAddress = vars.kubeMasterIP;
+      securePort = cfg.kubeMasterAPIServerPort;
+      advertiseAddress = cfg.kubeMasterIP;
     };
 
     # use coredns
