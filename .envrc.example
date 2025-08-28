@@ -1,5 +1,3 @@
-#!/usr/bin/zsh
-
 export USER_DEVICE=""
 export ARCH_MAC_ADDRESS=""
 export WIN_MAC_ADDRESS=""

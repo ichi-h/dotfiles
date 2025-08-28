@@ -22,6 +22,7 @@
       "*.swp"
       "__pycache__"
       ".DS_Store"
+      ".envrc"
     ];
   };
 }
