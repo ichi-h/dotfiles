@@ -1,7 +1,4 @@
 { config, pkgs, vars, ... }:
-let
-  keyFile = "/home/${vars.username}/dotfiles/sops/age/hanaakari.txt";
-in
 {
   imports = [
     ./hardware-configuration.nix
@@ -27,6 +24,5 @@ in
     variant = "";
   };
 
-  # FIXME: use lib.env
-  users.users."${vars.username}".hashedPasswordFile = config.sops.secrets.hashed-user-passwd-hanaakari.path;
+  users.users."${vars.username}".hashedPasswordFile = vars.secrets.hashed-user-passwd-hanaakari;
 }
