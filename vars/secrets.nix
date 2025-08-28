@@ -10,6 +10,8 @@ let
 in
 {
   secrets = {
+    k8s-master-node-apitoken = getEnvWrapper "K8S_MASTER_NODE_APITOKEN";
+
     hashed-user-passwd-tokiwa = getEnvWrapper "HASHED_USER_PASSWD_TOKIWA";
     hashed-user-passwd-hanaakari = getEnvWrapper "HASHED_USER_PASSWD_HANAAKARI";
     hashed-user-passwd-yomogi = getEnvWrapper "HASHED_USER_PASSWD_YOMOGI";
