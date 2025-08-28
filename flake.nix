@@ -27,6 +27,7 @@
           specialArgs = {
             inherit inputs outputs;
             vars = import ./vars;
+            impurelibs = import ./impurelibs;
           };
           modules = [
             ./hosts/tokiwa/configuration.nix
@@ -38,6 +39,7 @@
           specialArgs = {
             inherit inputs outputs;
             vars = import ./vars;
+            impurelibs = import ./impurelibs;
           };
           modules = [
             ./hosts/hanaakari/configuration.nix

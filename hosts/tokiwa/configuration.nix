@@ -1,4 +1,4 @@
-{ config, pkgs, vars, ... }:
+{ config, pkgs, vars, impurelibs, ... }:
 {
   imports = [
     ./hardware-configuration.nix
@@ -24,5 +24,5 @@
     variant = "";
   };
 
-  users.users."${vars.username}".hashedPassword = vars.secrets.hashed-user-passwd-tokiwa;
+  users.users."${vars.username}".hashedPassword = impurelibs.secrets.hashed-user-passwd-tokiwa;
 }

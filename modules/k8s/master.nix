@@ -1,7 +1,7 @@
 
-{ pkgs, vars, ... }:
+{ pkgs, impurelibs, ... }:
 let
-  cfg = import ./config.nix { inherit vars; };
+  cfg = import ./config.nix { inherit impurelibs; };
 in
 {
   # resolve master hostname
