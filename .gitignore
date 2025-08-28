@@ -1,3 +1,1 @@
 .env
-sops/age/*
-!sops/age/.gitkeep

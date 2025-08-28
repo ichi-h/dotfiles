@@ -27,18 +27,6 @@ in
     variant = "";
   };
 
-  sops = {
-    age.keyFile = keyFile;
-    defaultSopsFile = ./secrets.yaml;
-    secrets = {
-      hashed-user-passwd-tokiwa.neededForUsers = true;
-    };
-  };
-
-
+  # FIXME: use lib.env
   users.users."${vars.username}".hashedPasswordFile = config.sops.secrets.hashed-user-passwd-tokiwa.path;
-
-  environment.variables = {
-    SOPS_AGE_KEY_FILE = keyFile;
-  };
 }
