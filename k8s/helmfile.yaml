@@ -1,6 +1,6 @@
 repositories:
-  # - name: grafana
-  #   url: https://grafana.github.io/helm-charts
+  - name: grafana
+    url: https://grafana.github.io/helm-charts
   # - name: vector
   #   url: https://helm.vector.dev
   - name: prometheus-community
@@ -43,27 +43,27 @@ releases:
   #         commonConfig:
   #           replication_factor: 1
   #         useTestSchema: true
-  # - name: grafana
-  #   namespace: monitoring
-  #   chart: grafana/grafana
-  #   version: 9.3.2
-  #   values:
-  #     - service:
-  #         type: NodePort
-  #       nodeSelector:
-  #         role: monitoring
-  #       datasources:
-  #         datasources.yaml:
-  #           apiVersion: 1
-  #           datasources:
-  #             - name: "Prometheus"
-  #               type: prometheus
-  #               access: proxy
-  #               url: http://prometheus-server
-  #             - name: "Loki"
-  #               type: loki
-  #               access: proxy
-  #               url: http://loki-gateway
+  - name: grafana
+    namespace: monitoring
+    chart: grafana/grafana
+    version: 9.4.0
+    values:
+      - service:
+          type: NodePort
+        nodeSelector:
+          role: monitoring
+        datasources:
+          datasources.yaml:
+            apiVersion: 1
+            datasources:
+              - name: "Prometheus"
+                type: prometheus
+                access: proxy
+                url: http://prometheus-server
+              # - name: "Loki"
+              #   type: loki
+              #   access: proxy
+              #   url: http://loki-gateway
   # - name: vector
   #   namespace: monitoring
   #   chart: vector/vector
