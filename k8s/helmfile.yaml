@@ -33,7 +33,7 @@ releases:
               type: local
           schemaConfig:
             configs:
-              - from: 2025-08-01
+              - from: "2025-08-01"
                 store: tsdb
                 object_store: filesystem
                 schema: v13
@@ -42,16 +42,14 @@ releases:
                   period: 24h
         singleBinary:
           replicas: 1
+          extraArgs: ["-config.expand-env=true"]
           persistence:
             enabled: true
-            storageClass: nfs-client
+            storageClass: standard
             size: 10Gi
           nodeSelector:
             role: application
         gateway:
-          service:
-            nodePort: 31001
-            type: NodePort
           nodeSelector:
             role: application
         table_manager:
