@@ -1,0 +1,126 @@
+repositories:
+  # - name: grafana
+  #   url: https://grafana.github.io/helm-charts
+  # - name: vector
+  #   url: https://helm.vector.dev
+  - name: prometheus-community
+    url: https://prometheus-community.github.io/helm-charts
+
+releases:
+  # - name: loki
+  #   namespace: monitoring
+  #   chart: grafana/loki
+  #   version: 6.36.0
+  #   values:
+  #     - minio:
+  #         enabled: true
+  #       write:
+  #         replicas: 1
+  #         nodeSelector:
+  #           role: monitoring
+  #       read:
+  #         replicas: 1
+  #         nodeSelector:
+  #           role: monitoring
+  #       backend:
+  #         replicas: 1
+  #         nodeSelector:
+  #           role: monitoring
+  #       resultsCache:
+  #         nodeSelector:
+  #           role: monitoring
+  #       gateway:
+  #         nodeSelector:
+  #           role: monitoring
+  #       lokiCanary:
+  #         nodeSelector:
+  #           role: monitoring
+  #       chunksCache:
+  #         nodeSelector:
+  #           role: monitoring
+  #       loki:
+  #         auth_enabled: false
+  #         commonConfig:
+  #           replication_factor: 1
+  #         useTestSchema: true
+  # - name: grafana
+  #   namespace: monitoring
+  #   chart: grafana/grafana
+  #   version: 9.3.2
+  #   values:
+  #     - service:
+  #         type: NodePort
+  #       nodeSelector:
+  #         role: monitoring
+  #       datasources:
+  #         datasources.yaml:
+  #           apiVersion: 1
+  #           datasources:
+  #             - name: "Prometheus"
+  #               type: prometheus
+  #               access: proxy
+  #               url: http://prometheus-server
+  #             - name: "Loki"
+  #               type: loki
+  #               access: proxy
+  #               url: http://loki-gateway
+  # - name: vector
+  #   namespace: monitoring
+  #   chart: vector/vector
+  #   version: 0.45.0
+  #   values:
+  #     - role: "Agent"
+  #       workloadType: "DaemonSet"
+  #       service:
+  #         enabled: false
+  #       tolerations:
+  #         - key: node-role.kubernetes.io/control-plane
+  #           operator: Exists
+  #           effect: NoSchedule
+  #         - key: node-role.kubernetes.io/master
+  #           operator: Exists
+  #           effect: NoSchedule
+  #       extraVolumes:
+  #         - name: var-lib-docker-containers
+  #           hostPath:
+  #             path: /var/lib/docker/containers
+  #       extraVolumeMounts:
+  #         - name: var-lib-docker-containers
+  #           mountPath: /var/lib/docker/containers
+  #           readOnly: true
+  #       customConfig:
+  #         data_dir: /vector-data-dir
+  #         sources:
+  #           kubernetes_logs:
+  #             type: kubernetes_logs
+  #             auto_partial_merge: true
+  #             include_paths_glob_patterns:
+  #               - /var/log/containers/*.log
+  #               - /var/log/pods/*/*/*.log
+  #         sinks:
+  #           loki_logs:
+  #             type: loki
+  #             inputs: ["kubernetes_logs"]
+  #             encoding:
+  #               codec: json
+  #             endpoint: http://loki-gateway.monitoring.svc.cluster.local
+  #             labels:
+  #               job: vector
+  #               cluster: kubernetes
+  #             batch:
+  #               max_bytes: 102400
+  #               timeout_secs: 5
+  #             request:
+  #               timeout_secs: 30
+  #               retry_attempts: 5
+  #               retry_max_duration_secs: 300
+  #               retry_initial_backoff_secs: 1
+  #               retry_max_delay_secs: 30
+  - name: prometheus
+    namespace: monitoring
+    chart: prometheus-community/prometheus
+    version: 27.30.0
+    values:
+      - server:
+          nodeSelector:
+            role: monitoring
