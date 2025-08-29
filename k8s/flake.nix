@@ -28,6 +28,7 @@
             kubernetes-helm-wrapped
             helmfile-wrapped
             kustomize
+            k9s
           ];
           shellHook = ''
             if ! kind get clusters | grep -q '^kind$'; then
