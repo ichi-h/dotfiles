@@ -8,7 +8,6 @@ repositories:
 
 releases:
   # - name: loki
-  #   namespace: monitoring
   #   chart: grafana/loki
   #   version: 6.36.0
   #   values:
@@ -17,41 +16,40 @@ releases:
   #       write:
   #         replicas: 1
   #         nodeSelector:
-  #           role: monitoring
+  #           role: application
   #       read:
   #         replicas: 1
   #         nodeSelector:
-  #           role: monitoring
+  #           role: application
   #       backend:
   #         replicas: 1
   #         nodeSelector:
-  #           role: monitoring
+  #           role: application
   #       resultsCache:
   #         nodeSelector:
-  #           role: monitoring
+  #           role: application
   #       gateway:
   #         nodeSelector:
-  #           role: monitoring
+  #           role: application
   #       lokiCanary:
   #         nodeSelector:
-  #           role: monitoring
+  #           role: application
   #       chunksCache:
   #         nodeSelector:
-  #           role: monitoring
+  #           role: application
   #       loki:
   #         auth_enabled: false
   #         commonConfig:
   #           replication_factor: 1
   #         useTestSchema: true
   - name: grafana
-    namespace: monitoring
     chart: grafana/grafana
     version: 9.4.0
     values:
       - service:
           type: NodePort
         nodeSelector:
-          role: monitoring
+          role: application
         datasources:
           datasources.yaml:
             apiVersion: 1
@@ -65,7 +63,6 @@ releases:
               #   access: proxy
               #   url: http://loki-gateway
   # - name: vector
-  #   namespace: monitoring
   #   chart: vector/vector
   #   version: 0.45.0
   #   values:
@@ -103,7 +100,7 @@ releases:
   #             inputs: ["kubernetes_logs"]
   #             encoding:
   #               codec: json
-  #             endpoint: http://loki-gateway.monitoring.svc.cluster.local
+  #             endpoint: http://loki-gateway.default.svc.cluster.local
   #             labels:
   #               job: vector
   #               cluster: kubernetes
@@ -117,10 +114,9 @@ releases:
   #               retry_initial_backoff_secs: 1
   #               retry_max_delay_secs: 30
   - name: prometheus
-    namespace: monitoring
     chart: prometheus-community/prometheus
     version: 27.32.0
     values:
       - server:
           nodeSelector:
-            role: monitoring
+            role: application
