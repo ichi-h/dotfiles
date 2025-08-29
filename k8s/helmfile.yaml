@@ -119,7 +119,7 @@ releases:
   - name: prometheus
     namespace: monitoring
     chart: prometheus-community/prometheus
-    version: 27.30.0
+    version: 27.32.0
     values:
       - server:
           nodeSelector:
