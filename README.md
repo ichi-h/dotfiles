@@ -12,7 +12,7 @@
 
 ## Usage
 
-Install Nix in advance or use NixOS.
+Install Nix beforehand, and NixOS if necessary.
 
 - [Nix Installer](https://github.com/DeterminateSystems/nix-installer)
 
@@ -35,7 +35,8 @@ nix run nixpkgs#home-manager -- switch --flake .#linux-arm64
 nix run nixpkgs#home-manager -- switch --flake .#darwin
 
 # Rebuild NixOS
-sudo direnv allow; sudo direnv exec . nixos-rebuild switch --flake .#(environment) --impure
+sudo direnv allow # if you edited .envrc
+sudo direnv exec . nixos-rebuild switch --flake .#(environment) --impure
 ```
 
 ### Why not use sops-nix, agenix and so on?
@@ -84,5 +85,5 @@ I decided to do this. In other words, **I gave up on purity**.
 Wait a minute! Wouldn't that eliminate the appeal of NixOS?  
 Yes, that opinion is correct, but it doesn't mean that the appeal of NixOS would be **completely** lost.  
 Certainly, if I allow impurity, I can't predict what might happen. However, if we minimize the impure portion and understand its scope precisely, it is possible to obtain the desired output with accuracy nearly indistinguishable from that of a reference-transparent function, with only a slight amount of care.  
-To that end, this project aggregates impure methods within `/impurelibs` and allow the user can call it by `impurelibs.xxx`. This also includes the Nix expression for managing the secrets introduced at the beginning.
+To that end, this project aggregates impure methods within `/impurelibs` and allow the user can call it by `impurelibs.xxx`. This also includes the Nix expression for managing the secrets introduced at the beginning.  
 Of course, it's not as robust as pure mechanisms, but at least there's only one place that needs careful management, and the calling side can understand that it's impure, making it a better management approach than letting things become lawless.
