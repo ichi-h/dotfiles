@@ -7,41 +7,56 @@ repositories:
     url: https://prometheus-community.github.io/helm-charts
 
 releases:
-  # - name: loki
-  #   chart: grafana/loki
-  #   version: 6.36.0
-  #   values:
-  #     - minio:
-  #         enabled: true
-  #       write:
-  #         replicas: 1
-  #         nodeSelector:
-  #           role: application
-  #       read:
-  #         replicas: 1
-  #         nodeSelector:
-  #           role: application
-  #       backend:
-  #         replicas: 1
-  #         nodeSelector:
-  #           role: application
-  #       resultsCache:
-  #         nodeSelector:
-  #           role: application
-  #       gateway:
-  #         nodeSelector:
-  #           role: application
-  #       lokiCanary:
-  #         nodeSelector:
-  #           role: application
-  #       chunksCache:
-  #         nodeSelector:
-  #           role: application
-  #       loki:
-  #         auth_enabled: false
-  #         commonConfig:
-  #           replication_factor: 1
-  #         useTestSchema: true
+  - name: loki
+    chart: grafana/loki
+    version: 6.38.0
+    values:
+      - deploymentMode: SingleBinary<->SimpleScalable
+        loki:
+          auth_enabled: false
+          containerSecurityContext:
+            readOnlyRootFilesystem: false
+          podSecurityContext:
+            fsGroup: 0
+            runAsNonRoot: false
+            runAsUser: 0
+          commonConfig:
+            replication_factor: 1
+          storage:
+            type: filesystem
+          commonStorageConfig:
+            type: filesystem
+          persistence:
+            enabled: true
+          rulerConfig:
+            storage:
+              type: local
+          schemaConfig:
+            configs:
+              - from: 2025-08-01
+                store: tsdb
+                object_store: filesystem
+                schema: v13
+                index:
+                  prefix: loki_index_
+                  period: 24h
+        singleBinary:
+          replicas: 1
+          persistence:
+            enabled: true
+            storageClass: nfs-client
+            size: 10Gi
+          nodeSelector:
+            role: application
+        gateway:
+          service:
+            nodePort: 31001
+            type: NodePort
+          nodeSelector:
+            role: application
+        table_manager:
+          retention_deletes_enabled: true
+          retention_period: 24h
   - name: grafana
     chart: grafana/grafana
     version: 9.4.0
@@ -58,10 +73,10 @@ releases:
                 type: prometheus
                 access: proxy
                 url: http://prometheus-server
-              # - name: "Loki"
-              #   type: loki
-              #   access: proxy
-              #   url: http://loki-gateway
+              - name: "Loki"
+                type: loki
+                access: proxy
+                url: http://loki-gateway
   # - name: vector
   #   chart: vector/vector
   #   version: 0.45.0
