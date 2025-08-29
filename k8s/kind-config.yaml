@@ -1,0 +1,15 @@
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+nodes:
+  - role: control-plane
+    labels:
+      role: monitoring
+  - role: worker
+    labels:
+      role: application
+  - role: worker
+    labels:
+      role: development
+  - role: worker
+    labels:
+      role: gpu
