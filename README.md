@@ -16,6 +16,8 @@ Install Nix beforehand, and NixOS if necessary.
 
 - [Nix Installer](https://github.com/DeterminateSystems/nix-installer)
 
+### Setup
+
 ```sh
 cd ~/
 git clone https://github.com/ichi-h/dotfiles
@@ -24,6 +26,12 @@ cd dotfiles
 cp .envrc.example .envrc
 vim .envrc # edit this
 direnv allow
+```
+
+### Nix and NixOS
+
+```sh
+cd nix
 
 # For Linux (x86_64)
 nix run nixpkgs#home-manager -- switch --flake .#linux-x86
