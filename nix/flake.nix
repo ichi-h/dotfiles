@@ -48,7 +48,16 @@
       };
 
       homeConfigurations = {
-        "linux-x86" = home-manager.lib.homeManagerConfiguration {
+        "linux-cui-x86" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          extraSpecialArgs = {
+            inherit inputs outputs;
+            vars = import ./vars;
+            enableGuiPkg = false;
+          };
+          modules = [ ./home/linux/home.nix ];
+        };
+        "linux-gui-x86" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = {
             inherit inputs outputs;
@@ -57,7 +66,7 @@
           };
           modules = [ ./home/linux/home.nix ];
         };
-        "linux-arm64" = home-manager.lib.homeManagerConfiguration {
+        "linux-cui-arm64" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.aarch64-linux;
           extraSpecialArgs = {
             inherit inputs outputs;

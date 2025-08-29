@@ -12,11 +12,8 @@ sudo direnv allow # to reference environment variables during NixOS rebuilds.
 ```
 
 ```sh
-# For Linux (x86_64)
-nix run nixpkgs#home-manager -- switch --flake .#linux-x86
-
-# For Linux (arm64)
-nix run nixpkgs#home-manager -- switch --flake .#linux-arm64
+# For Linux
+nix run nixpkgs#home-manager -- switch --flake .#linux-[cui|gui]-[x86|arm64]
 
 # For Darwin
 nix run nixpkgs#home-manager -- switch --flake .#darwin
