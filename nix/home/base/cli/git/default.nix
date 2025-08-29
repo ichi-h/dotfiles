@@ -23,6 +23,7 @@
       "__pycache__"
       ".DS_Store"
       ".envrc"
+      ".env"
     ];
   };
 }
