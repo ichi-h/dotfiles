@@ -3,6 +3,10 @@
     "format": "󱄅",
     "tooltip": false
   },
+  "custom/separator": {
+    "format": "|",
+    "tooltip": false
+  },
   "pulseaudio": {
     "format": "{icon} {volume}%",
     "format-bluetooth": "{icon} {volume}%  {format_source}",
@@ -26,7 +30,7 @@
     "on-click": "pavucontrol"
   },
   "clock": {
-    "format": "{:%Y-%m-%d %H:%M} ",
+    "format": "{:%Y-%m-%d (%a) %H:%M} ",
     "tooltip-format": "<tt><small>{calendar}</small></tt>"
   }
 }
