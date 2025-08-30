@@ -1,0 +1,32 @@
+{
+  "custom/nix": {
+    "format": "󱄅",
+    "tooltip": false
+  },
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-bluetooth": "{icon} {volume}%  {format_source}",
+    "format-bluetooth-muted": " {icon} {format_source}",
+    "format-muted": " {format_source}",
+    "format-source": " {volume}%",
+    "format-source-muted": "",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "on-click": "pavucontrol"
+  },
+  "clock": {
+    "format": "{:%Y-%m-%d %H:%M} ",
+    "tooltip-format": "<tt><small>{calendar}</small></tt>"
+  }
+}

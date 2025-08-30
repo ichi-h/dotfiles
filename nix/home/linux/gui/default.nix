@@ -1,7 +1,7 @@
 {
   imports = [
     ./niri
+    ./waybar
     ./fuzzel.nix
-    ./waybar.nix
   ];
 }

@@ -1,0 +1,18 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 42,
+  "spacing": 4,
+  "modules-left": [
+    "custom/nix",
+    "niri/workspaces"
+  ],
+  "modules-center": [],
+  "modules-right": [
+    "pulseaudio",
+    "clock"
+  ],
+  "include": [
+    "~/.config/waybar/modules.json"
+  ]
+}

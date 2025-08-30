@@ -1,0 +1,95 @@
+/* :root {
+  --mono-50: #FCFCFC;
+  --mono-100: #E6E6E6;
+  --mono-200: #CCCCCC;
+  --mono-300: #B3B3B3;
+  --mono-400: #999999;
+  --mono-500: #808080;
+  --mono-600: #666666;
+  --mono-700: #4D4D4D;
+  --mono-800: #333333;
+  --mono-900: #1A1A1A;
+} */
+
+* {
+  font-family: "HackGen Console NF", FontAwesome, sans-serif;
+  font-size: 16px;
+}
+
+window#waybar {
+  background: none;
+  font-family: "HackGen Console NF", feather;
+  color: #FCFCFC;
+}
+
+.modules-left,
+.modules-right {
+  background: #1A1A1A;
+  margin: 8px;
+  border-radius: 16px;
+}
+
+.modules-left {
+  padding: 0;
+}
+
+.modules-right {
+  padding: 0 4px;
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#wireplumber,
+#custom-media,
+#tray,
+#mode,
+#idle_inhibitor,
+#scratchpad,
+#power-profiles-daemon,
+#language,
+#mpd {
+  padding: 0 8px;
+  border-radius: 16px;
+}
+
+#pulseaudio {
+  margin-left: 6px;
+}
+
+#workspaces button {
+  background: transparent;
+  font-family: "HackGen Console NF", feather;
+  font-weight: 900;
+  font-size: 16px;
+  color: #FCFCFC;
+  border: none;
+  border-radius: 16px;
+  transition: background .2s;
+}
+
+#workspaces button.active {
+  background: #4D4D4D;
+}
+
+#workspaces button:hover {
+  background: #666666;
+  box-shadow: none;
+}
+
+#custom-nix {
+  margin-left: 6px;
+  padding: 0 8px;
+  font-size: 24px;
+  transition: color .2s;
+}
+
+#custom-nix:hover {
+  color: #7EBAE4;
+}
