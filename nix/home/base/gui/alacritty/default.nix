@@ -4,7 +4,7 @@
     enable = enableGuiPkg;
     settings = {
       font = let hackGenNerdConsole = style: {
-        family = "HackGenNerd Console";
+        family = "HackGen Console NF";
         inherit style;
       }; in {
         size = 20;
