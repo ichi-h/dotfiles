@@ -4,7 +4,7 @@
     ./hardware-configuration.nix
     ../../modules/base
     ../../modules/k8s/master.nix
-    ../../modules/niri
+    ../../modules/desktop
   ];
 
   networking.hostName = "tokiwa"; # Define your hostname.
