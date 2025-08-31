@@ -7,6 +7,6 @@
   home.file.".local/share/applications/bitwarden.desktop".text =
     builtins.replaceStrings
       [ "Exec=bitwarden %U" ]
-      [ ("Exec=bitwarden " + vars.wayland-ime-args + " %U") ]
+      [ ("Exec=bitwarden " + vars.x11-args + " %U") ]
       (builtins.readFile "${pkgs.bitwarden}/share/applications/bitwarden.desktop");
 }

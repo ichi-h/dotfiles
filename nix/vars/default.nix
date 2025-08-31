@@ -2,5 +2,6 @@
   username = "ichi";
   userid = "ichi-h";
 
-  wayland-ime-args = "--enable-wayland-ime --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-blink-features=MiddleClickAutoscroll --disable-features=WaylandFractionalScaleV1";
+  wayland-ime-args = "--enable-wayland-ime --enable-features=UseOzonePlatform --ozone-platform=wayland";
+  x11-args = "--ozone-platform=x11";
 }
