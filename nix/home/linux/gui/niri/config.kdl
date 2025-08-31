@@ -256,6 +256,7 @@ layout {
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
 spawn-at-startup "waybar"
+spawn-at-startup "xwayland-satellite"
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
 // If the client will specifically ask for CSD, the request will be honored.
@@ -589,4 +590,9 @@ binds {
     // Powers off the monitors. To turn them back on, do any input like
     // moving the mouse or pressing any other key.
     // Mod+Shift+P { power-off-monitors; }
+}
+
+environment {
+    DISPLAY ":0" // xwayland-satellite
+    ELECTRON_OZONE_PLATFORM_HINT "wayland"
 }
