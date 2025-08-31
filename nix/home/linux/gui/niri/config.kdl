@@ -433,8 +433,8 @@ binds {
     // Mod+Ctrl+I         { move-column-to-workspace-up; }
     Ctrl+Shift+N      { focus-workspace-down; }
     Ctrl+Shift+P        { focus-workspace-up; }
-    Mod+Shift+N              { focus-workspace-down; }
-    Mod+Shift+P              { focus-workspace-up; }
+    Mod+Shift+N              { move-column-to-workspace-down; }
+    Mod+Shift+P              { move-column-to-workspace-up; }
 
     // Alternatively, there are commands to move just a single window:
     // Mod+Ctrl+Page_Down { move-window-to-workspace-down; }
