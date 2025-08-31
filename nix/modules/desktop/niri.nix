@@ -9,7 +9,8 @@
     };
   };
 
-  environment.variables = {
-    ELECTRON_OZONE_PLATFORM_HINT = "auto";
+  environment.sessionVariables = {
+    ELECTRON_OZONE_PLATFORM_HINT = "wayland";
+    NIXOS_OZONE_WL = "1";
   };
 }
