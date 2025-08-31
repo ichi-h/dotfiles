@@ -8,4 +8,8 @@
       wayland.enable = true;
     };
   };
+
+  environment.variables = {
+    ELECTRON_OZONE_PLATFORM_HINT = "auto";
+  };
 }
