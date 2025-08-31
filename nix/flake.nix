@@ -8,6 +8,8 @@
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    xremap.url = "github:xremap/nix-flake";
   };
 
   outputs =
@@ -15,6 +17,7 @@
       self,
       nixpkgs,
       home-manager,
+      xremap,
       ...
     }@inputs:
     let
@@ -31,6 +34,7 @@
           };
           modules = [
             ./hosts/tokiwa/configuration.nix
+            xremap.nixosModules.default
           ];
         };
 
@@ -43,6 +47,7 @@
           };
           modules = [
             ./hosts/hanaakari/configuration.nix
+            xremap.nixosModules.default
           ];
         };
       };
