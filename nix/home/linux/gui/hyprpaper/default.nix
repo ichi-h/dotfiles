@@ -1,5 +1,6 @@
+{ enableGuiPkg, ... }:
 {
-  services.hyprpaper.enable = true;
+  services.hyprpaper.enable = enableGuiPkg;
   services.hyprpaper.settings = {
     ipc = "on";
     splash = false;

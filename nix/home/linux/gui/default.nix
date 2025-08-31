@@ -1,8 +1,9 @@
 {
   imports = [
+    ./fuzzel
     ./hyprpaper
     ./niri
     ./waybar
-    ./fuzzel.nix
+    ./core.nix
   ];
 }
