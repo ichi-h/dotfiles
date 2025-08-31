@@ -153,7 +153,7 @@ layout {
         // off
 
         // How many logical pixels the ring extends out from the windows.
-        width 4
+        width 2
 
         // Colors can be set in a variety of ways:
         // - CSS named colors: "red"
@@ -161,7 +161,7 @@ layout {
         // - CSS-like notation: "rgb(255, 127, 0)", rgba(), hsl() and a few others.
 
         // Color of the ring on the active monitor.
-        active-color "#7fc8ff"
+        active-color "#7EBAE4"
 
         // Color of the ring on inactive monitors.
         inactive-color "#505050"
@@ -363,19 +363,23 @@ binds {
 
     Mod+Q { close-window; }
 
-    Mod+Left  { focus-column-left; }
-    Mod+Down  { focus-window-down; }
-    Mod+Up    { focus-window-up; }
-    Mod+Right { focus-column-right; }
-    Mod+H     { focus-column-left; }
-    Mod+J     { focus-window-down; }
-    Mod+K     { focus-window-up; }
-    Mod+L     { focus-column-right; }
+    // Mod+Left  { focus-column-left; }
+    // Mod+Down  { focus-window-down; }
+    // Mod+Up    { focus-window-up; }
+    // Mod+Right { focus-column-right; }
+    // Mod+H     { focus-column-left; }
+    // Mod+J     { focus-window-down; }
+    // Mod+K     { focus-window-up; }
+    // Mod+L     { focus-column-right; }
+    Ctrl+Shift+H     { focus-column-left; }
+    Ctrl+Shift+J     { focus-window-down; }
+    Ctrl+Shift+K     { focus-window-up; }
+    Ctrl+Shift+L     { focus-column-right; }
 
-    Mod+Ctrl+Left  { move-column-left; }
-    Mod+Ctrl+Down  { move-window-down; }
-    Mod+Ctrl+Up    { move-window-up; }
-    Mod+Ctrl+Right { move-column-right; }
+    // Mod+Ctrl+Left  { move-column-left; }
+    // Mod+Ctrl+Down  { move-window-down; }
+    // Mod+Ctrl+Up    { move-window-up; }
+    // Mod+Ctrl+Right { move-column-right; }
     Mod+Ctrl+H     { move-column-left; }
     Mod+Ctrl+J     { move-window-down; }
     Mod+Ctrl+K     { move-window-up; }
@@ -388,28 +392,28 @@ binds {
     // Mod+Ctrl+J     { move-window-down-or-to-workspace-down; }
     // Mod+Ctrl+K     { move-window-up-or-to-workspace-up; }
 
-    Mod+Home { focus-column-first; }
-    Mod+End  { focus-column-last; }
-    Mod+Ctrl+Home { move-column-to-first; }
-    Mod+Ctrl+End  { move-column-to-last; }
+    // Mod+Home { focus-column-first; }
+    // Mod+End  { focus-column-last; }
+    // Mod+Ctrl+Home { move-column-to-first; }
+    // Mod+Ctrl+End  { move-column-to-last; }
 
-    Mod+Shift+Left  { focus-monitor-left; }
-    Mod+Shift+Down  { focus-monitor-down; }
-    Mod+Shift+Up    { focus-monitor-up; }
-    Mod+Shift+Right { focus-monitor-right; }
-    Mod+Shift+H     { focus-monitor-left; }
-    Mod+Shift+J     { focus-monitor-down; }
-    Mod+Shift+K     { focus-monitor-up; }
-    Mod+Shift+L     { focus-monitor-right; }
+    // Mod+Shift+Left  { focus-monitor-left; }
+    // Mod+Shift+Down  { focus-monitor-down; }
+    // Mod+Shift+Up    { focus-monitor-up; }
+    // Mod+Shift+Right { focus-monitor-right; }
+    // Mod+Shift+H     { focus-monitor-left; }
+    // Mod+Shift+J     { focus-monitor-down; }
+    // Mod+Shift+K     { focus-monitor-up; }
+    // Mod+Shift+L     { focus-monitor-right; }
 
-    Mod+Shift+Ctrl+Left  { move-column-to-monitor-left; }
-    Mod+Shift+Ctrl+Down  { move-column-to-monitor-down; }
-    Mod+Shift+Ctrl+Up    { move-column-to-monitor-up; }
-    Mod+Shift+Ctrl+Right { move-column-to-monitor-right; }
-    Mod+Shift+Ctrl+H     { move-column-to-monitor-left; }
-    Mod+Shift+Ctrl+J     { move-column-to-monitor-down; }
-    Mod+Shift+Ctrl+K     { move-column-to-monitor-up; }
-    Mod+Shift+Ctrl+L     { move-column-to-monitor-right; }
+    // Mod+Shift+Ctrl+Left  { move-column-to-monitor-left; }
+    // Mod+Shift+Ctrl+Down  { move-column-to-monitor-down; }
+    // Mod+Shift+Ctrl+Up    { move-column-to-monitor-up; }
+    // Mod+Shift+Ctrl+Right { move-column-to-monitor-right; }
+    // Mod+Shift+Ctrl+H     { move-column-to-monitor-left; }
+    // Mod+Shift+Ctrl+J     { move-column-to-monitor-down; }
+    // Mod+Shift+Ctrl+K     { move-column-to-monitor-up; }
+    // Mod+Shift+Ctrl+L     { move-column-to-monitor-right; }
 
     // Alternatively, there are commands to move just a single window:
     // Mod+Shift+Ctrl+Left  { move-window-to-monitor-left; }
@@ -419,23 +423,27 @@ binds {
     // Mod+Shift+Ctrl+Left  { move-workspace-to-monitor-left; }
     // ...
 
-    Mod+Page_Down      { focus-workspace-down; }
-    Mod+Page_Up        { focus-workspace-up; }
-    Mod+U              { focus-workspace-down; }
-    Mod+I              { focus-workspace-up; }
-    Mod+Ctrl+Page_Down { move-column-to-workspace-down; }
-    Mod+Ctrl+Page_Up   { move-column-to-workspace-up; }
-    Mod+Ctrl+U         { move-column-to-workspace-down; }
-    Mod+Ctrl+I         { move-column-to-workspace-up; }
+    // Mod+Page_Down      { focus-workspace-down; }
+    // Mod+Page_Up        { focus-workspace-up; }
+    // Mod+U              { focus-workspace-down; }
+    // Mod+I              { focus-workspace-up; }
+    // Mod+Ctrl+Page_Down { move-column-to-workspace-down; }
+    // Mod+Ctrl+Page_Up   { move-column-to-workspace-up; }
+    // Mod+Ctrl+U         { move-column-to-workspace-down; }
+    // Mod+Ctrl+I         { move-column-to-workspace-up; }
+    Ctrl+Shift+N      { focus-workspace-down; }
+    Ctrl+Shift+P        { focus-workspace-up; }
+    Mod+Shift+N              { focus-workspace-down; }
+    Mod+Shift+P              { focus-workspace-up; }
 
     // Alternatively, there are commands to move just a single window:
     // Mod+Ctrl+Page_Down { move-window-to-workspace-down; }
     // ...
 
-    Mod+Shift+Page_Down { move-workspace-down; }
-    Mod+Shift+Page_Up   { move-workspace-up; }
-    Mod+Shift+U         { move-workspace-down; }
-    Mod+Shift+I         { move-workspace-up; }
+    // Mod+Shift+Page_Down { move-workspace-down; }
+    // Mod+Shift+Page_Up   { move-workspace-up; }
+    // Mod+Shift+U         { move-workspace-down; }
+    // Mod+Shift+I         { move-workspace-up; }
 
     // You can bind mouse wheel scroll ticks using the following syntax.
     // These binds will change direction based on the natural-scroll setting.
@@ -443,22 +451,22 @@ binds {
     // To avoid scrolling through workspaces really fast, you can use
     // the cooldown-ms property. The bind will be rate-limited to this value.
     // You can set a cooldown on any bind, but it's most useful for the wheel.
-    Mod+WheelScrollDown      cooldown-ms=150 { focus-workspace-down; }
-    Mod+WheelScrollUp        cooldown-ms=150 { focus-workspace-up; }
-    Mod+Ctrl+WheelScrollDown cooldown-ms=150 { move-column-to-workspace-down; }
-    Mod+Ctrl+WheelScrollUp   cooldown-ms=150 { move-column-to-workspace-up; }
+    // Mod+WheelScrollDown      cooldown-ms=150 { focus-workspace-down; }
+    // Mod+WheelScrollUp        cooldown-ms=150 { focus-workspace-up; }
+    // Mod+Ctrl+WheelScrollDown cooldown-ms=150 { move-column-to-workspace-down; }
+    // Mod+Ctrl+WheelScrollUp   cooldown-ms=150 { move-column-to-workspace-up; }
 
-    Mod+WheelScrollRight      { focus-column-right; }
-    Mod+WheelScrollLeft       { focus-column-left; }
-    Mod+Ctrl+WheelScrollRight { move-column-right; }
-    Mod+Ctrl+WheelScrollLeft  { move-column-left; }
+    // Mod+WheelScrollRight      { focus-column-right; }
+    // Mod+WheelScrollLeft       { focus-column-left; }
+    // Mod+Ctrl+WheelScrollRight { move-column-right; }
+    // Mod+Ctrl+WheelScrollLeft  { move-column-left; }
 
     // Usually scrolling up and down with Shift in applications results in
     // horizontal scrolling; these binds replicate that.
-    Mod+Shift+WheelScrollDown      { focus-column-right; }
-    Mod+Shift+WheelScrollUp        { focus-column-left; }
-    Mod+Ctrl+Shift+WheelScrollDown { move-column-right; }
-    Mod+Ctrl+Shift+WheelScrollUp   { move-column-left; }
+    // Mod+Shift+WheelScrollDown      { focus-column-right; }
+    // Mod+Shift+WheelScrollUp        { focus-column-left; }
+    // Mod+Ctrl+Shift+WheelScrollDown { move-column-right; }
+    // Mod+Ctrl+Shift+WheelScrollUp   { move-column-left; }
 
     // Similarly, you can bind touchpad scroll "ticks".
     // Touchpad scrolling is continuous, so for these binds it is split into
@@ -580,5 +588,5 @@ binds {
 
     // Powers off the monitors. To turn them back on, do any input like
     // moving the mouse or pressing any other key.
-    Mod+Shift+P { power-off-monitors; }
+    // Mod+Shift+P { power-off-monitors; }
 }
