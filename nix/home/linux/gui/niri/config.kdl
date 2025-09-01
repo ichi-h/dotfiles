@@ -62,8 +62,8 @@ input {
     // Setting max-scroll-amount="0%" makes it work only on windows already fully on screen.
     // focus-follows-mouse max-scroll-amount="0%"
 
-    mod-key "Alt"
-    mod-key-nested "Alt"
+    mod-key "Super"
+    mod-key-nested "Super"
 }
 
 // You can configure outputs by their name, which you can find
@@ -376,8 +376,6 @@ binds {
     // Mod+K     { focus-window-up; }
     // Mod+L     { focus-column-right; }
     Mod+H     { focus-column-left; }
-    Mod+J     { focus-window-down; }
-    Mod+K     { focus-window-up; }
     Mod+L     { focus-column-right; }
 
     // Mod+Ctrl+Left  { move-column-left; }
@@ -385,8 +383,6 @@ binds {
     // Mod+Ctrl+Up    { move-window-up; }
     // Mod+Ctrl+Right { move-column-right; }
     Mod+Shift+H     { move-column-left; }
-    Mod+Shift+J     { move-window-down; }
-    Mod+Shift+K     { move-window-up; }
     Mod+Shift+L     { move-column-right; }
 
     // Alternative commands that move across workspaces when reaching
@@ -435,10 +431,10 @@ binds {
     // Mod+Ctrl+Page_Up   { move-column-to-workspace-up; }
     // Mod+Ctrl+U         { move-column-to-workspace-down; }
     // Mod+Ctrl+I         { move-column-to-workspace-up; }
-    Mod+N      { focus-workspace-down; }
-    Mod+P        { focus-workspace-up; }
-    Mod+Shift+N              { move-column-to-workspace-down; }
-    Mod+Shift+P              { move-column-to-workspace-up; }
+    Mod+J      { focus-workspace-down; }
+    Mod+K        { focus-workspace-up; }
+    Mod+Shift+J              { move-column-to-workspace-down; }
+    Mod+Shift+K              { move-column-to-workspace-up; }
 
     // Alternatively, there are commands to move just a single window:
     // Mod+Ctrl+Page_Down { move-window-to-workspace-down; }
