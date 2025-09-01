@@ -29,6 +29,17 @@
           };
         }
         {
+          name = "CapsLock utils";
+          remap = {
+            CapsLock-u = "Ctrl-u";
+            CapsLock-d = "Ctrl-d";
+            CapsLock-k = "F7";
+            CapsLock-Esc = "BackSpace";
+            CapsLock-KEY_SEMICOLON = "Ctrl-KEY_SEMICOLON";
+            CapsLock-Shift-KEY_SEMICOLON = "Ctrl-Shift-KEY_SEMICOLON";
+          };
+        }
+        {
           name = "Move tabs";
           remap = {
             Ctrl_L-h = "Shift-Ctrl-tab";
