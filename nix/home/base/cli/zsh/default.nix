@@ -20,8 +20,7 @@
     shellAliases = {
       "..." = "cd ../..";
       "...." = "cd ../../..";
-      "la" = "ls -laFG";
-      "l" = "ls -CFG";
+      "la" = "ls -laFGh";
     };
     envExtra = builtins.readFile ./.zshenv;
     initContent = builtins.readFile ./.zshrc;
