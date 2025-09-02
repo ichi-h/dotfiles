@@ -5,6 +5,9 @@ nodes:
   - role: worker
     labels:
       role: application
+    extraMounts:
+      - hostPath: /home/ichi/dotfiles/k8s/volumes
+        containerPath: /mnt/k8s/volumes
   - role: worker
     labels:
       role: development

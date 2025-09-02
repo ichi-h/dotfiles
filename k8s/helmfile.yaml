@@ -45,8 +45,8 @@ releases:
           extraArgs: ["-config.expand-env=true"]
           persistence:
             enabled: true
-            storageClass: standard
-            size: 10Gi
+            storageClass: loki-local-storage
+            size: 128Mi
           nodeSelector:
             role: application
         gateway:
@@ -131,5 +131,12 @@ releases:
     version: 27.32.0
     values:
       - server:
+          persistentVolume:
+            size: 128Mi
+            storageClass: prometheus-server-local-storage
           nodeSelector:
             role: application
+        alertmanager:
+          persistence:
+            size: 128Mi
+            storageClass: prometheus-alertmanager-local-storage

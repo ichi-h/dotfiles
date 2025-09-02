@@ -31,6 +31,10 @@
             k9s
           ];
           shellHook = ''
+            mkdir -p volumes/loki
+            mkdir -p volumes/prometheus/server
+            mkdir -p volumes/prometheus/alertmanager
+
             if ! kind get clusters | grep -q '^kind$'; then
               echo "Creating kind cluster..."
               kind create cluster --config kind-config.yaml
