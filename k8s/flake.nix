@@ -34,6 +34,7 @@
             mkdir -p volumes/loki
             mkdir -p volumes/prometheus/server
             mkdir -p volumes/prometheus/alertmanager
+            mkdir -p volumes/vaultwarden
 
             if ! kind get clusters | grep -q '^kind$'; then
               echo "Creating kind cluster..."

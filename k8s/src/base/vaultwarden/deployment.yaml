@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vaultwarden-deploy
+  labels:
+    role: application
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      role: application
+  template:
+    metadata:
+      labels:
+        role: application
+        app: vaultwarden
+    spec:
+      nodeSelector:
+        role: application
+      containers:
+        - name: vaultwarden
+          image: vaultwarden/server:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          env:
+            - name: DOMAIN
+              value: "http://localhost:31713" # FIXME
+          volumeMounts:
+            - name: vw-data
+              mountPath: /data
+          resources:
+            limits:
+              cpu: "200m"
+              memory: "256Mi"
+            requests:
+              cpu: "50m"
+              memory: "64Mi"
+      volumes:
+        - name: vw-data
+          persistentVolumeClaim:
+            claimName: vaultwarden-pvc
