@@ -17,31 +17,10 @@ spec:
     spec:
       nodeSelector:
         role: application
-      initContainers:
-        - name: setup-permissions
-          image: alpine:latest
-          command: ["sh", "-c"]
-          args:
-            - |
-              echo "Setting up directory permissions..."
-
-              mkdir -p /var/www/html/data /var/www/html/config /var/www/html/custom_apps /var/www/html/themes
-              chmod 755 /var/www/html/data /var/www/html/config /var/www/html/custom_apps /var/www/html/themes
-
-              echo "Directory permissions setup completed:"
-              ls -la /var/www/html/
-          volumeMounts:
-            - name: nc-data
-              mountPath: /var/www/html/data
-            - name: nc-config
-              mountPath: /var/www/html/config
-            - name: nc-custom-apps
-              mountPath: /var/www/html/custom_apps
-            - name: nc-themes
-              mountPath: /var/www/html/themes
-          securityContext:
-            runAsUser: 0
-            runAsGroup: 0
+      securityContext:
+        runAsUser: 33
+        runAsGroup: 33
+        fsGroup: 33
       containers:
         - name: nextcloud
           image: nextcloud:apache
