@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nextcloud-deploy
+  labels:
+    role: application
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      role: application
+  template:
+    metadata:
+      labels:
+        role: application
+        app: nextcloud
+    spec:
+      nodeSelector:
+        role: application
+      initContainers:
+        - name: setup-permissions
+          image: alpine:latest
+          command: ["sh", "-c"]
+          args:
+            - |
+              echo "Setting up directory permissions..."
+
+              mkdir -p /var/www/html/data /var/www/html/config /var/www/html/custom_apps /var/www/html/themes
+              chmod 755 /var/www/html/data /var/www/html/config /var/www/html/custom_apps /var/www/html/themes
+
+              echo "Directory permissions setup completed:"
+              ls -la /var/www/html/
+          volumeMounts:
+            - name: nc-data
+              mountPath: /var/www/html/data
+            - name: nc-config
+              mountPath: /var/www/html/config
+            - name: nc-custom-apps
+              mountPath: /var/www/html/custom_apps
+            - name: nc-themes
+              mountPath: /var/www/html/themes
+          securityContext:
+            runAsUser: 0
+            runAsGroup: 0
+      containers:
+        - name: nextcloud
+          image: nextcloud:apache
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: nc-data
+              mountPath: /var/www/html/data
+            - name: nc-config
+              mountPath: /var/www/html/config
+            - name: nc-custom-apps
+              mountPath: /var/www/html/custom_apps
+            - name: nc-themes
+              mountPath: /var/www/html/themes
+          resources:
+            limits:
+              cpu: "1"
+              memory: "1024Mi"
+            requests:
+              cpu: "500m"
+              memory: "512Mi"
+      volumes:
+        - name: nc-data
+          persistentVolumeClaim:
+            claimName: nextcloud-data-pvc
+        - name: nc-config
+          persistentVolumeClaim:
+            claimName: nextcloud-config-pvc
+        - name: nc-custom-apps
+          persistentVolumeClaim:
+            claimName: nextcloud-custom-apps-pvc
+        - name: nc-themes
+          persistentVolumeClaim:
+            claimName: nextcloud-themes-pvc

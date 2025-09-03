@@ -1,0 +1,47 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: nextcloud-data-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: nextcloud-data-local-storage
+  resources:
+    requests:
+      storage: 128Mi
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: nextcloud-config-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: nextcloud-config-local-storage
+  resources:
+    requests:
+      storage: 16Mi
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: nextcloud-custom-apps-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: nextcloud-custom-apps-local-storage
+  resources:
+    requests:
+      storage: 128Mi
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: nextcloud-themes-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: nextcloud-themes-local-storage
+  resources:
+    requests:
+      storage: 16Mi

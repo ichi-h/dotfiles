@@ -1,0 +1,27 @@
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: nextcloud-data-local-storage
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: WaitForFirstConsumer
+---
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: nextcloud-config-local-storage
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: WaitForFirstConsumer
+---
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: nextcloud-custom-apps-local-storage
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: WaitForFirstConsumer
+---
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: nextcloud-themes-local-storage
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: WaitForFirstConsumer
