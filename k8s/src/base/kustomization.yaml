@@ -1,0 +1,5 @@
+resources:
+  - loki/
+  - nextcloud/
+  - prometheus/
+  - vaultwarden/

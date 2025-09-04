@@ -6,7 +6,7 @@
 nix develop # or write `use flake` in .envrc
 
 # Apply manifests and Helmfile.
-kubectl apply -f src/ --recursive
+kubectl apply -k src/overlays/dev
 helmfile apply
 
 # Download available Helm Chart values.
