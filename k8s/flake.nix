@@ -29,6 +29,7 @@
             helmfile-wrapped
             kustomize
             k9s
+            velero
           ];
           shellHook = ''
             mkdir -p volumes/loki
