@@ -3,3 +3,4 @@ resources:
   - nextcloud/
   - prometheus/
   - vaultwarden/
+  - velero/
