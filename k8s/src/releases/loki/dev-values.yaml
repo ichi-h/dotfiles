@@ -1,0 +1,44 @@
+deploymentMode: SingleBinary<->SimpleScalable
+loki:
+  auth_enabled: false
+  containerSecurityContext:
+    readOnlyRootFilesystem: false
+  podSecurityContext:
+    fsGroup: 0
+    runAsNonRoot: false
+    runAsUser: 0
+  commonConfig:
+    replication_factor: 1
+  storage:
+    type: filesystem
+  commonStorageConfig:
+    type: filesystem
+  persistence:
+    enabled: true
+  rulerConfig:
+    storage:
+      type: local
+  schemaConfig:
+    configs:
+      - from: "2025-08-01"
+        store: tsdb
+        object_store: filesystem
+        schema: v13
+        index:
+          prefix: loki_index_
+          period: 24h
+singleBinary:
+  replicas: 1
+  extraArgs: ["-config.expand-env=true"]
+  persistence:
+    enabled: true
+    storageClass: loki-local-storage
+    size: 128Mi
+  nodeSelector:
+    role: application
+gateway:
+  nodeSelector:
+    role: application
+table_manager:
+  retention_deletes_enabled: true
+  retention_period: 24h

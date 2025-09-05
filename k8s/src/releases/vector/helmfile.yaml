@@ -1,0 +1,6 @@
+releases:
+  - name: vector
+    chart: vector/vector
+    version: 0.45.0
+    values:
+      - dev-values.yaml

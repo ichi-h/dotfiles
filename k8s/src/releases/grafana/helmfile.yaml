@@ -1,0 +1,6 @@
+releases:
+  - name: grafana
+    chart: grafana/grafana
+    version: 9.4.0
+    values:
+      - dev-values.yaml

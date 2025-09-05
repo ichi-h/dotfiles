@@ -1,0 +1,10 @@
+server:
+  persistentVolume:
+    size: 128Mi
+    storageClass: prometheus-server-local-storage
+  nodeSelector:
+    role: application
+alertmanager:
+  persistence:
+    size: 128Mi
+    storageClass: prometheus-alertmanager-local-storage

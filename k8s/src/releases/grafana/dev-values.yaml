@@ -1,0 +1,16 @@
+service:
+  type: NodePort
+nodeSelector:
+  role: application
+datasources:
+  datasources.yaml:
+    apiVersion: 1
+    datasources:
+      - name: "Prometheus"
+        type: prometheus
+        access: proxy
+        url: http://prometheus-server
+      - name: "Loki"
+        type: loki
+        access: proxy
+        url: http://loki-gateway
