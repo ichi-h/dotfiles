@@ -9,12 +9,12 @@ repositories:
     url: https://vmware-tanzu.github.io/helm-charts
 
 environments:
-  dev:
-  prod:
+  dev: {}
+  prod: {}
 
 helmfiles:
   - ./src/releases/grafana/helmfile.yaml
   - ./src/releases/loki/helmfile.yaml
   - ./src/releases/prometheus/helmfile.yaml
   - ./src/releases/vector/helmfile.yaml
-  # - ./src/releases/velero/helmfile.yaml
+  - ./src/releases/velero/helmfile.yaml
