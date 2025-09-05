@@ -1,6 +1,10 @@
+environments:
+  dev:
+  prod:
+---
 releases:
   - name: loki
     chart: grafana/loki
     version: 6.38.0
     values:
-      - dev-values.yaml
+      - values.yaml.gotmpl

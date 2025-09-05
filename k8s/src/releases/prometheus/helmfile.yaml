@@ -1,6 +1,10 @@
+environments:
+  dev:
+  prod:
+---
 releases:
   - name: prometheus
     chart: prometheus-community/prometheus
     version: 27.32.0
     values:
-      - dev-values.yaml
+      - values.yaml.gotmpl

@@ -32,8 +32,8 @@ singleBinary:
   extraArgs: ["-config.expand-env=true"]
   persistence:
     enabled: true
-    storageClass: loki-local-storage
-    size: 128Mi
+    storageClass: {{ .Environment.Name }}-loki-local-storage
+    size: {{ if eq .Environment.Name "prod" }}10Gi{{ else }}128Mi{{ end }}
   nodeSelector:
     role: application
 gateway:

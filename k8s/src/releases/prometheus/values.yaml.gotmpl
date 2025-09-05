@@ -1,0 +1,10 @@
+server:
+  persistentVolume:
+    size: {{ if eq .Environment.Name "prod" }}8Gi{{ else }}128Mi{{ end }}
+    storageClass: {{ .Environment.Name }}-prometheus-server-local-storage
+  nodeSelector:
+    role: application
+alertmanager:
+  persistence:
+    size: {{ if eq .Environment.Name "prod" }}2Gi{{ else }}128Mi{{ end }}
+    storageClass: {{ .Environment.Name }}-prometheus-alertmanager-local-storage
