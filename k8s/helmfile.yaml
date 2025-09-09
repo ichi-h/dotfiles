@@ -13,11 +13,11 @@ environments:
   prod: {}
 
 helmfiles:
-  - ./src/releases/grafana/helmfile.yaml
-  - ./src/releases/loki/helmfile.yaml
-  - ./src/releases/minio/helmfile.yaml
-  - ./src/releases/nextcloud/helmfile.yaml
-  - ./src/releases/prometheus/helmfile.yaml
-  - ./src/releases/vaultwarden/helmfile.yaml
-  - ./src/releases/vector/helmfile.yaml
-  - ./src/releases/velero/helmfile.yaml
+  - ./releases/grafana/helmfile.yaml
+  - ./releases/loki/helmfile.yaml
+  - ./releases/minio/helmfile.yaml
+  - ./releases/nextcloud/helmfile.yaml
+  - ./releases/prometheus/helmfile.yaml
+  - ./releases/vaultwarden/helmfile.yaml
+  - ./releases/vector/helmfile.yaml
+  - ./releases/velero/helmfile.yaml
