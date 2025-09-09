@@ -1,0 +1,18 @@
+metadata:
+  labels:
+    role: application
+
+app:
+  domain: http://localhost:31713
+  storage:
+    size: 128Mi
+    local:
+      path: /mnt/k8s/volumes/vaultwarden
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: role
+              operator: In
+              values:
+                - application

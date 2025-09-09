@@ -8,4 +8,4 @@ spec:
   storageClassName: vaultwarden-local-storage
   resources:
     requests:
-      storage: 128Mi
+      storage: {{ .Values.app.storage.size }}

@@ -4,18 +4,14 @@ metadata:
   name: vaultwarden-pv
 spec:
   capacity:
-    storage: 128Mi
+    storage: {{ .Values.app.storage.size }}
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
   storageClassName: vaultwarden-local-storage
   local:
-    path: /mnt/k8s/volumes/vaultwarden
+    path: {{ .Values.app.storage.local.path }}
+  {{- with .Values.app.nodeAffinity }}
   nodeAffinity:
-    required:
-      nodeSelectorTerms:
-        - matchExpressions:
-            - key: role
-              operator: In
-              values:
-                - application
+    {{- toYaml . | nindent 8 }}
+  {{- end }}

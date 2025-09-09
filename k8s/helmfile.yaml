@@ -17,5 +17,6 @@ helmfiles:
   - ./src/releases/loki/helmfile.yaml
   - ./src/releases/nextcloud/helmfile.yaml
   - ./src/releases/prometheus/helmfile.yaml
+  - ./src/releases/vaultwarden/helmfile.yaml
   - ./src/releases/vector/helmfile.yaml
   - ./src/releases/velero/helmfile.yaml
