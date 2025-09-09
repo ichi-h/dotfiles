@@ -1,6 +1,6 @@
 environments:
-  dev:
-  prod:
+  dev: {}
+  prod: {}
 ---
 releases:
   - name: prometheus
@@ -8,3 +8,6 @@ releases:
     version: 27.32.0
     values:
       - values.yaml.gotmpl
+---
+helmfiles:
+  - path: ./prometheus-mics/helmfile.yaml

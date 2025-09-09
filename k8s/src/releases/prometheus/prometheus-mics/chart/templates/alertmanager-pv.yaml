@@ -4,18 +4,14 @@ metadata:
   name: prometheus-alertmanager-pv
 spec:
   capacity:
-    storage: 128Mi
+    storage: {{ .Values.persistentVolume.alertmanager.capacity.storage }}
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
   storageClassName: prometheus-alertmanager-local-storage
   local:
     path: /mnt/k8s/volumes/prometheus/alertmanager
+  {{- with .Values.persistentVolume.nodeAffinity }}
   nodeAffinity:
-    required:
-      nodeSelectorTerms:
-        - matchExpressions:
-            - key: role
-              operator: In
-              values:
-                - application
+    {{- toYaml . | nindent 8 }}
+  {{- end }}

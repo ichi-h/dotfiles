@@ -1,0 +1,7 @@
+persistentVolume:
+  alertmanager:
+    capacity:
+      storage: 128Mi
+  server:
+    capacity:
+      storage: 128Mi

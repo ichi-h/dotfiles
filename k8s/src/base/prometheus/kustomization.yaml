@@ -1,5 +1,0 @@
-resources:
-  - alertmanager-pv.yaml
-  - alertmanager-sc.yaml
-  - server-pv.yaml
-  - server-sc.yaml

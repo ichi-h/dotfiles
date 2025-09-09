@@ -4,18 +4,14 @@ metadata:
   name: prometheus-server-pv
 spec:
   capacity:
-    storage: 128Mi
+    storage: {{ .Values.persistentVolume.server.capacity.storage }}
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
   storageClassName: prometheus-server-local-storage
   local:
     path: /mnt/k8s/volumes/prometheus/server
+  {{- with .Values.persistentVolume.nodeAffinity }}
   nodeAffinity:
-    required:
-      nodeSelectorTerms:
-        - matchExpressions:
-            - key: role
-              operator: In
-              values:
-                - application
+    {{- toYaml . | nindent 8 }}
+  {{- end }}
