@@ -1,6 +1,0 @@
-resources:
-  - deployment.yaml
-  - pv.yaml
-  - pvc.yaml
-  - sc.yaml
-  - svc.yaml

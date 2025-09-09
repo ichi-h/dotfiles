@@ -1,0 +1,13 @@
+persistentVolume:
+  data:
+    capacity:
+      storage: 128Mi
+  config:
+    capacity:
+      storage: 16Mi
+  customApps:
+    capacity:
+      storage: 128Mi
+  themes:
+    capacity:
+      storage: 16Mi

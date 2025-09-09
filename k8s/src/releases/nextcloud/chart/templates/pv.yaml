@@ -4,21 +4,17 @@ metadata:
   name: nextcloud-data-pv
 spec:
   capacity:
-    storage: 128Mi
+    storage: {{ .Values.persistentVolume.data.capacity.storage }}
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
   storageClassName: nextcloud-data-local-storage
   local:
-    path: /mnt/k8s/volumes/shared/data
+    path: {{ .Values.persistentVolume.data.local.path }}
+  {{- with .Values.persistentVolume.nodeAffinity }}
   nodeAffinity:
-    required:
-      nodeSelectorTerms:
-        - matchExpressions:
-            - key: role
-              operator: In
-              values:
-                - application
+    {{- toYaml . | nindent 8 }}
+  {{- end }}
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -26,21 +22,17 @@ metadata:
   name: nextcloud-config-pv
 spec:
   capacity:
-    storage: 16Mi
+    storage: {{ .Values.persistentVolume.config.capacity.storage }}
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
   storageClassName: nextcloud-config-local-storage
   local:
-    path: /mnt/k8s/volumes/shared/config
+    path: {{ .Values.persistentVolume.config.local.path }}
+  {{- with .Values.persistentVolume.nodeAffinity }}
   nodeAffinity:
-    required:
-      nodeSelectorTerms:
-        - matchExpressions:
-            - key: role
-              operator: In
-              values:
-                - application
+    {{- toYaml . | nindent 8 }}
+  {{- end }}
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -48,21 +40,17 @@ metadata:
   name: nextcloud-custom-apps-pv
 spec:
   capacity:
-    storage: 128Mi
+    storage: {{ .Values.persistentVolume.customApps.capacity.storage }}
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
   storageClassName: nextcloud-custom-apps-local-storage
   local:
-    path: /mnt/k8s/volumes/shared/custom_apps
+    path: {{ .Values.persistentVolume.customApps.local.path }}
+  {{- with .Values.persistentVolume.nodeAffinity }}
   nodeAffinity:
-    required:
-      nodeSelectorTerms:
-        - matchExpressions:
-            - key: role
-              operator: In
-              values:
-                - application
+    {{- toYaml . | nindent 8 }}
+  {{- end }}
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -70,18 +58,14 @@ metadata:
   name: nextcloud-themes-pv
 spec:
   capacity:
-    storage: 16Mi
+    storage: {{ .Values.persistentVolume.themes.capacity.storage }}
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
   storageClassName: nextcloud-themes-local-storage
   local:
-    path: /mnt/k8s/volumes/shared/themes
+    path: {{ .Values.persistentVolume.themes.local.path }}
+  {{- with .Values.persistentVolume.nodeAffinity }}
   nodeAffinity:
-    required:
-      nodeSelectorTerms:
-        - matchExpressions:
-            - key: role
-              operator: In
-              values:
-                - application
+    {{- toYaml . | nindent 8 }}
+  {{- end }}

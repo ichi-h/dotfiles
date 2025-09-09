@@ -3,20 +3,20 @@ kind: Deployment
 metadata:
   name: nextcloud-deploy
   labels:
-    role: application
+    role: {{ .Values.metadata.labels.role }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      role: application
+      role: {{ .Values.metadata.labels.role }}
   template:
     metadata:
       labels:
-        role: application
+        role: {{ .Values.metadata.labels.role }}
         app: nextcloud
     spec:
       nodeSelector:
-        role: application
+        role: {{ .Values.metadata.labels.role }}
       securityContext:
         runAsUser: 33
         runAsGroup: 33

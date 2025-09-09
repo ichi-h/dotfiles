@@ -8,7 +8,7 @@ spec:
   storageClassName: nextcloud-data-local-storage
   resources:
     requests:
-      storage: 128Mi
+      storage: {{ .Values.persistentVolume.data.capacity.storage }}
 ---
 kind: PersistentVolumeClaim
 apiVersion: v1
@@ -20,7 +20,7 @@ spec:
   storageClassName: nextcloud-config-local-storage
   resources:
     requests:
-      storage: 16Mi
+      storage: {{ .Values.persistentVolume.config.capacity.storage }}
 ---
 kind: PersistentVolumeClaim
 apiVersion: v1
@@ -32,7 +32,7 @@ spec:
   storageClassName: nextcloud-custom-apps-local-storage
   resources:
     requests:
-      storage: 128Mi
+      storage: {{ .Values.persistentVolume.customApps.capacity.storage }}
 ---
 kind: PersistentVolumeClaim
 apiVersion: v1
@@ -44,4 +44,4 @@ spec:
   storageClassName: nextcloud-themes-local-storage
   resources:
     requests:
-      storage: 16Mi
+      storage: {{ .Values.persistentVolume.themes.capacity.storage }}
