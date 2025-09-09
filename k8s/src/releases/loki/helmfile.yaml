@@ -1,6 +1,6 @@
 environments:
-  dev:
-  prod:
+  dev: {}
+  prod: {}
 ---
 releases:
   - name: loki
@@ -8,3 +8,6 @@ releases:
     version: 6.38.0
     values:
       - values.yaml.gotmpl
+---
+helmfiles:
+  - path: ./loki-mics/helmfile.yaml

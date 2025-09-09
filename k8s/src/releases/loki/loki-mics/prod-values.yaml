@@ -1,0 +1,2 @@
+persistentVolume:
+  size: 10Gi
