@@ -8,5 +8,12 @@
     "Tokiwa",
     "Yomogi",
     "Yomosugara"
-  ]
+  ],
+  "files.associations": {
+    ".gotmpl": "helm-template"
+  },
+  "vs-kubernetes": {
+    "vs-kubernetes.kubectl-path": "/nix/store/f93la7iy82zzmhr9wc5rxh18yqajr95v-kubectl-1.33.0/bin",
+    "vs-kubernetes.helm-path": "/nix/store/fd8hqsgzr7294jq8wgkbal360lsw8pnf-helm-3.17.3/bin"
+  }
 }
