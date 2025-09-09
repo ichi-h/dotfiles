@@ -1,4 +1,0 @@
-resources:
-  - ../../base
-  - minio.yaml
-namePrefix: dev-

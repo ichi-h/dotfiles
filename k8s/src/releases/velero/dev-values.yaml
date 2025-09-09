@@ -8,7 +8,7 @@ configuration:
       config:
         region: minio
         s3ForcePathStyle: true
-        s3Url: http://dev-minio.velero.svc.cluster.local:9000
+        s3Url: http://minio.velero.svc.cluster.local:9000
         publicUrl: http://localhost:9000
 snapshotsEnabled: false
 deployNodeAgent: true

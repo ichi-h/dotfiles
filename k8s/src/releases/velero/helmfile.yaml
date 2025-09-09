@@ -5,6 +5,7 @@ environments:
 releases:
   - name: velero
     namespace: velero
+    createNamespace: true
     chart: vmware-tanzu/velero
     version: 10.1.1
     secrets:

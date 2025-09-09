@@ -15,6 +15,7 @@ environments:
 helmfiles:
   - ./src/releases/grafana/helmfile.yaml
   - ./src/releases/loki/helmfile.yaml
+  - ./src/releases/minio/helmfile.yaml
   - ./src/releases/nextcloud/helmfile.yaml
   - ./src/releases/prometheus/helmfile.yaml
   - ./src/releases/vaultwarden/helmfile.yaml

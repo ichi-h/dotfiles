@@ -92,7 +92,7 @@ spec:
               echo "Waiting for MinIO to start..."
               sleep 30
               echo "Setting up MinIO..."
-              mc --config-dir=/config alias set velero http://dev-minio:9000 minio minio123
+              mc --config-dir=/config alias set velero http://minio:9000 minio minio123
               echo "Creating bucket..."
               mc --config-dir=/config mb -p velero/velero
               echo "Setup complete!"

@@ -1,0 +1,15 @@
+environments:
+  dev:
+    values:
+      - enabled: true
+  prod:
+    values:
+      - enabled: false
+---
+releases:
+  - name: minio
+    condition: enabled
+    namespace: velero
+    createNamespace: true
+    chart: ./chart
+    version: 0.1.0
