@@ -3,10 +3,11 @@ kind: Service
 metadata:
   name: nextcloud-svc
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: nextcloud
   ports:
-    - port: 80
+    - name: http
+      port: 80
       targetPort: 80
-      nodePort: 31714
+      protocol: TCP
