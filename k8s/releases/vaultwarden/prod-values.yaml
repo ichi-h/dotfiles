@@ -1,2 +1,3 @@
 app:
-  domain: http://localhost:31713 # FIXME
+  enableTls: true
+  domain: vaultwarden.localhost # FIXME

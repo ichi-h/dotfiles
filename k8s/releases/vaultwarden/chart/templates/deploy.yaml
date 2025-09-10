@@ -25,7 +25,7 @@ spec:
             - containerPort: 80
           env:
             - name: DOMAIN
-              value: {{ .Values.app.domain }}
+              value: {{ if .Values.enableTls }}https{{ else }}http{{ end }}://{{ .Values.app.domain }}
           volumeMounts:
             - name: vw-data
               mountPath: /data

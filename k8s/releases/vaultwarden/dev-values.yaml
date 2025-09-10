@@ -1,2 +1,3 @@
 app:
-  domain: http://localhost:31713
+  enableTls: false
+  domain: vaultwarden.localhost

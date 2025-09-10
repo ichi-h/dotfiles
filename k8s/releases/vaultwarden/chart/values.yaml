@@ -3,7 +3,8 @@ metadata:
     role: application
 
 app:
-  domain: http://localhost:31713
+  enableTls: false
+  domain: localhost
   storage:
     size: 128Mi
     local:
