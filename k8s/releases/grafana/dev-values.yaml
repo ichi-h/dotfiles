@@ -1,5 +1,13 @@
 nodeSelector:
   role: application
+
+ingress:
+  enabled: true
+  path: /
+  pathType: Prefix
+  hosts:
+    - grafana.localhost
+
 datasources:
   datasources.yaml:
     apiVersion: 1

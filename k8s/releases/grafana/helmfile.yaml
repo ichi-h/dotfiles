@@ -1,6 +1,10 @@
+environments:
+  dev: {}
+  prod: {}
+---
 releases:
   - name: grafana
     chart: grafana/grafana
     version: 9.4.0
     values:
-      - values.yaml
+      - ./{{ .Environment.Name }}-values.yaml
