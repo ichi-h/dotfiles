@@ -1,0 +1,11 @@
+environments:
+  dev: {}
+  prod: {}
+---
+releases:
+  - name: traefik
+    chart: traefik/traefik
+    version: 37.1.0
+    createNamespace: true
+    values:
+      - ./{{ .Environment.Name }}-values.yaml
