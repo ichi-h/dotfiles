@@ -27,6 +27,9 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 80
+          env:
+            - name: NEXTCLOUD_TRUSTED_DOMAINS
+              value: {{ .Values.domain }}
           volumeMounts:
             - name: nc-data
               mountPath: /var/www/html/data

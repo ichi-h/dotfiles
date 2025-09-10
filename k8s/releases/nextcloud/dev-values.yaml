@@ -1,3 +1,5 @@
+domain: nextcloud.localhost
+
 persistentVolume:
   data:
     capacity:
