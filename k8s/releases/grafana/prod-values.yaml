@@ -1,0 +1,24 @@
+nodeSelector:
+  role: application
+
+ingress:
+  enabled: true
+  annotations:
+    traefik.ingress.kubernetes.io/router.tls: "true"
+  path: /
+  pathType: Prefix
+  hosts:
+    - grafana.home.ichi-h.com
+
+datasources:
+  datasources.yaml:
+    apiVersion: 1
+    datasources:
+      - name: "Prometheus"
+        type: prometheus
+        access: proxy
+        url: http://prometheus-server
+      - name: "Loki"
+        type: loki
+        access: proxy
+        url: http://loki-gateway

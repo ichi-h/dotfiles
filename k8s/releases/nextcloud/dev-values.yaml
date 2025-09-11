@@ -1,4 +1,5 @@
-domain: nextcloud.localhost
+ingress:
+  host: nextcloud.localhost
 
 persistentVolume:
   data:

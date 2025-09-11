@@ -2,9 +2,12 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: vaultwarden-ing
+  {{- with .Values.ingress.annotations }}
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
 spec:
   rules:
-  - host: {{ .Values.app.domain }}
+  - host: {{ .Values.ingress.host }}
     http:
       paths:
       - path: /

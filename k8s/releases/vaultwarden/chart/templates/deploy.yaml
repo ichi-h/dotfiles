@@ -3,20 +3,20 @@ kind: Deployment
 metadata:
   name: vaultwarden-deploy
   labels:
-    role: {{ .Values.metadata.labels.role }}
+    role: {{ .Values.app.metadata.labels.role }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      role: {{ .Values.metadata.labels.role }}
+      role: {{ .Values.app.metadata.labels.role }}
   template:
     metadata:
       labels:
-        role: {{ .Values.metadata.labels.role }}
+        role: {{ .Values.app.metadata.labels.role }}
         app: vaultwarden
     spec:
       nodeSelector:
-        role: {{ .Values.metadata.labels.role }}
+        role: {{ .Values.app.metadata.labels.role }}
       containers:
         - name: vaultwarden
           image: vaultwarden/server:latest
@@ -25,7 +25,7 @@ spec:
             - containerPort: 80
           env:
             - name: DOMAIN
-              value: {{ if .Values.enableTls }}https{{ else }}http{{ end }}://{{ .Values.app.domain }}
+              value: {{ if .Values.enableTls }}https{{ else }}http{{ end }}://{{ .Values.ingress.host }}
           volumeMounts:
             - name: vw-data
               mountPath: /data

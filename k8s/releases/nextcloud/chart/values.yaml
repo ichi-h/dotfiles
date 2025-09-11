@@ -1,4 +1,6 @@
-domain: localhost
+ingress:
+  annotations: {}
+  host: localhost
 
 metadata:
   labels:

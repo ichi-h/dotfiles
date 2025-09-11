@@ -1,3 +1,5 @@
+ingress:
+  host: vaultwarden.localhost
+
 app:
   enableTls: false
-  domain: vaultwarden.localhost

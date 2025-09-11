@@ -1,3 +1,8 @@
+ingress:
+  annotations:
+    traefik.ingress.kubernetes.io/router.tls: "true"
+  host: nextcloud.home.ichi-h.com
+
 persistentVolume:
   data:
     capacity:

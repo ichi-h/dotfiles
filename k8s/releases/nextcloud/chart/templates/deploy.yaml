@@ -29,7 +29,7 @@ spec:
             - containerPort: 80
           env:
             - name: NEXTCLOUD_TRUSTED_DOMAINS
-              value: {{ .Values.domain }}
+              value: {{ .Values.ingress.host }}
           volumeMounts:
             - name: nc-data
               mountPath: /var/www/html/data

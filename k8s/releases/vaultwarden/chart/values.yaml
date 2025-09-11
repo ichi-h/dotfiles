@@ -1,10 +1,12 @@
-metadata:
-  labels:
-    role: application
+ingress:
+  annotations: {}
+  host: localhost
 
 app:
+  metadata:
+    labels:
+      role: application
   enableTls: false
-  domain: localhost
   storage:
     size: 128Mi
     local:
