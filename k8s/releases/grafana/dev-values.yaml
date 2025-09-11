@@ -3,6 +3,8 @@ nodeSelector:
 
 ingress:
   enabled: true
+  annotations:
+    traefik.ingress.kubernetes.io/router.tls: "true"
   path: /
   pathType: Prefix
   hosts:

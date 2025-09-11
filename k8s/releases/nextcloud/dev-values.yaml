@@ -1,4 +1,6 @@
 ingress:
+  annotations:
+    traefik.ingress.kubernetes.io/router.tls: "true"
   host: nextcloud.localhost
 
 persistentVolume:

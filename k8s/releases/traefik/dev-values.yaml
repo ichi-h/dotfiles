@@ -1,6 +1,8 @@
 ingressRoute:
   dashboard:
     enabled: true
+    annotations:
+      traefik.ingress.kubernetes.io/router.tls: "true"
     matchRule: Host(`dashboard.localhost`)
     entryPoints:
       - web
