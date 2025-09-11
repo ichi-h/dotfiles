@@ -6,9 +6,8 @@ releases:
   - name: traefik
     chart: traefik/traefik
     version: 37.1.0
+    namespace: traefik
     createNamespace: true
-    secrets:
-      - ../../secrets/{{ .Environment.Name }}-secrets.yaml
     values:
       - ./{{ .Environment.Name }}-values.yaml
 ---

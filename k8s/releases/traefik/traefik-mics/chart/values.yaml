@@ -1,3 +1,6 @@
+traefik:
+  basicAuthPasswd: ""
+
 persistentVolume:
   name: traefik-pv
   size: 128Mi

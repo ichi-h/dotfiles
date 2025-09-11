@@ -1,4 +1,12 @@
+environments:
+  dev: {}
+  prod: {}
+---
 releases:
   - name: traefik-mics
+    namespace: traefik
+    createNamespace: true
     chart: ./chart
     version: 0.1.0
+    secrets:
+      - ../../../secrets/{{ .Environment.Name }}-secrets.yaml

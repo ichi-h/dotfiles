@@ -32,21 +32,3 @@ env:
     value: "{{ .Values.cloudflare.email }}"
   - name: CF_DNS_API_TOKEN
     value: "{{ .Values.cloudflare.dnsApiToken }}"
-
-extraObjects:
-  - apiVersion: v1
-    kind: Secret
-    metadata:
-      name: traefik-dashboard-auth-secret
-    type: kubernetes.io/basic-auth
-    stringData:
-      username: admin
-      password: "{{ .Values.traefik.basicAuthPasswd }}"
-
-  - apiVersion: traefik.io/v1alpha1
-    kind: Middleware
-    metadata:
-      name: traefik-dashboard-auth
-    spec:
-      basicAuth:
-        secret: traefik-dashboard-auth-secret
