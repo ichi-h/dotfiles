@@ -9,6 +9,9 @@ ingressRoute:
     middlewares:
       - name: traefik-dashboard-auth
 
+nodeSelector:
+  role: application
+
 extraObjects:
   - apiVersion: v1
     kind: Secret

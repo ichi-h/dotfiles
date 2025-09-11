@@ -9,6 +9,30 @@ ingressRoute:
     middlewares:
       - name: traefik-dashboard-auth
 
+persistence:
+  enabled: true
+  name: cloudflareResolver
+  storageClass: traefik-local-storage
+  volumeName: traefik-pv
+  path: /data
+
+certificatesResolvers:
+  cloudflareResolver:
+    acme:
+      email: "{{ .Values.cloudflare.email }}"
+      storage: /data/acme.json
+      dnschallenge:
+        provider: cloudflare
+
+nodeSelector:
+  role: application
+
+env:
+  - name: CF_API_EMAIL
+    value: "{{ .Values.cloudflare.email }}"
+  - name: CF_DNS_API_TOKEN
+    value: "{{ .Values.cloudflare.dnsApiToken }}"
+
 extraObjects:
   - apiVersion: v1
     kind: Secret

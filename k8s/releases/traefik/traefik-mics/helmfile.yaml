@@ -1,0 +1,4 @@
+releases:
+  - name: traefik-mics
+    chart: ./chart
+    version: 0.1.0

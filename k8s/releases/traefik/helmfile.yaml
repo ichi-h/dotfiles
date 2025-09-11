@@ -11,3 +11,6 @@ releases:
       - ../../secrets/{{ .Environment.Name }}-secrets.yaml
     values:
       - ./{{ .Environment.Name }}-values.yaml
+---
+helmfiles:
+  - path: ./traefik-mics/helmfile.yaml
