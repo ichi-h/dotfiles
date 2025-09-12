@@ -1,6 +1,6 @@
 { impurelibs, ... }:
 {
-    programs.coredns = {
+    services.coredns = {
       enable = true;
       extraArgs = [
         "-dns.port=53"
