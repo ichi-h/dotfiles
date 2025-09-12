@@ -23,4 +23,4 @@ helmfiles:
   - ./releases/traefik/helmfile.yaml
   - ./releases/vaultwarden/helmfile.yaml
   - ./releases/vector/helmfile.yaml
-  - ./releases/velero/helmfile.yaml
+  # - ./releases/velero/helmfile.yaml

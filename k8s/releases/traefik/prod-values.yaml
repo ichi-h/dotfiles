@@ -11,13 +11,13 @@ ingressRoute:
 
 persistence:
   enabled: true
-  name: cloudflareResolver
+  name: cloudflare-resolver
   storageClass: traefik-local-storage
   volumeName: traefik-pv
   path: /data
 
 certificatesResolvers:
-  cloudflareResolver:
+  cloudflare-resolver:
     acme:
       email: "{{ .Values.cloudflare.email }}"
       storage: /data/acme.json
