@@ -1,2 +1,3 @@
 volumes/
 key.txt
+!.envrc
