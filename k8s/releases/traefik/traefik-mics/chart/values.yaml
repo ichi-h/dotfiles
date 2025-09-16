@@ -1,6 +1,8 @@
 traefik:
   basicAuthPasswd: ""
 
+storageType: local # local or ceph
+
 persistentVolume:
   name: traefik-pv
   size: 128Mi

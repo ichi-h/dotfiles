@@ -1,6 +1,8 @@
+{{- if eq .Values.storageType "local" }}
 kind: StorageClass
 apiVersion: storage.k8s.io/v1
 metadata:
-  name: traefik-local-storage
+  name: traefik
 provisioner: kubernetes.io/no-provisioner
 volumeBindingMode: WaitForFirstConsumer
+{{- end }}

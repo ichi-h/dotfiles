@@ -12,7 +12,7 @@ ingressRoute:
 persistence:
   enabled: true
   name: cloudflare-resolver
-  storageClass: traefik-local-storage
+  storageClass: traefik
   volumeName: traefik-pv
   path: /data
 
