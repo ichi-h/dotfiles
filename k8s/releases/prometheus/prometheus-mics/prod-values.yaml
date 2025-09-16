@@ -1,7 +1,1 @@
-persistentVolume:
-  alertmanager:
-    capacity:
-      storage: 2Gi
-  server:
-    capacity:
-      storage: 8Gi
+storageType: ceph

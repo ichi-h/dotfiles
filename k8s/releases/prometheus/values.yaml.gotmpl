@@ -1,10 +1,10 @@
 server:
   persistentVolume:
     size: {{ if eq .Environment.Name "prod" }}8Gi{{ else }}128Mi{{ end }}
-    storageClass: prometheus-server-local-storage
+    storageClass: prometheus-server
   nodeSelector:
     role: application
 alertmanager:
   persistence:
     size: {{ if eq .Environment.Name "prod" }}2Gi{{ else }}128Mi{{ end }}
-    storageClass: prometheus-alertmanager-local-storage
+    storageClass: prometheus-alertmanager

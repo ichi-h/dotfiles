@@ -1,3 +1,5 @@
+storageType: local # local or ceph
+
 persistentVolume:
   alertmanager:
     capacity:
@@ -5,7 +7,6 @@ persistentVolume:
   server:
     capacity:
       storage: 128Mi
-
   nodeAffinity:
     required:
       nodeSelectorTerms:

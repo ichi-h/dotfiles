@@ -1,3 +1,5 @@
+storageType: local
+
 persistentVolume:
   alertmanager:
     capacity:
