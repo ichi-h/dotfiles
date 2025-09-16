@@ -1,71 +1,26 @@
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: nextcloud-data-pv
-spec:
-  capacity:
-    storage: {{ .Values.persistentVolume.data.capacity.storage }}
-  accessModes:
-    - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Retain
-  storageClassName: nextcloud-data-local-storage
-  local:
-    path: {{ .Values.persistentVolume.data.local.path }}
-  {{- with .Values.persistentVolume.nodeAffinity }}
-  nodeAffinity:
-    {{- toYaml . | nindent 8 }}
-  {{- end }}
+{{- if eq .Values.storageType "local" }}
+{{- range .Values.persistentVolumeClaims }}
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: nextcloud-config-pv
+  name: nextcloud-{{ .name }}-pv
 spec:
   capacity:
-    storage: {{ .Values.persistentVolume.config.capacity.storage }}
+    storage: {{ .storage }}
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: nextcloud-config-local-storage
+  storageClassName: nextcloud-{{ .name }}
   local:
-    path: {{ .Values.persistentVolume.config.local.path }}
-  {{- with .Values.persistentVolume.nodeAffinity }}
+    path: {{ .pv.localPath }}
   nodeAffinity:
-    {{- toYaml . | nindent 8 }}
-  {{- end }}
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: nextcloud-custom-apps-pv
-spec:
-  capacity:
-    storage: {{ .Values.persistentVolume.customApps.capacity.storage }}
-  accessModes:
-    - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Retain
-  storageClassName: nextcloud-custom-apps-local-storage
-  local:
-    path: {{ .Values.persistentVolume.customApps.local.path }}
-  {{- with .Values.persistentVolume.nodeAffinity }}
-  nodeAffinity:
-    {{- toYaml . | nindent 8 }}
-  {{- end }}
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: nextcloud-themes-pv
-spec:
-  capacity:
-    storage: {{ .Values.persistentVolume.themes.capacity.storage }}
-  accessModes:
-    - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Retain
-  storageClassName: nextcloud-themes-local-storage
-  local:
-    path: {{ .Values.persistentVolume.themes.local.path }}
-  {{- with .Values.persistentVolume.nodeAffinity }}
-  nodeAffinity:
-    {{- toYaml . | nindent 8 }}
-  {{- end }}
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: role
+              operator: In
+              values:
+                - application
+{{- end }}
+{{- end }}

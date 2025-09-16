@@ -1,3 +1,4 @@
+storageType: local # local or ceph
 persistentVolume:
   name: loki-pv
   size: 128Mi

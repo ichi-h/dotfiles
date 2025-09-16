@@ -1,47 +1,14 @@
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
-  name: nextcloud-data-pvc
-spec:
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: nextcloud-data-local-storage
-  resources:
-    requests:
-      storage: {{ .Values.persistentVolume.data.capacity.storage }}
+{{- range .Values.persistentVolumeClaims }}
 ---
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: nextcloud-config-pvc
+  name: nextcloud-{{ .name }}-pvc
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: nextcloud-config-local-storage
+  storageClassName: nextcloud-{{ .name }}
   resources:
     requests:
-      storage: {{ .Values.persistentVolume.config.capacity.storage }}
----
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
-  name: nextcloud-custom-apps-pvc
-spec:
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: nextcloud-custom-apps-local-storage
-  resources:
-    requests:
-      storage: {{ .Values.persistentVolume.customApps.capacity.storage }}
----
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
-  name: nextcloud-themes-pvc
-spec:
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: nextcloud-themes-local-storage
-  resources:
-    requests:
-      storage: {{ .Values.persistentVolume.themes.capacity.storage }}
+      storage: {{ .storage }}
+{{- end }}

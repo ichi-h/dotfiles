@@ -32,7 +32,7 @@ singleBinary:
   extraArgs: ["-config.expand-env=true"]
   persistence:
     enabled: true
-    storageClass: loki-local-storage
+    storageClass: loki
     size: {{ if eq .Environment.Name "prod" }}10Gi{{ else }}128Mi{{ end }}
   nodeSelector:
     role: application

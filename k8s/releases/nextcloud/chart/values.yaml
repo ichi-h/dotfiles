@@ -6,32 +6,11 @@ metadata:
   labels:
     role: application
 
-persistentVolume:
-  data:
-    capacity:
-      storage: 128Mi
-    local:
-      path: /mnt/k8s/volumes/shared/data
-  config:
-    capacity:
-      storage: 16Mi
-    local:
-      path: /mnt/k8s/volumes/shared/config
-  customApps:
-    capacity:
-      storage: 128Mi
-    local:
-      path: /mnt/k8s/volumes/shared/custom_apps
-  themes:
-    capacity:
-      storage: 16Mi
-    local:
-      path: /mnt/k8s/volumes/shared/themes
-  nodeAffinity:
-    required:
-      nodeSelectorTerms:
-        - matchExpressions:
-            - key: role
-              operator: In
-              values:
-                - application
+storageType: local # local or ceph
+
+persistentVolumeClaims:
+  []
+  # - name: "data"
+  #   storage: "10Gi"
+  #   pv: # only needed for local storageType
+  #     localPath: "/path/to/data"

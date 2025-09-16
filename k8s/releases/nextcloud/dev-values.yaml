@@ -3,16 +3,22 @@ ingress:
     traefik.ingress.kubernetes.io/router.tls: "true"
   host: nextcloud.localhost
 
-persistentVolume:
-  data:
-    capacity:
-      storage: 128Mi
-  config:
-    capacity:
-      storage: 16Mi
-  customApps:
-    capacity:
-      storage: 128Mi
-  themes:
-    capacity:
-      storage: 16Mi
+storageType: local
+
+persistentVolumeClaims:
+  - name: data
+    storage: 128Mi
+    pv:
+      localPath: /mnt/k8s/volumes/shared/data
+  - name: config
+    storage: 16Mi
+    pv:
+      localPath: /mnt/k8s/volumes/shared/config
+  - name: custom-apps
+    storage: 128Mi
+    pv:
+      localPath: /mnt/k8s/volumes/shared/custom_apps
+  - name: themes
+    storage: 16Mi
+    pv:
+      localPath: /mnt/k8s/volumes/shared/themes

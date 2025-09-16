@@ -1,3 +1,4 @@
+{{- if eq .Values.storageType "local" }}
 apiVersion: v1
 kind: PersistentVolume
 metadata:
@@ -8,10 +9,11 @@ spec:
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: loki-local-storage
+  storageClassName: loki
   local:
     path: {{ .Values.persistentVolume.local.path }}
   {{- with .Values.persistentVolume.nodeAffinity }}
   nodeAffinity:
     {{- toYaml . | nindent 8 }}
   {{- end }}
+{{- end }}

@@ -1,0 +1,12 @@
+{{- if eq .Values.storageType "local" }}
+{{- $storageTypes := list "data" "config" "custom-apps" "themes" }}
+{{- range $storageTypes }}
+---
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: nextcloud-{{ . }}
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: WaitForFirstConsumer
+{{- end }}
+{{- end }}

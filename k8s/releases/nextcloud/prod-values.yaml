@@ -3,16 +3,14 @@ ingress:
     traefik.ingress.kubernetes.io/router.tls: "true"
   host: nextcloud.home.ichi-h.com
 
-persistentVolume:
-  data:
-    capacity:
-      storage: 50Gi
-  config:
-    capacity:
-      storage: 16Mi
-  customApps:
-    capacity:
-      storage: 128Mi
-  themes:
-    capacity:
-      storage: 16Mi
+storageType: ceph
+
+persistentVolumeClaims:
+  - name: data
+    storage: 50Gi
+  - name: config
+    storage: 16Mi
+  - name: custom-apps
+    storage: 128Mi
+  - name: themes
+    storage: 16Mi
