@@ -1,0 +1,17 @@
+environments:
+  dev:
+    values:
+      - enabled: true
+  prod:
+    values:
+      - enabled: false
+---
+releases:
+  - name: rook-ceph-cluster
+    chart: rook-release/rook-ceph-cluster
+    version: 1.18.2
+    condition: enabled
+    namespace: rook-ceph
+    createNamespace: true
+    values:
+      - ./values.yaml

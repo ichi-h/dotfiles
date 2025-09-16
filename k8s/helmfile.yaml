@@ -9,12 +9,15 @@ repositories:
     url: https://vmware-tanzu.github.io/helm-charts
   - name: traefik
     url: https://traefik.github.io/charts
+  - name: rook-release
+    url: https://charts.rook.io/release
 
 environments:
   dev: {}
   prod: {}
 
 helmfiles:
+  - ./releases/ceph/helmfile.yaml
   - ./releases/grafana/helmfile.yaml
   - ./releases/loki/helmfile.yaml
   - ./releases/minio/helmfile.yaml

@@ -1,0 +1,3 @@
+helmfiles:
+  - ./cluster/helmfile.yaml
+  - ./operator/helmfile.yaml

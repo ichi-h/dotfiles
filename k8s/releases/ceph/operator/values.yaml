@@ -1,0 +1,5 @@
+nodeSelector:
+  role: application
+
+csi:
+  provisionerReplicas: 1
