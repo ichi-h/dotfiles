@@ -51,4 +51,8 @@ in
       fi
     '';
   };
+
+  systemd.services.containerd.serviceConfig = {
+    LimitNOFILE = lib.mkForce null;
+  };
 }
