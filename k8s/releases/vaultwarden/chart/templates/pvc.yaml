@@ -5,7 +5,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: vaultwarden-local-storage
+  storageClassName: vaultwarden
   resources:
     requests:
       storage: {{ .Values.app.storage.size }}

@@ -3,5 +3,7 @@ ingress:
     traefik.ingress.kubernetes.io/router.tls: "true"
   host: vaultwarden.home.ichi-h.com
 
+storageType: ceph
+
 app:
   enableTls: true

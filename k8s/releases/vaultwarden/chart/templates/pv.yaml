@@ -1,3 +1,4 @@
+{{- if eq .Values.storageType "local" }}
 apiVersion: v1
 kind: PersistentVolume
 metadata:
@@ -8,10 +9,11 @@ spec:
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: vaultwarden-local-storage
+  storageClassName: vaultwarden
   local:
     path: {{ .Values.app.storage.local.path }}
   {{- with .Values.app.nodeAffinity }}
   nodeAffinity:
     {{- toYaml . | nindent 8 }}
   {{- end }}
+{{- end }}

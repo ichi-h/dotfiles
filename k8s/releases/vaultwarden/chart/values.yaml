@@ -2,6 +2,8 @@ ingress:
   annotations: {}
   host: localhost
 
+storageType: local # local or ceph
+
 app:
   metadata:
     labels:

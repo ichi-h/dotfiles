@@ -3,5 +3,7 @@ ingress:
     traefik.ingress.kubernetes.io/router.tls: "true"
   host: vaultwarden.localhost
 
+storageType: local
+
 app:
   enableTls: true
