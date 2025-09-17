@@ -1,6 +1,6 @@
-{ pkgs, enableGuiPkg, ... }:
+{ pkgs, ... }:
 {
-  home.packages = if enableGuiPkg then with pkgs; [
+  home.packages = with pkgs; [
     obs-studio
-  ] else [];
+  ];
 }

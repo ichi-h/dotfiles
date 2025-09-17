@@ -1,7 +1,7 @@
 
-{ pkgs, enableGuiPkg, ... }:
+{ pkgs, ... }:
 {
-  home.packages = if enableGuiPkg then with pkgs; [
+  home.packages = with pkgs; [
     xwayland-satellite
-  ] else [];
+  ];
 }

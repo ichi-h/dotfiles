@@ -1,8 +1,8 @@
-{ pkgs, enableGuiPkg, vars, ... }:
+{ pkgs, vars, ... }:
 {
-  home.packages = if enableGuiPkg then with pkgs; [
+  home.packages = with pkgs; [
     vivaldi
-  ] else [];
+  ];
 
   home.file.".local/share/applications/vivaldi-stable.desktop".text =
     builtins.replaceStrings

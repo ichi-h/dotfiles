@@ -1,8 +1,8 @@
-{ pkgs, enableGuiPkg, vars, ... }:
+{ pkgs, vars, ... }:
 {
-  home.packages = if enableGuiPkg then with pkgs; [
+  home.packages = with pkgs; [
     vscode
-  ] else [];
+  ];
 
   home.file.".local/share/applications/code.desktop".text =
     builtins.replaceStrings

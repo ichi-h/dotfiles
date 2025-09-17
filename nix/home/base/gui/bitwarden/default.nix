@@ -1,8 +1,8 @@
-{ pkgs, enableGuiPkg, vars, ... }:
+{ pkgs, vars, ... }:
 {
-  home.packages = if enableGuiPkg then with pkgs; [
+  home.packages = with pkgs; [
     bitwarden-desktop
-  ] else [];
+  ];
 
   home.file.".local/share/applications/bitwarden.desktop".text =
     builtins.replaceStrings

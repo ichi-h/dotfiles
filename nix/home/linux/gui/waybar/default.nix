@@ -1,7 +1,6 @@
-{ enableGuiPkg, ... }:
 {
   programs.waybar = {
-    enable = enableGuiPkg;
+    enable = true;
   };
   home.file = {
     ".config/waybar/config.jsonc".source = ./config.jsonc;

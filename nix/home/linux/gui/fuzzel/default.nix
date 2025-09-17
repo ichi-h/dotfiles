@@ -1,6 +1,5 @@
-{ enableGuiPkg, ... }:
 {
   programs.fuzzel = {
-    enable = enableGuiPkg;
+    enable = true;
   };
 }

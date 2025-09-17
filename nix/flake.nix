@@ -58,34 +58,30 @@
           extraSpecialArgs = {
             inherit inputs outputs;
             vars = import ./vars;
-            enableGuiPkg = false;
           };
-          modules = [ ./home/linux/home.nix ];
+          modules = [ ./home/linux/home-for-cui.nix ];
         };
         "linux-gui-x86" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = {
             inherit inputs outputs;
             vars = import ./vars;
-            enableGuiPkg = true;
           };
-          modules = [ ./home/linux/home.nix ];
+          modules = [ ./home/linux/home-for-gui.nix ];
         };
-        "linux-cui-arm64" = home-manager.lib.homeManagerConfiguration {
+        "linux-cui-aarch64" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.aarch64-linux;
           extraSpecialArgs = {
             inherit inputs outputs;
             vars = import ./vars;
-            enableGuiPkg = false;
           };
-          modules = [ ./home/linux/home.nix ];
+          modules = [ ./home/linux/home-for-cui.nix ];
         };
         "darwin" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.aarch64-darwin;
           extraSpecialArgs = {
             inherit inputs outputs;
             vars = import ./vars;
-            enableGuiPkg = true;
           };
           modules = [ ./home/darwin/home.nix ];
         };

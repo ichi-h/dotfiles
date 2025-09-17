@@ -1,7 +1,7 @@
-{ pkgs, enableGuiPkg,... }:
+{ pkgs, ... }:
 {
   programs.alacritty = {
-    enable = enableGuiPkg;
+    enable = true;
     settings = {
       font = let hackGenNerdConsole = style: {
         family = "HackGen Console NF";
