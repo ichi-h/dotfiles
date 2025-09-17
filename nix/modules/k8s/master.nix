@@ -31,6 +31,13 @@ in
     kubelet.extraOpts = "--fail-swap-on=false --pod-infra-container-image=registry.k8s.io/pause:3.9";
   };
 
+  systemd.services.containerd = {
+    serviceConfig = {
+      TimeoutStartSec = "300";
+    };
+    before = [ "kubelet.service" ];
+  };
+
   systemd.services.k8s-setup = {
     description = "Kubernetes setup";
     wants = ["kubelet.service"];
