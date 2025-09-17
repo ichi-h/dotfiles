@@ -50,6 +50,18 @@
             xremap.nixosModules.default
           ];
         };
+
+        yomogi = inputs.nixpkgs.lib.nixosSystem {
+          system = "aarch64-linux";
+          specialArgs = {
+            inherit inputs outputs;
+            vars = import ./vars;
+            impurelibs = import ./impurelibs;
+          };
+          modules = [
+            ./hosts/yomogi/configuration.nix
+          ];
+        };
       };
 
       homeConfigurations = {

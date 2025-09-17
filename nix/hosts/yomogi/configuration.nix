@@ -1,0 +1,31 @@
+{ config, pkgs, vars, impurelibs, ... }:
+{
+  imports = [
+    ../../modules/base
+    ../../modules/coredns
+    ../../modules/k8s/master.nix
+  ];
+
+  fileSystems = {
+    "/" = {
+      device = "/dev/disk/by-label/NIXOS_SD";
+      fsType = "ext4";
+      options = [ "noatime" ];
+    };
+  };
+
+  boot = {
+    kernelPackages = pkgs.linuxKernel.packages.linux_rpi4;
+    initrd.availableKernelModules = [ "xhci_pci" "usbhid" "usb_storage" ];
+    loader = {
+      grub.enable = false;
+      generic-extlinux-compatible.enable = true;
+    };
+  };
+
+  hardware.enableRedistributableFirmware = true;
+
+  networking.hostName = "yomogi"; # Define your hostname.
+
+  users.users."${vars.username}".hashedPassword = impurelibs.secrets.hashed-user-passwd-yomogi;
+}
