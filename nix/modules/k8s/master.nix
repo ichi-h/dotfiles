@@ -53,6 +53,6 @@ in
   };
 
   systemd.services.containerd.serviceConfig = {
-    LimitNOFILE = lib.mkForce null;
+    LimitNOFILE = "infinity";
   };
 }
