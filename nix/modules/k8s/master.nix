@@ -28,7 +28,7 @@ in
     addons.dns.enable = true;
 
     # needed if you use swap
-    kubelet.extraOpts = "--fail-swap-on=false";
+    kubelet.extraOpts = "--fail-swap-on=false --pod-infra-container-image=registry.k8s.io/pause:3.9";
   };
 
   systemd.services.k8s-setup = {
