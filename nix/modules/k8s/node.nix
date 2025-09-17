@@ -26,9 +26,9 @@ in
     apiserverAddress = api;
 
     # use coredns
-    addons.dns.enable = false;
+    addons.dns.enable = true;
 
-    kubelet.extraOpts = "--fail-swap-on=false --pod-infra-container-image=registry.k8s.io/pause:3.9";
+    kubelet.extraOpts = "--fail-swap-on=false";
   };
 
   systemd.tmpfiles.rules = [

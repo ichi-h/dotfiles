@@ -3,7 +3,7 @@
   imports = [
     ./hardware-configuration.nix
     ../../modules/base
-    # ../../modules/k8s/node.nix
+    ../../modules/k8s/node.nix
     ../../modules/desktop
   ];
 
