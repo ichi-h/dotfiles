@@ -1,5 +1,5 @@
 
-{ pkgs, impurelibs, ... }:
+{ pkgs, lib, impurelibs, ... }:
 let
   cfg = import ./config.nix { inherit impurelibs; };
 in
