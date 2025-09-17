@@ -7,6 +7,10 @@
     ../../modules/desktop
   ];
 
+  # Bootloader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
   networking.hostName = "hanaakari"; # Define your hostname.
 
   users.users."${vars.username}".hashedPassword = impurelibs.secrets.hashed-user-passwd-hanaakari;
