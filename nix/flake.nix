@@ -9,7 +9,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    xremap.url = "github:xremap/nix-flake";
+    # xremap.url = "github:xremap/nix-flake";
   };
 
   outputs =
@@ -17,7 +17,7 @@
       self,
       nixpkgs,
       home-manager,
-      xremap,
+      # xremap,
       ...
     }@inputs:
     let
@@ -34,7 +34,7 @@
           };
           modules = [
             ./hosts/tokiwa/configuration.nix
-            xremap.nixosModules.default
+            # xremap.nixosModules.default
           ];
         };
 
@@ -47,7 +47,7 @@
           };
           modules = [
             ./hosts/hanaakari/configuration.nix
-            xremap.nixosModules.default
+            # xremap.nixosModules.default
           ];
         };
 
