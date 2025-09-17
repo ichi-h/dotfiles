@@ -4,5 +4,6 @@
     curl
     fastfetch
     tree
+    bitwarden-cli
   ];
 }
