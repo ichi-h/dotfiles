@@ -49,6 +49,7 @@
             CapsLock-k = "F7";
             CapsLock-BackSpace = "Ctrl-BackSpace";
             CapsLock-Esc = "BackSpace";
+            CapsLock-Space = "Ctrl-Space";
             # CapsLock-KEY_SEMICOLON = "Ctrl-KEY_SEMICOLON";
             # CapsLock-Shift-KEY_SEMICOLON = "Ctrl-Shift-KEY_SEMICOLON";
           };
