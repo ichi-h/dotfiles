@@ -12,6 +12,8 @@ mkdir -p volumes/shared/themes
 
 mkdir -p volumes/traefik
 
+mkdir -p volumes/grafana
+
 if ! kind get clusters | grep -q '^kind$'; then
   echo "Creating kind cluster..."
   kind create cluster --config kind-config.yaml

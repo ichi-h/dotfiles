@@ -22,3 +22,11 @@ datasources:
         type: loki
         access: proxy
         url: http://loki-gateway
+
+persistence:
+  type: pvc
+  enabled: true
+  storageClassName: grafana
+  accessModes:
+    - ReadWriteOnce
+  size: 10Gi

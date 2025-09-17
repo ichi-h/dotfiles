@@ -8,3 +8,6 @@ releases:
     version: 9.4.0
     values:
       - ./{{ .Environment.Name }}-values.yaml
+---
+helmfiles:
+  - path: ./grafana-mics/helmfile.yaml

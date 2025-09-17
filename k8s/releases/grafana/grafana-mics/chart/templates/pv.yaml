@@ -1,0 +1,19 @@
+{{- if eq .Values.storageType "local" }}
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: grafana-pv
+spec:
+  capacity:
+    storage: {{ .Values.persistentVolume.size }}
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: grafana
+  local:
+    path: {{ .Values.persistentVolume.local.path }}
+  {{- with .Values.persistentVolume.nodeAffinity }}
+  nodeAffinity:
+    {{- toYaml . | nindent 8 }}
+  {{- end }}
+{{- end }}

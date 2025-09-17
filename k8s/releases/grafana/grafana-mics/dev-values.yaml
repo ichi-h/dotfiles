@@ -1,0 +1,3 @@
+storageType: local
+persistentVolume:
+  size: 128Mi

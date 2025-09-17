@@ -1,0 +1,13 @@
+storageType: local # local or ceph
+persistentVolume:
+  size: 128Mi
+  local:
+    path: /mnt/k8s/volumes/grafana
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: role
+              operator: In
+              values:
+                - application
