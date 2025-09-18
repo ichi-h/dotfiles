@@ -7,12 +7,6 @@ in
   # resolve master hostname
   networking.extraHosts = "${cfg.kubeMasterIP} ${cfg.kubeMasterHostname}";
 
-  # open firewall for cfssl and api server
-  networking.firewall.extraCommands = ''
-    iptables -A nixos-fw -p tcp --dport 8888 -s 192.168.10.0/24 -j nixos-fw-accept
-    iptables -A nixos-fw -p tcp --dport 6443 -s 192.168.10.0/24 -j nixos-fw-accept
-  '';
-
   # packages for administration tasks
   environment.systemPackages = with pkgs; [
     kompose

@@ -17,5 +17,8 @@
     networkmanager.enable = true;
 
     firewall.enable = true;
+    firewall.extraCommands = ''
+      iptables -A nixos-fw -s 192.168.10.0/24 -j nixos-fw-accept
+    '';
   };
 }
