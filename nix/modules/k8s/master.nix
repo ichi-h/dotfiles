@@ -52,11 +52,6 @@ in
     before = [ "kubelet.service" ];
   };
 
-  systemd.services.certmgr.serviceConfig.ExecStartPost = [
-    "${pkgs.coreutils}/bin/chmod 644 /var/lib/kubernetes/secrets/cluster-admin.pem"
-    "${pkgs.coreutils}/bin/chmod 644 /var/lib/kubernetes/secrets/cluster-admin-key.pem"
-  ];
-
   systemd.services.k8s-setup = {
     description = "Kubernetes setup";
     wants = ["kubelet.service"];
