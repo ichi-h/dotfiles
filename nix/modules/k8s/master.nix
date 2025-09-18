@@ -52,6 +52,11 @@ in
     before = [ "kubelet.service" ];
   };
 
+  systemd.services.certmgr.serviceConfig.ExecStartPost = [
+    "${pkgs.coreutils}/bin/chmod 644 /var/lib/kubernetes/secrets/cluster-admin.pem"
+    "${pkgs.coreutils}/bin/chmod 644 /var/lib/kubernetes/secrets/cluster-admin-key.pem"
+  ];
+
   systemd.services.k8s-setup = {
     description = "Kubernetes setup";
     wants = ["kubelet.service"];
@@ -64,8 +69,6 @@ in
       Type = "oneshot";
     };
     script = ''
-      chmod +r /var/lib/kubernetes/secrets/cluster-admin.pem
-      chmod +r /var/lib/kubernetes/secrets/cluster-admin-key.pem
       if [ ! -e "$HOME/.kube/config" ]; then
         mkdir -p $HOME/.kube
         ln -s /etc/kubernetes/cluster-admin.kubeconfig "$HOME/.kube/config"
