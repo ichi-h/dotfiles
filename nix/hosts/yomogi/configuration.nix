@@ -28,9 +28,18 @@
     };
   };
 
-  hardware.enableRedistributableFirmware = true;
+  networking = {
+    hostName = "yomogi"; # Define your hostname.
+    networkmanager.unmanaged = [ "end0" ];
+    interfaces.end0 = {
+      ipv4.addresses = [{
+        address = impurelibs.secrets.ip-address-yomogi.private;
+        prefixLength = 24;
+      }];
+    };
+  };
 
-  networking.hostName = "yomogi"; # Define your hostname.
+  hardware.enableRedistributableFirmware = true;
 
   users.users."${vars.username}".hashedPassword = impurelibs.secrets.hashed-user-passwd-yomogi;
 }

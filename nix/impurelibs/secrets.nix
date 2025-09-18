@@ -18,11 +18,26 @@ in
     hashed-user-passwd-yomosugara = getEnvWrapper "HASHED_USER_PASSWD_YOMOSUGARA";
     hashed-user-passwd-fujibakama = getEnvWrapper "HASHED_USER_PASSWD_FUJIBAKAMA";
 
-    ip-address-tokiwa = getEnvWrapper "IP_ADDRESS_TOKIWA";
-    ip-address-hanaakari = getEnvWrapper "IP_ADDRESS_HANAAKARI";
-    ip-address-yomogi = getEnvWrapper "IP_ADDRESS_YOMOGI";
-    ip-address-yomosugara = getEnvWrapper "IP_ADDRESS_YOMOSUGARA";
-    ip-address-fujibakama = getEnvWrapper "IP_ADDRESS_FUJIBAKAMA";
+    ip-address-tokiwa = {
+      tailscale = getEnvWrapper "TAILSCALE_IP_ADDRESS_TOKIWA";
+      private = getEnvWrapper "PRIVATE_IP_ADDRESS_TOKIWA";
+    };
+    ip-address-hanaakari = {
+      tailscale = getEnvWrapper "TAILSCALE_IP_ADDRESS_HANAAKARI";
+      private = getEnvWrapper "PRIVATE_IP_ADDRESS_HANAAKARI";
+    };
+    ip-address-yomogi = {
+      tailscale = getEnvWrapper "TAILSCALE_IP_ADDRESS_YOMOGI";
+      private = getEnvWrapper "PRIVATE_IP_ADDRESS_YOMOGI";
+    };
+    ip-address-yomosugara = {
+      tailscale = getEnvWrapper "TAILSCALE_IP_ADDRESS_YOMOSUGARA";
+      private = getEnvWrapper "PRIVATE_IP_ADDRESS_YOMOSUGARA";
+    };
+    ip-address-fujibakama = {
+      tailscale = getEnvWrapper "TAILSCALE_IP_ADDRESS_FUJIBAKAMA";
+      private = getEnvWrapper "PRIVATE_IP_ADDRESS_FUJIBAKAMA";
+    };
 
     mac-address-tokiwa = getEnvWrapper "MAC_ADDRESS_TOKIWA";
     mac-address-hanaakari = getEnvWrapper "MAC_ADDRESS_HANAAKARI";

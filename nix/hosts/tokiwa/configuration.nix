@@ -11,7 +11,16 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelModules = [ "ceph" ];
 
-  networking.hostName = "tokiwa"; # Define your hostname.
+  networking = {
+    hostName = "tokiwa"; # Define your hostname.
+    networkmanager.unmanaged = [ "enp1s0" ];
+    interfaces.enp1s0 = {
+      ipv4.addresses = [{
+        address = impurelibs.secrets.ip-address-tokiwa.private;
+        prefixLength = 24;
+      }];
+    };
+  };
 
   users.users."${vars.username}".hashedPassword = impurelibs.secrets.hashed-user-passwd-tokiwa;
 }
