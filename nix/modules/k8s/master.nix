@@ -35,7 +35,7 @@ in
       };
     };
 
-    kubelet.extraOpts = "--fail-swap-on=false --pod-infra-container-image=registry.k8s.io/pause:3.9";
+    kubelet.extraOpts = "--fail-swap-on=false --root-dir=/var/lib/kubelet --pod-infra-container-image=registry.k8s.io/pause:3.9";
   };
 
   # This config is necessary on arm64

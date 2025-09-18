@@ -16,6 +16,7 @@
 
   boot = {
     kernelPackages = pkgs.linuxKernel.packages.linux_rpi4;
+    kernelModules = [ "ceph" ];
     initrd.availableKernelModules = [ "xhci_pci" "usbhid" "usb_storage" ];
     loader = {
       grub.enable = false;

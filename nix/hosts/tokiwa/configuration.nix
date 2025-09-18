@@ -7,9 +7,9 @@
     ../../modules/desktop
   ];
 
-  # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.kernelModules = [ "ceph" ];
 
   networking.hostName = "tokiwa"; # Define your hostname.
 

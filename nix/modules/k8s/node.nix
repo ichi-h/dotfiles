@@ -28,7 +28,7 @@ in
     # use coredns
     addons.dns.enable = true;
 
-    kubelet.extraOpts = "--fail-swap-on=false";
+    kubelet.extraOpts = "--fail-swap-on=false --root-dir=/var/lib/kubelet";
   };
 
   systemd.tmpfiles.rules = [
