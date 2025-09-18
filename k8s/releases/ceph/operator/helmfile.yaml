@@ -1,10 +1,10 @@
 environments:
   dev:
     values:
-      - enabled: true
+      - enabled: false
   prod:
     values:
-      - enabled: false
+      - enabled: true
 ---
 releases:
   - name: rook-ceph

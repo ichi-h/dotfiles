@@ -17,7 +17,8 @@ environments:
   prod: {}
 
 helmfiles:
-  - ./releases/ceph/helmfile.yaml
+  - ./releases/ceph/cluster/helmfile.yaml
+  - ./releases/ceph/operator/helmfile.yaml
   - ./releases/grafana/helmfile.yaml
   - ./releases/loki/helmfile.yaml
   - ./releases/minio/helmfile.yaml
