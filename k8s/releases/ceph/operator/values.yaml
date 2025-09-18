@@ -4,6 +4,31 @@ nodeSelector:
 csi:
   provisionerReplicas: 1
 
+  csiRbdProvisionerResource:
+    requests:
+      cpu: 50m
+      memory: 32Mi
+    limits:
+      memory: 64Mi
+  csiRbdPluginResource:
+    requests:
+      cpu: 50m
+      memory: 32Mi
+    limits:
+      memory: 64Mi
+  csiCephFSProvisionerResource:
+    requests:
+      cpu: 50m
+      memory: 32Mi
+    limits:
+      memory: 64Mi
+  csiCephFSPluginResource:
+    requests:
+      cpu: 50m
+      memory: 32Mi
+    limits:
+      memory: 64Mi
+
   # -- The volume of the CephCSI CephFS plugin DaemonSet
   csiCephFSPluginVolume:
     - name: lib-modules

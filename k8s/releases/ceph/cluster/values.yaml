@@ -1,4 +1,11 @@
 cephClusterSpec:
+  mon:
+    count: 3
+    allowMultiplePerNode: false
+
+  mgr:
+    count: 1
+
   storage:
     useAllNodes: false
     useAllDevices: false
@@ -16,9 +23,29 @@ cephClusterSpec:
                   operator: In
                   values:
                     - application
+    mon:
+      nodeAffinity:
+        required:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values:
+                    - hanaakari
+                    - tokiwa
+                    - yomogi
+
+  removeOSDsIfOutAndSafeToRemove: false
 
 cephBlockPools:
-cephObjectStores:
+  - name: ceph-blockpool
+    spec:
+      replicated:
+        size: 1
+        requireSafeReplicaSize: false
+    storageClass:
+      enabled: false
+
 cephFileSystems:
   - name: myfs
     # see https://github.com/rook/rook/blob/master/Documentation/CRDs/Shared-Filesystem/ceph-filesystem-crd.md#filesystem-settings for available configuration
@@ -35,4 +62,3 @@ cephFileSystems:
         activeStandby: true
     storageClass:
       enabled: false
-      isDefault: false
