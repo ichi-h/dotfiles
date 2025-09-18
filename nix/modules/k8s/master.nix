@@ -1,5 +1,5 @@
 
-{ pkgs, lib, impurelibs, ... }:
+{ pkgs, lib, config, impurelibs, ... }:
 let
   cfg = import ./config.nix { inherit impurelibs; };
 in
@@ -85,6 +85,12 @@ in
         ln -s /etc/kubernetes/cluster-admin.kubeconfig "$HOME/.kube/config"
       fi
     '';
+  };
+
+  systemd.services.flannel = {
+    serviceConfig = {
+      ExecStart = lib.mkForce "${pkgs.flannel}/bin/flannel -ip-masq";
+    };
   };
 
   systemd.services.containerd.serviceConfig = {
