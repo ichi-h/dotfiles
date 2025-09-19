@@ -18,6 +18,7 @@
 
     firewall.enable = true;
     firewall.extraCommands = ''
+      iptables -A nixos-fw -s 10.0.0.0/8 -j nixos-fw-accept
       iptables -A nixos-fw -s 192.168.10.0/24 -j nixos-fw-accept
     '';
   };
