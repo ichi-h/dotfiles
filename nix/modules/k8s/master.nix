@@ -6,6 +6,7 @@ in
 {
   # resolve master hostname
   networking.extraHosts = "${cfg.kubeMasterIP} ${cfg.kubeMasterHostname}";
+  networking.firewall.allowedTCPPorts = [ cfg.kubeMasterAPIServerPort ];
 
   # packages for administration tasks
   environment.systemPackages = with pkgs; [
