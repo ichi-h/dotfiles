@@ -36,22 +36,6 @@ in
     };
 
     kubelet.extraOpts = "--fail-swap-on=false --root-dir=/var/lib/kubelet --pod-infra-container-image=registry.k8s.io/pause:3.9";
-    kubelet.cni.config = [{
-      name = "mynet";
-      type = "bridge";
-      bridge = "cni0";
-      addIf = true;
-      ipMasq = true;
-      isGateway = true;
-      ipam = {
-        type = "host-local";
-        subnet = "10.1.0.0/16";
-        gateway = "10.1.0.1";
-        routes = [{
-          dst = "0.0.0.0/0";
-        }];
-      };
-    }];
   };
 
   # This config is necessary on arm64
