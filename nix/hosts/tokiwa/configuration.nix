@@ -9,7 +9,7 @@
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelModules = [ "ceph" ];
+  boot.kernelModules = [ "ceph" "rbd" ];
 
   networking = {
     hostName = "tokiwa"; # Define your hostname.

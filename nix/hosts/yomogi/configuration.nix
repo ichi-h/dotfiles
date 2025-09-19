@@ -16,7 +16,7 @@
 
   boot = {
     kernelPackages = pkgs.linuxKernel.packages.linux_rpi4;
-    kernelModules = [ "ceph" ];
+    kernelModules = [ "ceph" "rbd" ];
     kernelParams = [
       "systemd.unified_cgroup_hierarchy=1"
       "cgroup_enable=memory"
