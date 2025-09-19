@@ -22,6 +22,7 @@ in
     apiserver = {
       securePort = cfg.kubeMasterAPIServerPort;
       advertiseAddress = cfg.kubeMasterIP;
+      extraOpts = "--v=4";
     };
 
     # This config is necessary on arm64
