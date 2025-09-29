@@ -1,3 +1,7 @@
+environments:
+  dev: {}
+  prod: {}
+---
 releases:
   - name: vector
     chart: vector/vector
