@@ -1,6 +1,7 @@
 storageType: local # local or ceph
-persistentVolume:
+persistentVolumeClaim:
   size: 128Mi
+persistentVolume:
   local:
     path: /mnt/k8s/volumes/grafana
   nodeAffinity:

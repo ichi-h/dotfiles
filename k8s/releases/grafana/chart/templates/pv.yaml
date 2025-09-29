@@ -5,7 +5,7 @@ metadata:
   name: grafana-pv
 spec:
   capacity:
-    storage: {{ .Values.persistentVolume.size }}
+    storage: {{ .Values.persistentVolumeClaim.size }}
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain

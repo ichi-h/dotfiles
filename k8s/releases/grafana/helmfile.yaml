@@ -4,10 +4,9 @@ environments:
 ---
 releases:
   - name: grafana
-    chart: grafana/grafana
-    version: 9.4.0
+    chart: ./chart
+    version: 0.1.0
+    secrets:
+      - ../../secrets/{{ .Environment.Name }}-secrets.yaml
     values:
       - ./{{ .Environment.Name }}-values.yaml
----
-helmfiles:
-  - path: ./grafana-mics/helmfile.yaml

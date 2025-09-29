@@ -1,22 +1,4 @@
-nodeSelector:
-  role: application
-
-ingress:
-  enabled: true
-  annotations:
-    traefik.ingress.kubernetes.io/router.tls: "true"
-  path: /
-  pathType: Prefix
-  hosts:
-    - grafana.home.ichi-h.com
-
-initChownData:
-  enabled: false
-
-persistence:
-  type: pvc
-  enabled: true
-  storageClassName: grafana
-  accessModes:
-    - ReadWriteOnce
+host: grafana.home.ichi-h.com
+storageType: ceph
+persistentVolumeClaim:
   size: 10Gi
