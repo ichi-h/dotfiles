@@ -1,6 +1,10 @@
 environments:
-  dev: {}
-  prod: {}
+  dev:
+    secrets:
+      - ../../secrets/dev-secrets.yaml
+  prod:
+    secrets:
+      - ../../secrets/prod-secrets.yaml
 ---
 releases:
   - name: traefik
@@ -9,7 +13,7 @@ releases:
     namespace: traefik
     createNamespace: true
     values:
-      - ./{{ .Environment.Name }}-values.yaml
+      - ./{{ .Environment.Name }}-values.yaml.gotmpl
 ---
 helmfiles:
   - path: ./traefik-mics/helmfile.yaml

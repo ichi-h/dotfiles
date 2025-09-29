@@ -1,6 +1,8 @@
 ingress:
   annotations:
     traefik.ingress.kubernetes.io/router.tls: "true"
+    traefik.ingress.kubernetes.io/router.tls.certresolver: cloudflare-resolver
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
   host: nextcloud.home.ichi-h.com
 
 storageType: ceph

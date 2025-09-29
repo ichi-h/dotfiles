@@ -55,7 +55,7 @@ data:
     plugins = /var/lib/grafana/plugins
     provisioning = /etc/grafana/provisioning
     [server]
-    domain = {{ .Values.host }}
+    domain = {{ .Values.ingress.host }}
 ---
 # Source: grafana/templates/pvc.yaml
 apiVersion: v1
@@ -292,10 +292,15 @@ metadata:
     app.kubernetes.io/instance: grafana
     app.kubernetes.io/version: "12.1.0"
   annotations:
-    traefik.ingress.kubernetes.io/router.tls: "true"
+  {{- with .Values.ingress.annotations }}
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
 spec:
+  tls:
+    - hosts:
+        - {{ .Values.ingress.host }}
   rules:
-    - host: {{ .Values.host }}
+    - host: {{ .Values.ingress.host }}
       http:
         paths:
           - path: /

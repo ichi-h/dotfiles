@@ -1,0 +1,72 @@
+ingressRoute:
+  dashboard:
+    enabled: true
+    annotations:
+      traefik.ingress.kubernetes.io/router.tls: "true"
+      traefik.ingress.kubernetes.io/router.tls.certresolver: cloudflare-resolver
+      traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    matchRule: Host(`dashboard.home.ichi-h.com`)
+    entryPoints:
+      - websecure
+    tls:
+      certResolver: cloudflare-resolver
+    middlewares:
+      - name: traefik-dashboard-auth
+
+persistence:
+  enabled: true
+  name: cloudflare-resolver
+  storageClass: traefik
+  path: /data
+
+entrypoints:
+  web:
+    address: ":80"
+    http:
+      redirections:
+        entrypoint:
+          to: "websecure"
+          scheme: "https"
+  websecure:
+    address: ":443"
+    http:
+      tls:
+        certResolver: "letsencrypt"
+
+certificatesResolvers:
+  cloudflare-resolver:
+    acme:
+      email: "{{ .Values.cloudflare.email }}"
+      storage: /data/acme.json
+      dnschallenge:
+        provider: cloudflare
+
+deployment:
+  initContainers:
+    - name: volume-permissions
+      image: busybox:latest
+      command:
+        - sh
+        - -c
+        - |
+          mkdir -p /data
+          touch /data/acme.json
+          chown 65532:65532 /data/acme.json
+          chmod 600 /data/acme.json
+          chown 65532:65532 /data
+          chmod 755 /data
+      volumeMounts:
+        - name: cloudflare-resolver
+          mountPath: /data
+      securityContext:
+        runAsUser: 0
+        runAsNonRoot: false
+
+nodeSelector:
+  role: application
+
+env:
+  - name: CF_DNS_API_TOKEN
+    value: "{{ .Values.cloudflare.dnsApiToken }}"
+  - name: CF_ZONE_API_TOKEN
+    value: "{{ .Values.cloudflare.zoneApiToken }}"

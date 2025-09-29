@@ -1,4 +1,7 @@
-host: grafana.localhost
+ingress:
+  annotations:
+    traefik.ingress.kubernetes.io/router.tls: "true"
+  host: grafana.localhost
 storageType: local
 persistentVolumeClaim:
   size: 128Mi
