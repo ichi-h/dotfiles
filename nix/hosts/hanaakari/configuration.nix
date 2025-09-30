@@ -4,6 +4,7 @@
     ./hardware-configuration.nix
     ../../modules/base
     ../../modules/k8s/node.nix
+    ../../modules/nginx/k8s-port-forward
     ../../modules/desktop
   ];
 
