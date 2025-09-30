@@ -29,17 +29,17 @@ entrypoints:
           scheme: "https"
   websecure:
     address: ":443"
-    http:
-      tls:
-        certResolver: "letsencrypt"
 
 certificatesResolvers:
   cloudflare-resolver:
     acme:
       email: "{{ .Values.cloudflare.email }}"
       storage: /data/acme.json
+      caServer: https://acme-v02.api.letsencrypt.org/directory # production
+      # caServer: https://acme-staging-v02.api.letsencrypt.org/directory # staging
       dnschallenge:
         provider: cloudflare
+        delayBeforeCheck: 10
 
 deployment:
   initContainers:
