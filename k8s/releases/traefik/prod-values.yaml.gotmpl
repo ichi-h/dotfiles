@@ -19,6 +19,9 @@ ports:
   websecure:
     nodePort: 31443
 
+service:
+  type: NodePort
+
 persistence:
   enabled: true
   name: cloudflare-resolver
@@ -70,6 +73,7 @@ deployment:
 
 nodeSelector:
   role: application
+  proxy: "true"
 
 env:
   - name: CF_DNS_API_TOKEN
