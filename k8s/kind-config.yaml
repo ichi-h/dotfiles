@@ -15,9 +15,3 @@ nodes:
     extraMounts:
       - hostPath: /home/ichi/dotfiles/k8s/volumes
         containerPath: /mnt/k8s/volumes
-  - role: worker
-    labels:
-      role: development
-  - role: worker
-    labels:
-      role: gpu
