@@ -1,9 +1,10 @@
 environments:
-  dev: {}
-  prod: {}
----
-helmfiles:
-  - path: ./velero-mics/helmfile.yaml
+  dev:
+    secrets:
+      - ../../secrets/dev-secrets.yaml
+  prod:
+    secrets:
+      - ../../secrets/prod-secrets.yaml
 ---
 releases:
   - name: velero
@@ -11,7 +12,8 @@ releases:
     createNamespace: true
     chart: vmware-tanzu/velero
     version: 11.0.0
-    secrets:
-      - ../../secrets/{{ .Environment.Name }}-secrets.yaml
     values:
-      - ./{{ .Environment.Name }}-values.yaml
+      - ./{{ .Environment.Name }}-values.yaml.gotmpl
+---
+helmfiles:
+  - path: ./velero-mics/helmfile.yaml

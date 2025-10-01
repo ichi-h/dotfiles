@@ -4,9 +4,9 @@ configuration:
   backupStorageLocation:
     - name: default
       provider: aws
-      bucket: velero
+      bucket: {{ .Values.s3.bucket }}
       config:
-        region: minio
+        region: {{ .Values.s3.region }}
         s3ForcePathStyle: true
         s3Url: http://minio.velero.svc.cluster.local:9000
         publicUrl: http://localhost:9000

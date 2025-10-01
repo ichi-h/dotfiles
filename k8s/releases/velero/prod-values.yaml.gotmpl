@@ -1,15 +1,14 @@
 configuration:
-  provider: aws
+  namespace: velero
+  defaultVolumesToFsBackup: true
   backupStorageLocation:
-    name: backup-bucket-s3
-    bucket: home-server-backup.ichi-h
-    default: true
-    config:
-      region: ap-northeast-1
-  volumeSnapshotLocation:
-    name: backup-bucket-s3
-    config:
-      region: ap-northeast-1
+    - name: default
+      provider: aws
+      bucket: {{ .Values.s3.bucket }}
+      config:
+        region: {{ .Values.s3.region }}
+snapshotsEnabled: false
+deployNodeAgent: true
 initContainers:
   - name: velero-plugin-for-aws
     image: velero/velero-plugin-for-aws:v1.12.2
@@ -17,6 +16,15 @@ initContainers:
     volumeMounts:
       - mountPath: /target
         name: plugins
+credentials:
+  useSecret: true
+  name: cloud-credentials
+  secretContents:
+    cloud: |
+      [default]
+      aws_access_key_id={{ .Values.s3.accessKeyId }}
+      aws_secret_access_key={{ .Values.s3.secretAccessKey }}
+
 # schedules:
 #   app-backup:
 #     disabled: false
