@@ -1,0 +1,12 @@
+environments:
+  dev: {}
+  prod: {}
+---
+releases:
+  - name: velero-mics
+    namespace: velero
+    createNamespace: true
+    chart: ./chart
+    version: 0.1.0
+    secrets:
+      - ../../../secrets/{{ .Environment.Name }}-secrets.yaml

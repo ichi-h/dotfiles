@@ -2,6 +2,9 @@ environments:
   dev: {}
   prod: {}
 ---
+helmfiles:
+  - path: ./velero-mics/helmfile.yaml
+---
 releases:
   - name: velero
     namespace: velero
