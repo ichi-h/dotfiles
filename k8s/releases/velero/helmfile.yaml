@@ -7,7 +7,7 @@ releases:
     namespace: velero
     createNamespace: true
     chart: vmware-tanzu/velero
-    version: 10.1.1
+    version: 11.0.0
     secrets:
       - ../../secrets/{{ .Environment.Name }}-secrets.yaml
     values:
