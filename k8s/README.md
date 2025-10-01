@@ -31,5 +31,15 @@ touch key.txt # edit secret key
 # Deploy Helmfiles.
 ./deploy-prod.sh
 
-# TODO: Create backup to S3.
+# Create backup.
+velero backup create app-backup --include-namespaces default,traefik
+
+# Get backup list.
+velero backup get
+
+# Restore backup.
+velero restore create --from-backup app-backup --restore-volumes
+
+# Delete backup.
+velero backup delete app-backup --confirm
 ```
