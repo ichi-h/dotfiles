@@ -32,7 +32,7 @@ touch key.txt # edit secret key
 ./deploy-prod.sh
 
 # Create backup.
-velero backup create app-backup --include-namespaces default,traefik
+velero backup create app-backup --include-namespaces default
 
 # Get backup list.
 velero backup get
