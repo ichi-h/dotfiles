@@ -27,3 +27,14 @@ credentials:
       [default]
       aws_access_key_id={{ .Values.s3.accessKeyId }}
       aws_secret_access_key={{ .Values.s3.secretAccessKey }}
+
+# schedules:
+#   app-backup:
+#     disabled: false
+#     schedule: "*/10 * * * *" # run every 10 minutes
+#     useOwnerReferencesInBackup: false
+#     template:
+#       ttl: 10m
+#       includedNamespaces:
+#         - default
+#       storageLocation: default
