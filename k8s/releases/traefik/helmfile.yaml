@@ -16,4 +16,5 @@ releases:
     namespace: traefik
     createNamespace: true
     values:
+      - ./base-values.yaml.gotmpl
       - ./{{ .Environment.Name }}-values.yaml.gotmpl

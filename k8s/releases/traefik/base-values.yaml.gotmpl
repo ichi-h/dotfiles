@@ -1,0 +1,20 @@
+ports:
+  web:
+    nodePort: 31080
+  websecure:
+    nodePort: 31443
+
+entrypoints:
+  web:
+    address: ":80"
+    http:
+      redirections:
+        entrypoint:
+          to: "websecure"
+          scheme: "https"
+  websecure:
+    address: ":443"
+
+nodeSelector:
+  role: application
+  proxy: "true"

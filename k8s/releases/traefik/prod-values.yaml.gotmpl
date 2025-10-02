@@ -13,12 +13,6 @@ ingressRoute:
     middlewares:
       - name: traefik-dashboard-auth
 
-ports:
-  web:
-    nodePort: 31080
-  websecure:
-    nodePort: 31443
-
 service:
   type: NodePort
 
@@ -27,17 +21,6 @@ persistence:
   name: cloudflare-resolver
   storageClass: traefik
   path: /data
-
-entrypoints:
-  web:
-    address: ":80"
-    http:
-      redirections:
-        entrypoint:
-          to: "websecure"
-          scheme: "https"
-  websecure:
-    address: ":443"
 
 certificatesResolvers:
   cloudflare-resolver:
@@ -70,10 +53,6 @@ deployment:
       securityContext:
         runAsUser: 0
         runAsNonRoot: false
-
-nodeSelector:
-  role: application
-  proxy: "true"
 
 env:
   - name: CF_DNS_API_TOKEN
