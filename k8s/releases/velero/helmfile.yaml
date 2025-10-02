@@ -8,6 +8,7 @@ environments:
 ---
 helmfiles:
   - path: ./velero-mics/helmfile.yaml
+  - path: ./minio/helmfile.yaml
 ---
 releases:
   - name: velero

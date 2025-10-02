@@ -21,7 +21,6 @@ helmfiles:
   - ./releases/ceph/operator/helmfile.yaml
   - ./releases/grafana/helmfile.yaml
   - ./releases/loki/helmfile.yaml
-  - ./releases/minio/helmfile.yaml
   - ./releases/nextcloud/helmfile.yaml
   - ./releases/prometheus/helmfile.yaml
   - ./releases/traefik/helmfile.yaml
