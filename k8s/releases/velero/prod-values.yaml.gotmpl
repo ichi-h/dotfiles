@@ -1,5 +1,3 @@
-snapshotsEnabled: false
-deployNodeAgent: true
 configuration:
   namespace: velero
   defaultVolumesToFsBackup: true
@@ -9,14 +7,6 @@ configuration:
       bucket: {{ .Values.s3.bucket }}
       config:
         region: {{ .Values.s3.region }}
-credentials:
-  useSecret: true
-  name: cloud-credentials
-  secretContents:
-    cloud: |
-      [default]
-      aws_access_key_id={{ .Values.s3.accessKeyId }}
-      aws_secret_access_key={{ .Values.s3.secretAccessKey }}
 
 dnsPolicy: "None"
 dnsConfig:
@@ -43,14 +33,6 @@ nodeAgent:
     options:
       - name: ndots
         value: "5"
-
-initContainers:
-  - name: velero-plugin-for-aws
-    image: velero/velero-plugin-for-aws:v1.12.2
-    imagePullPolicy: IfNotPresent
-    volumeMounts:
-      - mountPath: /target
-        name: plugins
 
 schedules:
   app-backup:

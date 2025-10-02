@@ -17,4 +17,5 @@ releases:
     chart: vmware-tanzu/velero
     version: 11.0.0
     values:
+      - ./base-values.yaml.gotmpl
       - ./{{ .Environment.Name }}-values.yaml.gotmpl
