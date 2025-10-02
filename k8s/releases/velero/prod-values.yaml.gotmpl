@@ -1,3 +1,5 @@
+snapshotsEnabled: false
+deployNodeAgent: true
 configuration:
   namespace: velero
   defaultVolumesToFsBackup: true
@@ -7,8 +9,15 @@ configuration:
       bucket: {{ .Values.s3.bucket }}
       config:
         region: {{ .Values.s3.region }}
-snapshotsEnabled: false
-deployNodeAgent: true
+credentials:
+  useSecret: true
+  name: cloud-credentials
+  secretContents:
+    cloud: |
+      [default]
+      aws_access_key_id={{ .Values.s3.accessKeyId }}
+      aws_secret_access_key={{ .Values.s3.secretAccessKey }}
+
 dnsPolicy: "None"
 dnsConfig:
   nameservers:
@@ -21,7 +30,6 @@ dnsConfig:
   options:
     - name: ndots
       value: "5"
-
 nodeAgent:
   dnsPolicy: "None"
   dnsConfig:
@@ -35,6 +43,7 @@ nodeAgent:
     options:
       - name: ndots
         value: "5"
+
 initContainers:
   - name: velero-plugin-for-aws
     image: velero/velero-plugin-for-aws:v1.12.2
@@ -42,22 +51,14 @@ initContainers:
     volumeMounts:
       - mountPath: /target
         name: plugins
-credentials:
-  useSecret: true
-  name: cloud-credentials
-  secretContents:
-    cloud: |
-      [default]
-      aws_access_key_id={{ .Values.s3.accessKeyId }}
-      aws_secret_access_key={{ .Values.s3.secretAccessKey }}
 
-# schedules:
-#   app-backup:
-#     disabled: false
-#     schedule: "0 3 * * *" # JST 12:00
-#     useOwnerReferencesInBackup: false
-#     template:
-#       ttl: 24h
-#       includedNamespaces:
-#         - default
-#       storageLocation: default
+schedules:
+  app-backup:
+    disabled: false
+    schedule: "0 3 * * 4" # At 12:00 AM every Thursday on JST
+    useOwnerReferencesInBackup: false
+    template:
+      ttl: 168h
+      includedNamespaces:
+        - default
+      storageLocation: default
