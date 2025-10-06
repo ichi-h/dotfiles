@@ -4,6 +4,10 @@ let
   cfg = import ./config.nix { inherit impurelibs; };
 in
 {
+  imports = [
+    ./base.nix
+  ];
+
   # resolve master hostname
   networking.extraHosts = "${cfg.kubeMasterIP} ${cfg.kubeMasterHostname}";
   networking.firewall.allowedTCPPorts = [ cfg.kubeMasterAPIServerPort ];
