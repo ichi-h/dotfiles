@@ -6,5 +6,6 @@
     ./vivaldi
     ./waybar
     ./core.nix
+    ./desktop-entry.nix
   ];
 }
