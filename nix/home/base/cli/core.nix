@@ -5,5 +5,6 @@
     fastfetch
     tree
     bitwarden-cli
+    wakeonlan
   ];
 }

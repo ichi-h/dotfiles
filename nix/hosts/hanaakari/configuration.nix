@@ -1,4 +1,8 @@
 { config, pkgs, vars, impurelibs, ... }:
+let
+  interface = "enp1s0";
+  wolModule = (import ../../modules/network/wakeonlan.nix) interface;
+in
 {
   imports = [
     ./hardware-configuration.nix
@@ -6,6 +10,7 @@
     ../../modules/k8s/node.nix
     ../../modules/nginx/k8s-port-forward
     ../../modules/desktop
+    wolModule
   ];
 
   boot.loader.systemd-boot.enable = true;
@@ -14,7 +19,7 @@
 
   networking = {
     hostName = "hanaakari"; # Define your hostname.
-    networkmanager.unmanaged = [ "enp1s0" ];
+    networkmanager.unmanaged = [ interface ];
     interfaces.enp1s0 = {
       ipv4.addresses = [{
         address = impurelibs.secrets.ip-address-hanaakari.private;

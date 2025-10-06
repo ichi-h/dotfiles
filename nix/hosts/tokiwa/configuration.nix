@@ -1,10 +1,15 @@
 { config, pkgs, vars, impurelibs, ... }:
+let
+  interface = "enp1s0";
+  wolModule = (import ../../modules/network/wakeonlan.nix) interface;
+in
 {
   imports = [
     ./hardware-configuration.nix
     ../../modules/base
     ../../modules/k8s/node.nix
     ../../modules/desktop
+    wolModule
   ];
 
   boot.loader.systemd-boot.enable = true;
@@ -13,7 +18,7 @@
 
   networking = {
     hostName = "tokiwa"; # Define your hostname.
-    networkmanager.unmanaged = [ "enp1s0" ];
+    networkmanager.unmanaged = [ interface ];
     interfaces.enp1s0 = {
       ipv4.addresses = [{
         address = impurelibs.secrets.ip-address-tokiwa.private;
