@@ -1,9 +1,6 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
-    curl
-    fastfetch
-    tree
-    wakeonlan
+    bitwarden-cli
   ];
 }
