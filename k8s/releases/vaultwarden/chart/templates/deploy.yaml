@@ -26,6 +26,18 @@ spec:
           env:
             - name: DOMAIN
               value: {{ if .Values.enableTls }}https{{ else }}http{{ end }}://{{ .Values.ingress.host }}
+            - name: PASSWORD_HINTS_ALLOWED
+              value: "false"
+            - name: SMTP_HOST
+              value: {{ .Values.email.smtpHost }}
+            - name: SMTP_PORT
+              value: "{{ .Values.email.smtpPort }}"
+            - name: SMTP_FROM
+              value: {{ .Values.email.smtpFrom }}
+            - name: SMTP_USERNAME
+              value: {{ .Values.email.smtpUsername }}
+            - name: SMTP_PASSWORD
+              value: {{ .Values.email.smtpPasswd }}
           volumeMounts:
             - name: vw-data
               mountPath: /data

@@ -1,10 +1,15 @@
 environments:
-  dev: {}
-  prod: {}
+  dev:
+    secrets:
+      - ../../secrets/dev-secrets.yaml
+  prod:
+    secrets:
+      - ../../secrets/prod-secrets.yaml
 ---
 releases:
   - name: vaultwarden
     chart: ./chart
     version: 0.1.0
     values:
+      - ./base-values.yaml.gotmpl
       - ./{{ .Environment.Name }}-values.yaml

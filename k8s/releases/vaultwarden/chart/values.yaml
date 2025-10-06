@@ -1,3 +1,10 @@
+email:
+  smtpHost:
+  smtpPort:
+  smtpFrom:
+  smtpUsername:
+  smtpPasswd:
+
 ingress:
   annotations: {}
   host: localhost
