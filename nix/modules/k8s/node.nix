@@ -41,8 +41,4 @@ in
     "d /var/lib/kubernetes 0755 root root -"
     "d /opt/cni/bin 0755 root root -"
   ];
-
-  systemd.services.containerd.serviceConfig = {
-    LimitNOFILE = "infinity";
-  };
 }

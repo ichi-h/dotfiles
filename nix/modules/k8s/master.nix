@@ -84,8 +84,4 @@ in
       ExecStart = lib.mkForce "${pkgs.flannel}/bin/flannel -ip-masq";
     };
   };
-
-  systemd.services.containerd.serviceConfig = {
-    LimitNOFILE = "infinity";
-  };
 }
