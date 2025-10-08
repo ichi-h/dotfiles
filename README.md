@@ -2,13 +2,13 @@
 
 ## Hosts
 
-| Server Name             | Responsibility                                              | Hardware                                                       | OS          | Software                                            | Kubernetes Role        |
-| ----------------------- | ----------------------------------------------------------- | -------------------------------------------------------------- | ----------- | --------------------------------------------------- | ---------------------- |
-| 常磐 (Tokiwa)           | Management and monitoring of the entire home server system. | Mini Computer (N97, RAM 16GB)                                  | NixOS       | Kubernetes Control Plane, Grafana, Loki, Prometheus | Control Plane + Worker |
-| 花明 (Hanaakari)        | Hosting of applications provided by home servers.           | Mini Computer (N97, RAM 16GB)                                  | NixOS       | VaultWarden, Seafile, Navidrome                     | Worker                 |
-| 夜もすがら (Yomosugara) | Development environment provision.                          | Desktop (Core i5 13400, RAM 32GB)                              | NixOS       | -                                                   | Worker                 |
-| 藤袴 (Fujibakama)       | LLM hosting.                                                | Desktop (Core i5 12600K, RTX 5070, RAM 32GB)                   | NixOS (WSL) | Ollama                                              | Worker                 |
-| 蓬 (Yomogi)             | Wake on LAN for home servers.                               | Raspberry Pi 4 Model B (Cortex-A72, RAM 4GB, External 1TB SSD) | NixOS       | Power Management Server                             | (Outside the cluster)  |
+| Machine               | Hostname                      | OS         | Kubernetes Role | CPU/GPU                                        | RAM  | Storage                                  |
+| --------------------- | ----------------------------- | ---------- | --------------- | ---------------------------------------------- | ---- | ---------------------------------------- |
+| **Raspberry Pi 4**    | **yomogi<br>（蓬）**          | NixOS      | Control Plane   | ARM Cortex-A72                                 | 4GB  | 64GB（SD Card）                          |
+| **Mini PC 1**         | **tokiwa<br>（常磐）**        | NixOS      | Worker          | Intel N97                                      | 16GB | 512GB（M.2 SSD）                         |
+| **Mini PC 2**         | **hanaakari<br>（花明かり）** | NixOS      | Worker          | Intel N97                                      | 16GB | 512GB（M.2 SSD）<br>1 TB（External SSD） |
+| **Dev Server**        | **shiosai<br>（潮騒）**       | Arch Linux | -               | Intel Core i5-13400                            | 32GB | 1 TB（M.2 SSD）                          |
+| **Windows PC（WSL）** | **fujibakama<br>（藤袴）**    | NixOS      | -               | Intel Core i5-12600K + NVIDIA GeForce RTX 5070 | 32GB | 1 TB x 2（M.2 SSD）                      |
 
 ## Setup
 
