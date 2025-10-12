@@ -30,6 +30,8 @@ spec:
           env:
             - name: NEXTCLOUD_TRUSTED_DOMAINS
               value: {{ .Values.ingress.host }}
+            - name: OVERWRITEPROTOCOL
+              value: https
           volumeMounts:
             - name: nc-data
               mountPath: /var/www/html/data
