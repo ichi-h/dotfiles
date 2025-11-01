@@ -1,0 +1,35 @@
+configuration:
+  namespace: velero
+  defaultVolumesToFsBackup: true
+  backupStorageLocation:
+    - name: default
+      provider: aws
+      bucket: {{ .Values.s3.bucket }}
+      config:
+        region: {{ .Values.s3.region }}
+
+dnsPolicy: "None"
+dnsConfig:
+  nameservers:
+    - 8.8.8.8
+    - 8.8.4.4
+  searches:
+    - velero.svc.cluster.local
+    - svc.cluster.local
+    - cluster.local
+  options:
+    - name: ndots
+      value: "5"
+nodeAgent:
+  dnsPolicy: "None"
+  dnsConfig:
+    nameservers:
+      - 8.8.8.8
+      - 8.8.4.4
+    searches:
+      - velero.svc.cluster.local
+      - svc.cluster.local
+      - cluster.local
+    options:
+      - name: ndots
+        value: "5"

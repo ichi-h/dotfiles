@@ -14,6 +14,7 @@ repositories:
 
 environments:
   dev: {}
+  stg: {}
   prod: {}
 
 helmfiles:
