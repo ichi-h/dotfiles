@@ -4,6 +4,9 @@ ports:
   websecure:
     nodePort: 31443
 
+service:
+  type: NodePort
+  
 nodeSelector:
   role: application
   proxy: "true"

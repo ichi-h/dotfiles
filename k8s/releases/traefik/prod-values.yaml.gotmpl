@@ -13,9 +13,6 @@ ingressRoute:
     middlewares:
       - name: traefik-dashboard-auth
 
-service:
-  type: NodePort
-
 persistence:
   enabled: true
   name: cloudflare-resolver
