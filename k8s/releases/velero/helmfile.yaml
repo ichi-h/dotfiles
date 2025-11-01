@@ -2,6 +2,9 @@ environments:
   dev:
     secrets:
       - ../../secrets/dev-secrets.yaml
+  stg:
+    secrets:
+      - ../../secrets/stg-secrets.yaml
   prod:
     secrets:
       - ../../secrets/prod-secrets.yaml
