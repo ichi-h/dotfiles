@@ -2,7 +2,6 @@
 {
   imports = [
     ../../modules/base
-    ../../modules/coredns
     ../../modules/k8s/master.nix
   ];
 

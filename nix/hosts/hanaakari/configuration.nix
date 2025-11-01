@@ -7,6 +7,7 @@ in
   imports = [
     ./hardware-configuration.nix
     ../../modules/base
+    ../../modules/coredns
     ../../modules/k8s/node.nix
     ../../modules/nginx/k8s-port-forward
     ../../modules/desktop
