@@ -38,6 +38,10 @@ spec:
               value: {{ .Values.email.smtpUsername }}
             - name: SMTP_PASSWORD
               value: {{ .Values.email.smtpPasswd }}
+            - name: USE_SYSLOG
+              value: "true"
+            - name: EXTENDED_LOGGING
+              value: "true"
           volumeMounts:
             - name: vw-data
               mountPath: /data
