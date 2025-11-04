@@ -59,13 +59,13 @@ function hslToHex(h, s, l) {
 }
 
 function stringToHash(str) {
-  let hash = 0;
+  let hash = 5381;
   for (let i = 0; i < str.length; i++) {
     const char = str.charCodeAt(i);
-    hash = ((hash << 5) - hash) + char;
-    hash = hash & hash;
+    hash = ((hash << 5) + hash) + char;
   }
-  return Math.abs(hash);
+  hash = Math.abs(hash * 2654435761);
+  return hash;
 }
 
 function generateColorFromString(inputString, baseColor) {
