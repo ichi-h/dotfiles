@@ -1,17 +1,6 @@
 ingressRoute:
   dashboard:
-    enabled: true
-    annotations:
-      traefik.ingress.kubernetes.io/router.tls: "true"
-      traefik.ingress.kubernetes.io/router.tls.certresolver: cloudflare-resolver
-      traefik.ingress.kubernetes.io/router.entrypoints: websecure
-    matchRule: Host(`dashboard.home.ichi-h.com`)
-    entryPoints:
-      - websecure
-    tls:
-      certResolver: cloudflare-resolver
-    middlewares:
-      - name: traefik-dashboard-auth
+    enabled: false
 
 persistence:
   enabled: true
