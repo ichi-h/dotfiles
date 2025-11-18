@@ -22,6 +22,10 @@
       "...." = "cd ../../..";
       "la" = "ls -laFGh";
     };
+    variables = {
+      LANG = "ja_JP.UTF-8";
+      LC_ALL = "ja_JP.UTF-8";
+    };
     envExtra = builtins.readFile ./.zshenv;
     initContent = builtins.readFile ./.zshrc;
     plugins = [
