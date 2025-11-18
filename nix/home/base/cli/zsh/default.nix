@@ -22,7 +22,7 @@
       "...." = "cd ../../..";
       "la" = "ls -laFGh";
     };
-    variables = {
+    sessionVariables = {
       LANG = "ja_JP.UTF-8";
       LC_ALL = "ja_JP.UTF-8";
     };
