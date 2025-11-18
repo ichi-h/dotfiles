@@ -4,6 +4,8 @@ bindkey -e
 bindkey "^[[1;3D" beginning-of-line
 bindkey "^[[1;3C" end-of-line
 
+setopt COMBINING_CHARS
+
 PRIMARY_COLOR=`theme-color primary $(hostname)`
 SECONDARY_COLOR=`theme-color secondary $(hostname)`
 
