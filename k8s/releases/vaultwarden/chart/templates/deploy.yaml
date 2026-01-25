@@ -25,7 +25,7 @@ spec:
             - containerPort: 80
           env:
             - name: DOMAIN
-              value: {{ if .Values.enableTls }}https{{ else }}http{{ end }}://{{ .Values.ingress.host }}
+              value: {{ if .Values.app.enableTls }}https{{ else }}http{{ end }}://{{ .Values.ingress.host }}
             - name: PASSWORD_HINTS_ALLOWED
               value: "false"
             - name: SMTP_HOST
