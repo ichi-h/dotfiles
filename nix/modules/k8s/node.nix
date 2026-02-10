@@ -39,6 +39,8 @@ in
     "d /var/lib/kubelet 0755 root root -"
     "d /var/lib/kubelet/pki 0755 root root -"
     "d /var/lib/kubernetes 0755 root root -"
+    "d /var/lib/kubernetes/.kube 0750 kubernetes kubernetes -"
+    "f /var/lib/kubernetes/.kube/kuberc 0600 kubernetes kubernetes -"
     "d /opt/cni/bin 0755 root root -"
   ];
 }
