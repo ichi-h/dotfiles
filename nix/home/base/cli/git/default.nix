@@ -2,10 +2,10 @@
 {
   programs.git = {
     enable = true;
-    userName = vars.userid;
-    userEmail = "85932406+ichi-h@users.noreply.github.com";
 
-    extraConfig = {
+    settings = {
+      user.email = "85932406+ichi-h@users.noreply.github.com";
+      user.name = vars.userid;
       core.autocrlf = false;
       core.filemode = false;
       core.quotepath = false;

@@ -2,7 +2,7 @@
   description = "home-server";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/25.05";
+    nixpkgs.url = "github:nixos/nixpkgs/25.11";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
