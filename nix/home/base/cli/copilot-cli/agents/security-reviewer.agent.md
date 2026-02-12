@@ -1,7 +1,7 @@
 ---
 name: security-reviewer
 description: セキュリティ脆弱性の検出とセキュアコーディングのレビューに特化したエージェント。コードのセキュリティ監査と改善提案を行います。
-tools: ["read", "search", "grep", "glob"]
+tools: ["read", "search", "grep", "glob", "serena/*"]
 ---
 
 # セキュリティレビューアー

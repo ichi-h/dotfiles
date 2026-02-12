@@ -1,7 +1,7 @@
 ---
 name: orchestrator
 description: 課題解決の進行を管理するオーケストレーター。課題を複数タスクへ分割し、適切なサブエージェントに割り当てて実行を統括します。
-tools: ["task", "update_todo", "read_agent", "list_agents"]
+tools: ["task", "update_todo", "read_agent", "list_agents", "serena/*"]
 model: claude-opus-4.6
 ---
 
