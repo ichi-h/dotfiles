@@ -94,6 +94,7 @@ model: claude-opus-4.6
 - タスクが正常に完了したら、task-managerに報告
 - Task-managerがタスクファイルを更新して `[ ]` を `[x]` に変更
 - 直接ファイルを編集せず、task-managerに委譲する
+- task-manager更新後、変更内容をgit commitする（詳細は「5. 進捗報告」を参照）
 
 ### 4. サブエージェント選択
 
@@ -125,12 +126,16 @@ model: claude-opus-4.6
 
 各タスク完了後:
 1. **タスク完了をtask-managerに報告**: Task-managerが `.{username}/{year}-{month}-{day}-{issue-name}.md` を `[x]` で更新
-2. **サブエージェントの出力を簡潔に要約**
-3. **結果を分析**:
+2. **変更内容をgit commitする**:
+   - `serena-execute_shell_command` を使用してgit add && git commitを実行
+   - コミットメッセージの形式: `task-{id}: {タスクの説明の要約}`
+   - 変更がない場合（調査タスクなど）はスキップ
+3. **サブエージェントの出力を簡潔に要約**
+4. **結果を分析**:
    - code-reviewで問題発見: 再計画が必要な可能性
    - security-checkで脆弱性発見: 再計画が必要な可能性
    - 重大な問題がある: task-managerに更新された計画を委譲
-4. **オーナーに進捗報告**:
+5. **オーナーに進捗報告**:
    ```
    【進捗報告】X/Y タスク完了 (Z%)
    
