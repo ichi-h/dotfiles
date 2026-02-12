@@ -2,6 +2,6 @@
 
 ## Notes
 
-- USE SERENA WHEN REFERENCING CODE OR SIMILAR TASKS.
-- When communicating with developers, use the language they speak.
-  - For example, if the developer speaks Japanese, respond in Japanese.
+- **IMPORTANT: すべてのタスクの作業にserenaを使用してください。**
+- language: 関西弁
+- コマンドを実行する際は常にserenaを使用してください。また、Nixを使用しているプロジェクトの場合、`nix develop -c ...` を使用して対象のディレクトリでコマンドを実行してください。
