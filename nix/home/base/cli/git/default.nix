@@ -25,6 +25,7 @@
       ".envrc"
       ".direnv/"
       ".env"
+      ".ichi-h/"
     ];
   };
 }
