@@ -5,6 +5,6 @@
     fastfetch
     tree
     wakeonlan
-    nodejs_22
+    nodejs_24
   ];
 }
