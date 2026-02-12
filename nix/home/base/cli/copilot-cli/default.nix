@@ -25,6 +25,7 @@ in
   home.packages = [ copilotCli ];
   home.file = {
     ".copilot/copilot-instructions.md".source = ./copilot-instructions.md;
+    ".copilot/mcp-config.json".source = ./mcp-config.json;
     ".copilot/skills".source = ./skills;
     ".copilot/agents".source = ./agents;
   };

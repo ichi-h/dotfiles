@@ -75,6 +75,7 @@
           extraSpecialArgs = {
             inherit inputs outputs;
             vars = import ./vars;
+            mcp-servers-nix = inputs.mcp-servers-nix;
           };
           modules = [ ./home/linux/home-for-cui.nix ];
         };
@@ -83,6 +84,7 @@
           extraSpecialArgs = {
             inherit inputs outputs;
             vars = import ./vars;
+            mcp-servers-nix = inputs.mcp-servers-nix;
           };
           modules = [ ./home/linux/home-for-gui.nix ];
         };
@@ -91,6 +93,7 @@
           extraSpecialArgs = {
             inherit inputs outputs;
             vars = import ./vars;
+            mcp-servers-nix = inputs.mcp-servers-nix;
           };
           modules = [ ./home/linux/home-for-cui.nix ];
         };
@@ -99,6 +102,7 @@
           extraSpecialArgs = {
             inherit inputs outputs;
             vars = import ./vars;
+            mcp-servers-nix = inputs.mcp-servers-nix;
           };
           modules = [ ./home/darwin/home.nix ];
         };

@@ -1,0 +1,18 @@
+{
+  "mcpServers": {
+    "serena": {
+      "type": "local",
+      "command": "serena",
+      "tools": [
+        "*"
+      ],
+      "args": [
+        "start-mcp-server",
+        "--context",
+        "ide",
+        "--enable-web-dashboard",
+        "false"
+      ]
+    }
+  }
+}
