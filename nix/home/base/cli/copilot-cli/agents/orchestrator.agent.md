@@ -173,7 +173,7 @@ system-designerから設計書を受け取った場合:
 1. **タスク完了をtask-managerに報告**: Task-managerが `.{username}/{year}-{month}-{day}-{issue-name}.md` を `[x]` で更新
 2. **変更内容をgit commitする**:
    - `serena-execute_shell_command` を使用してgit add && git commitを実行
-   - コミットメッセージの形式: `task-{id}: {タスクの説明の要約}`
+   - コミットメッセージの形式: `{タスクの説明の要約} (task-{id})`
    - 変更がない場合（調査タスクなど）はスキップ
 3. **サブエージェントの出力を簡潔に要約**
 4. **結果を分析**:
@@ -185,7 +185,7 @@ system-designerから設計書を受け取った場合:
    ```
    【進捗報告】X/Y タスク完了 (Z%)
 
-   ✅ task-{id}: タスク名
+   ✅ タスク名 (task-{id})
    達成内容の簡潔な要約
 
    [問題発見時:]
@@ -193,7 +193,7 @@ system-designerから設計書を受け取った場合:
    - 問題の要約
    → タスクの再設計をtask-managerに依頼します
 
-   次のタスク: task-{id}: タスク名
+   次のタスク: タスク名 (task-{id})
    ```
 
 **動的タスク管理 - task-managerに委譲**:
@@ -242,7 +242,7 @@ system-designerから設計書を受け取った場合:
 - 3回失敗後、またはinvestigatorが根本原因を特定できない場合、停止してエスカレーション:
 
   ```
-  ⚠️ タスク「task-{id}」が3回失敗しました。
+  ⚠️ タスク (task-{id}) が3回失敗しました。
 
   失敗理由: [summary]
   試した方法:
