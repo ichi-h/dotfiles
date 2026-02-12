@@ -23,4 +23,9 @@ let
 in
 {
   home.packages = [ copilotCli ];
+  home.file = {
+    ".copilot/copilot-instructions.md".source = ./copilot-instructions.md;
+    ".copilot/skills".source = ./skills;
+    ".copilot/agents".source = ./agents;
+  };
 }
