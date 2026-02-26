@@ -27,8 +27,8 @@ in
         prefixLength = 24;
       }];
     };
-    defaultGateway = "192.168.10.1";
-    nameservers = [ "192.168.10.1" "8.8.8.8" ];
+    defaultGateway = vars.default-gateway;
+    nameservers = [ vars.default-gateway "8.8.8.8" ];
   };
 
   users.users."${vars.username}".hashedPassword = impurelibs.secrets.hashed-user-passwd-hanaakari;
