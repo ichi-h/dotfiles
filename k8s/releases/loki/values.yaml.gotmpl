@@ -27,13 +27,20 @@ loki:
         index:
           prefix: loki_index_
           period: 24h
+  compactor:
+    working_directory: /data/retention
+    compaction_interval: 10m
+    retention_enabled: true
+    retention_delete_delay: 2h
+    retention_delete_worker_count: 150
+    delete_request_store: filesystem
 singleBinary:
   replicas: 1
   extraArgs: ["-config.expand-env=true"]
   persistence:
     enabled: true
     storageClass: loki
-    size: {{ if eq .Environment.Name "prod" }}10Gi{{ else }}128Mi{{ end }}
+    size: {{ if eq .Environment.Name "prod" }}16Gi{{ else }}128Mi{{ end }}
   nodeSelector:
     role: application
 gateway:
