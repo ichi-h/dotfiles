@@ -22,4 +22,7 @@ in
       ];
     };
   };
+  home.file = {
+    ".config/opencode/oh-my-opencode.json".source = ./oh-my-opencode.json;
+  };
 }
