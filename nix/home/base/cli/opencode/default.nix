@@ -24,5 +24,6 @@ in
   };
   home.file = {
     ".config/opencode/oh-my-opencode.json".source = ./oh-my-opencode.json;
+    ".config/opencode/opencode.json".source = ./opencode.json;
   };
 }
