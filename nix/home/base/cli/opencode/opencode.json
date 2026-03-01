@@ -2,19 +2,5 @@
   "$schema": "https://opencode.ai/config.json",
   "plugin": [
     "oh-my-opencode@latest"
-  ],
-  "mcp": {
-    "serena": {
-      "type": "local",
-      "enabled": true,
-      "command": [
-        "serena",
-        "start-mcp-server",
-        "--context",
-        "ide",
-        "--enable-web-dashboard",
-        "false"
-      ]
-    }
-  }
+  ]
 }
