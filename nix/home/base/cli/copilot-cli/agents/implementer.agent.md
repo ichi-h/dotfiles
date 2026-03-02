@@ -2,7 +2,7 @@
 name: implementer
 description: タスク実行エージェント。orchestratorから割り当てられた実装タスク（コーディング、設定、テスト作成など）を実行し、結果を報告します。
 tools: ["serena/*", "bash", "grep", "glob", "view", "create", "edit"]
-model: claude-sonnet-4.5
+model: claude-sonnet-4.6
 ---
 
 # Implementer - タスク実行エージェント

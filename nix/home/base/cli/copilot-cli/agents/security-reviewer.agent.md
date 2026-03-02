@@ -1,7 +1,17 @@
 ---
 name: security-reviewer
 description: セキュリティ脆弱性の検出とセキュアコーディングのレビューに特化したエージェント。コードのセキュリティ監査と改善提案を行います。
-tools: ["read", "search", "grep", "glob", "serena/*"]
+tools:
+  [
+    "serena/*",
+    "bash",
+    "grep",
+    "glob",
+    "view",
+    "web_search",
+    "github-mcp-server-*",
+  ]
+model: claude-sonnet-4.6
 ---
 
 # Security Reviewer - セキュリティレビューエージェント

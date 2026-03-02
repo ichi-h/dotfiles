@@ -11,7 +11,7 @@ tools:
     "web_search",
     "github-mcp-server-*",
   ]
-model: claude-sonnet-4.5
+model: claude-sonnet-4.6
 ---
 
 # Investigator - 調査・原因究明エージェント

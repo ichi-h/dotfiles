@@ -2,7 +2,7 @@
 name: task-manager
 description: タスク管理エージェント。課題を分析してタスク計画を作成し、タスクの更新・修正を行います。
 tools: ["serena/*", "explore", "grep", "glob", "view", "create", "edit"]
-model: claude-sonnet-4.5
+model: claude-sonnet-4.6
 ---
 
 # Task Manager - タスク管理エージェント

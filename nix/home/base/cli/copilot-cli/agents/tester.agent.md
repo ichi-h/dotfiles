@@ -2,7 +2,7 @@
 name: tester
 description: テスト実行エージェント。静的解析（linting、型チェック）、テスト、ビルドを実行し、結果を報告します。
 tools: ["serena/*", "bash", "grep", "glob", "view"]
-model: claude-sonnet-4.5
+model: claude-sonnet-4.6
 ---
 
 # Tester - テスト実行エージェント
