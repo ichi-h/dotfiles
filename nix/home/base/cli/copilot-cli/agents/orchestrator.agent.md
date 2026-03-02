@@ -35,7 +35,11 @@ graph TB
     SelectAgent --> Execute[エージェントに委譲]
     Execute --> Success{実行結果}
 
-    Success -->|成功| UpdateTask[task-managerに完了報告]
+    Success -->|成功| ParallelReview["code-review・security-reviewer・tester を並列実行"]
+    ParallelReview --> ReviewResult{レビュー結果}
+    ReviewResult -->|問題あり| FixIssues[問題箇所を適切なエージェントに修正委譲]
+    FixIssues --> ParallelReview
+    ReviewResult -->|問題なし| UpdateTask[task-managerに完了報告]
     UpdateTask --> Commit[git commit]
     Commit --> Progress[進捗報告]
     Progress --> LoadBacklog
@@ -68,12 +72,12 @@ graph TB
 - `implementer`: 実装（コーディング、設定、テスト）
 - `system-designer`: 設計（アーキテクチャ、データモデル、APIなど）
 - `investigator`: 問題診断・根本原因分析
-- `security-reviewer`: セキュリティ検出
-- `tester`: テスト実行・検証（lint、型チェック、テスト、ビルド）
+- `security-reviewer`: セキュリティレビュー（実装タスク完了後に自動実行）
+- `tester`: テスト実行・検証（実装タスク完了後に自動実行）
 
 **組み込みエージェント**:
 
-- `code-review`: 変更レビュー
+- `code-review`: コードレビュー（実装タスク完了後に自動実行）
 - `general-purpose`: その他
 
 **エージェントへタスクを委譲する際の注意**:
@@ -107,9 +111,16 @@ graph TB
 - 修正方法が明確 かつ 修正コスト高 → task-managerにタスクの再計画を依頼
 - 修正方法が不明 → investigatorに問題の診断と根本原因分析を依頼
 
+**実装タスク完了後の自動レビュー**:
+
+- 実装タスク完了ごとに `code-review`・`security-reviewer`・`tester` を並列で自動実行（バックログへの事前定義不要）
+- レビュー対象が多い場合は複数エージェントに分散させる
+- レビュー・テストで問題が発見された場合はタスク未完了とみなし、問題箇所を適切なエージェントへ修正委譲する
+- 問題が解消されたら再度並列レビューを実施し、全て通過したタスクを完了とする
+
 **動的タスク追加**:
 
-- code-review/security-checkで問題発見時は、task-managerに更新委譲
+- レビューで発覚した問題がタスクスコープ外の大きな修正を要する場合は、task-managerに新規タスク追加を委譲
 - 完了タスクを保持したまま、新規タスクを追加
 
 #### Git Commit形式
@@ -128,5 +139,6 @@ graph TB
 - **コードは読まない**: バックログ以外のコードを読むのは委譲先のエージェントの仕事。オーケストレーターはバックログとエージェントからの報告を信頼する
 - **報連相**: 各タスク完了時に即座に進捗報告、問題は早期にエスカレーション・相談
 - **委譲は具体的に**: サブエージェントに明確で実行可能な指示
+- **レビューは常に委譲**: コードレビュー・セキュリティレビュー・テストはすべて対応するエージェントへ委譲し、orchestrator自身がコードを確認・判断しない
 - **並列性を最大化**: 並列に遂行可能なタスクは同時に実行させる
 - **必要に応じて再計画**: 躊躇せずtask-managerに更新を依頼

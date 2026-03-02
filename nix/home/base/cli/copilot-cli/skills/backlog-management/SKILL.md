@@ -1,6 +1,6 @@
 ---
 name: backlog-management
-description: バックログ解決のためのバックログ管理方法を定義します。バックログファイルの構造、フォーマット、命名規則、依存関係、品質保証タスクのガイドラインを提供します。
+description: バックログ解決のためのバックログ管理方法を定義します。バックログファイルの構造、フォーマット、命名規則、依存関係のガイドラインを提供します。
 ---
 
 # バックログ管理スキル
@@ -156,36 +156,6 @@ status: planning
 - **小さすぎるタスク** (< 15分): 関連するマイクロタスクをまとめる
 - **曖昧なタスク**: 具体的な行動が不明確
 
-## 品質保証タスク
-
-### 必須のQAタスク
-
-すべての実装には以下を含める必要があります:
-
-1. **コードレビュー**: 実装後
-2. **セキュリティレビュー**: セキュリティに関わる機能の場合は必須
-3. **テスト**: ユニットテスト、統合テストなど
-
-### QAタスクの配置
-
-- 実装タスクの後に配置
-- 適切な依存関係を設定
-- 並列実行可能な場合は並列に（例: コードレビューとセキュリティレビュー）
-
-**例**:
-
-```markdown
-- [x] 認証機能を実装 (task-a1b2)
-- [x] テストを追加 (task-c3d4)
-  - dependent on: task-a1b2
-- [ ] コードレビュー (task-e5f6)
-  - dependent on: task-c3d4
-- [ ] セキュリティレビュー (task-g7h8)
-  - dependent on: task-c3d4
-```
-
-`task-e5f6` と `task-g7h8` は並列実行可能。
-
 ## バックログファイルの操作
 
 ### 新規作成
@@ -229,12 +199,10 @@ status: planned
 ## タスク
 
 - [ ] JWT認証のアーキテクチャとデータモデルを設計 (task-a1b2)
-- [ ] 認証設計のセキュリティレビュー (task-c3d4)
-  - dependent on: task-a1b2
 - [ ] ユーザーモデルとデータベースマイグレーションを実装 (task-e5f6)
-  - dependent on: task-c3d4
+  - dependent on: task-a1b2
 - [ ] JWT生成と検証ユーティリティを実装 (task-g7h8)
-  - dependent on: task-c3d4
+  - dependent on: task-a1b2
 - [ ] ログインAPIエンドポイントを実装 (task-i9j0)
   - dependent on: task-g7h8
 - [ ] サインアップAPIエンドポイントを実装 (task-k1l2)
@@ -243,10 +211,6 @@ status: planned
   - dependent on: task-g7h8
 - [ ] 認証フロー用のユニットテストと統合テストを追加 (task-o5p6)
   - dependent on: task-i9j0, task-k1l2, task-m3n4
-- [ ] 認証実装のコードレビュー (task-q7r8)
-  - dependent on: task-o5p6
-- [ ] 認証実装のセキュリティレビュー (task-s9t0)
-  - dependent on: task-o5p6
 ```
 
 ### 例2: バグ修正
@@ -269,11 +233,9 @@ status: planned
   - dependent on: task-c3d4
 - [ ] メモリが適切に解放されることを検証する回帰テストを追加 (task-g7h8)
   - dependent on: task-c3d4
-- [ ] メモリリーク修正のコードレビュー (task-i9j0)
-  - dependent on: task-e5f6, task-g7h8
 ```
 
-### 例3: 更新されたバックログファイル（セキュリティ問題発見後）
+### 例3: 更新されたバックログファイル（テスト中にバグ発見後）
 
 ```markdown
 # user-authentication-system
@@ -287,30 +249,22 @@ status: in-progress
 ## タスク
 
 - [x] JWT認証のアーキテクチャとデータモデルを設計 (task-a1b2)
-- [x] 認証設計のセキュリティレビュー (task-c3d4)
-  - dependent on: task-a1b2
 - [x] ユーザーモデルとデータベースマイグレーションを実装 (task-e5f6)
-  - dependent on: task-c3d4
+  - dependent on: task-a1b2
 - [x] JWT生成と検証ユーティリティを実装 (task-g7h8)
-  - dependent on: task-c3d4
+  - dependent on: task-a1b2
 - [x] ログインAPIエンドポイントを実装 (task-i9j0)
   - dependent on: task-g7h8
 - [x] サインアップAPIエンドポイントを実装 (task-k1l2)
   - dependent on: task-e5f6
 - [x] 保護されたルート用の認証ミドルウェアを追加 (task-m3n4)
   - dependent on: task-g7h8
-- [x] 認証フロー用のユニットテストと統合テストを追加 (task-o5p6)
+- [x] 認証フロー用のユニットテストと統合テストを追加（バグ発見） (task-o5p6)
   - dependent on: task-i9j0, task-k1l2, task-m3n4
-- [x] 認証実装のコードレビュー (task-q7r8)
+- [ ] パスワードハッシュのソルト生成のバグを修正 (task-u1v2)
   - dependent on: task-o5p6
-- [x] 認証実装のセキュリティレビュー（脆弱性発見） (task-s9t0)
-  - dependent on: task-o5p6
-- [ ] パスワードハッシュのソルト生成の脆弱性を修正 (task-u1v2)
-  - dependent on: task-s9t0
-- [ ] 適切なソルト生成を検証するテストを更新 (task-w3x4)
+- [ ] ソルト生成を検証するテストを更新 (task-w3x4)
   - dependent on: task-u1v2
-- [ ] セキュリティレビューを再実行 (task-y5z6)
-  - dependent on: task-w3x4
 ```
 
 **注意**:
@@ -325,7 +279,6 @@ status: in-progress
 2. **完了タスクは保持**: 更新時に `[x]` マーカーを保持
 3. **一意のタスクID**: 同じバックログ内で重複しないようにする
 4. **依存関係を最小化**: 不必要な順次実行を避け、並列性を最大化
-5. **品質計画**: 常にレビューとテストのタスクを含める
-6. **セキュリティ優先**: セキュリティに関わる機能には必須のセキュリティチェック
-7. **並列実行の最適化**: 同時実行可能なタスクを特定して有効化
-8. **シンプルに保つ**: orchestratorが解析・実行しやすい形式
+5. **テストを含める**: 実装タスクには対応するテストタスクを含める
+6. **並列実行の最適化**: 同時実行可能なタスクを特定して有効化
+7. **シンプルに保つ**: orchestratorが解析・実行しやすい形式
