@@ -37,7 +37,7 @@ graph TB
     ParallelReview --> ReviewResult{レビュー結果}
     ReviewResult -->|問題あり| FixIssues[問題箇所を適切なエージェントに修正委譲]
     FixIssues --> ParallelReview
-    ReviewResult -->|問題なし| UpdateTask[task-managerに完了報告]
+    ReviewResult -->|問題なし| UpdateTask[バックログファイルを直接更新]
     UpdateTask --> Commit[git commit]
     Commit --> Progress[進捗報告]
     Progress --> LoadBacklog
