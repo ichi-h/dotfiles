@@ -6,5 +6,6 @@
     tree
     wakeonlan
     nodejs_24
+    bashInteractive
   ];
 }
