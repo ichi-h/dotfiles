@@ -35,7 +35,9 @@ graph TB
     SelectAgent --> Execute[エージェントに委譲]
     Execute --> Success{実行結果}
 
-    Success -->|成功| ParallelReview["code-review・security-reviewer・tester を並列実行"]
+    Success -->|成功| IsImplTask{実装タスク?}
+    IsImplTask -->|Yes| ParallelReview["code-review・security-reviewer・tester を並列実行"]
+    IsImplTask -->|No| UpdateTask
     ParallelReview --> ReviewResult{レビュー結果}
     ReviewResult -->|問題あり| FixIssues[問題箇所を適切なエージェントに修正委譲]
     FixIssues --> ParallelReview
@@ -104,9 +106,9 @@ graph TB
 - 予期しない動作やパフォーマンス問題
 - 複雑な統合・依存関係に起因する問題
 
-**Tester報告後のフロー**:
+**並列レビュー後のフロー**:
 
-- テスト全通過 → 次のタスクへ進行
+- 全エージェントが問題なし → UpdateTask（タスク完了とみなす）
 - 修正方法が明確 かつ 修正コスト低〜中 → implementerに修正を依頼
 - 修正方法が明確 かつ 修正コスト高 → task-managerにタスクの再計画を依頼
 - 修正方法が不明 → investigatorに問題の診断と根本原因分析を依頼
