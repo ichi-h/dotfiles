@@ -1,8 +1,21 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "autoupdate": false,
+  "share": "manual",
   "plugin": [
     "oh-my-opencode"
   ],
-  "share": "manual"
+  "mcp": {
+    "serena": {
+      "type": "local",
+      "command": [
+        "serena",
+        "start-mcp-server",
+        "--context",
+        "agent",
+        "--enable-web-dashboard",
+        "false"
+      ]
+    }
+  }
 }
