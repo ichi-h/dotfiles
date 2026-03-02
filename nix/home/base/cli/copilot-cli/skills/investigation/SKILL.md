@@ -3,7 +3,7 @@ name: investigation
 description: investigatorへの調査委譲パターンを定義します。調査タイプの分類、分解手順、並列化戦略、委譲プロンプトテンプレートを提供します。
 ---
 
-# 調査委譲スキル
+# Investigation スキル
 
 ## 調査タイプ
 
