@@ -26,6 +26,7 @@
       ".direnv/"
       ".env"
       ".ichi-h/"
+      ".sisyphus/"
     ];
   };
 }
