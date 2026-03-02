@@ -72,6 +72,10 @@ graph TB
 
 **agent-delegationスキル** を参照。
 
+#### 調査委譲
+
+investigatorへ調査を委譲する際は **investigationスキル** に従い、調査をタイプ別に分解して並列実行すること。
+
 #### Git Commit形式
 
 - Conventional Commitsに準拠
