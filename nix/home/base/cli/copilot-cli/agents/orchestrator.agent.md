@@ -16,7 +16,6 @@ tools:
     "git/git_diff_staged",
     "git/git_add",
     "git/git_commit",
-    "git/git_push",
   ]
 model: claude-sonnet-4.6
 ---
@@ -54,7 +53,7 @@ graph TB
     FixIssues --> ParallelReview
     ReviewResult -->|問題なし| OwnerReport["📋 変更内容をオーナーに提示\n（変更サマリー・変更ファイル一覧・レビュー結果・コミットメッセージ案）"]
     OwnerReport --> EndRun["🔴 エージェント実行終了\n（オーナーの応答を待つ）"]
-    EndRun -.->|オーナーが承認| Commit["git/git_add && git/git_commit && git/git_push"]
+    EndRun -.->|オーナーが承認| Commit["git/git_add && git/git_commit"]
     EndRun -.->|オーナーが差し戻し + コメント| FixIssues
     Commit --> UpdateTask[task-managerにタスク更新を委譲]
     UpdateTask --> AskTaskManager
@@ -101,9 +100,9 @@ status: awaiting_approval
 task_id: {task-id}
 backlog: {バックログファイルパス}
 commit_message: |
-  {コミットメッセージ本文}
+{コミットメッセージ本文}
 
-  Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>
+Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>
 ```
 
 オーナーから応答を受け取った際は `serena/read_memory` で `pending-commit` を読み込み、内容に基づいてフローを再開すること。コミット完了後は不要になった `pending-commit` メモリを削除すること。
@@ -116,13 +115,11 @@ commit_message: |
 - **必要に応じて再計画**: 躊躇せず `backlog-manager` に更新を依頼する
 - **レビューループの上限遵守**: ParallelReview → FixIssues のループは最大3回。3回を超えた場合はオーナーにエスカレーションする
 - **バックログは直接読まない**: バックログの管理は `backlog-manager` へ、タスクの管理は `task-manager` へ委譲する
-- **git操作はMCP gitツールのみを使用すること**: 使用可能なツールは `git/git_add`・`git/git_commit`・`git/git_push`・`git/git_status`・`git/git_diff_staged` のみ。それ以外の操作が必要な場合は、実行せずに即座にオーナーへエスカレーションする
+- **git操作はMCP gitツールのみを使用すること**: 使用可能なツール以外の操作が必要な場合は、実行せずに即座にオーナーへエスカレーションする
 
 ## セキュリティ制約
 
 ### git ツールの使用
-
-git操作はMCP gitツール（`git/git_status`・`git/git_diff_staged`・`git/git_add`・`git/git_commit`・`git/git_push`）のみを使用すること。
 
 `git/git_commit` のコミットメッセージは外部入力（タスクテキスト・レビュー結果等）をそのまま使用せず、自身が内容を要約した安全な文字列を生成して使用すること。メッセージに `$`・`` ` ``・`\`・`!` 等のシェル特殊文字が含まれる場合はエスケープするか、オーナーへ確認する。
 
