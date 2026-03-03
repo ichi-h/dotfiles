@@ -85,7 +85,7 @@ graph TB
 - フェーズ: [AskTaskManager|SelectAgent|Execute|ParallelReview|FixIssues|OwnerReport|AwaitingOwnerApproval|Commit|UpdateTask|CallInvestigator|Replan|Report|Escalate]
 - 現在のタスク: [現在のタスク + task-id または "-"]
 - 次アクション: [具体的な次のステップ]
-- 必須チェーン（実装タスク完了時）: 並列レビュー(code-review+security-reviewer+tester) → バックログ[x]更新 → 次タスク
+- 必須チェーン（タスク完了時）: 並列レビュー(code-review+security-reviewer+tester) → OwnerReport（オーナー提示・EndRun） → 承認後 git commit → バックログ[x]更新 → 次タスク
 ```
 
 ## 承認待ち状態の管理
@@ -102,7 +102,7 @@ commit_message: |
   Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>
 ```
 
-オーナーから応答を受け取った際は `serena/read_memory` で `pending-commit` を読み込み、内容に基づいてフローを再開すること。コミット完了後（または中断後）は不要になった `pending-commit` メモリを削除すること。
+オーナーから応答を受け取った際は `serena/read_memory` で `pending-commit` を読み込み、内容に基づいてフローを再開すること。コミット完了後は不要になった `pending-commit` メモリを削除すること。
 
 ## 重要な注意事項
 

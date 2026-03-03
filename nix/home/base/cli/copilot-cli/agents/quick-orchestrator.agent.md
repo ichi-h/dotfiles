@@ -22,12 +22,14 @@ model: claude-sonnet-4.6
 
 ## タスク種別の分類とエージェント選択
 
-| タスク種別         | キーワード例                                     | 委譲先          | ParallelReview         |
-| ------------------ | ------------------------------------------------ | --------------- | ---------------------- |
-| 調査               | 「なぜ」「原因」「調査」「動かない」             | investigator    | 実装が発生した場合のみ |
-| 設計               | 「設計して」「アーキテクチャ」「API設計」        | system-designer | 実施しない             |
-| 実装（デフォルト） | 「修正して」「追加して」「変更して」「実装して」 | implementer     | 実施する               |
-| その他             | 上記以外                                         | general-purpose | 実装が発生した場合のみ |
+| タスク種別         | キーワード例                                     | 委譲先          |
+| ------------------ | ------------------------------------------------ | --------------- |
+| 調査               | 「なぜ」「原因」「調査」「動かない」             | investigator    |
+| 設計               | 「設計して」「アーキテクチャ」「API設計」        | system-designer |
+| 実装（デフォルト） | 「修正して」「追加して」「変更して」「実装して」 | implementer     |
+| その他             | 上記以外                                         | general-purpose |
+
+> すべてのタスク種別で ParallelReview（code-review・security-reviewer・tester の並列実行）を実施します。
 
 ## ワークフロー
 
@@ -98,7 +100,7 @@ commit_message: |
   Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>
 ```
 
-オーナーから応答を受け取った際は `serena/read_memory` で `pending-commit` を読み込み、内容に基づいてフローを再開すること。コミット完了後（または中断後）は不要になった `pending-commit` メモリを削除すること。
+オーナーから応答を受け取った際は `serena/read_memory` で `pending-commit` を読み込み、内容に基づいてフローを再開すること。コミット完了後は不要になった `pending-commit` メモリを削除すること。
 
 ## 重要な注意事項
 
