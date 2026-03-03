@@ -50,7 +50,12 @@ graph TB
     CheckRetry -->|Yes| FixIssues[問題箇所を適切なエージェントに修正委譲]
     CheckRetry -->|No| Escalate
     FixIssues --> ParallelReview
-    ReviewResult -->|問題なし| UpdateTask[task-managerにタスク更新を委譲]
+    ReviewResult -->|問題なし| OwnerReport["📋 変更内容をオーナーに提示\n（変更サマリー・変更ファイル一覧・レビュー結果・コミットメッセージ案）"]
+    OwnerReport --> EndRun["🔴 エージェント実行終了\n（オーナーの応答を待つ）"]
+    EndRun -.->|オーナーが承認| Commit["git add && git commit"]
+    EndRun -.->|オーナーが差し戻し + コメント| FixIssues
+    EndRun -.->|オーナーが中断| Escalate
+    Commit --> UpdateTask[task-managerにタスク更新を委譲]
     UpdateTask --> AskTaskManager
 
     Success -->|失敗| Investigate{調査必要?}
