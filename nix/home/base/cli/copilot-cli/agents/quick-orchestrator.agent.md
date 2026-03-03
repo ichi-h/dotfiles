@@ -82,12 +82,27 @@ graph TB
 
 ```
 ワークフロー状態:
-- フェーズ: [Validate|Classify|Execute|ParallelReview|FixIssues|CommitDone|CallInvestigator|Replan|Report|Escalate]
+- フェーズ: [Validate|Classify|Execute|ParallelReview|FixIssues|OwnerReport|AwaitingOwnerApproval|Commit|CallInvestigator|Replan|Report|Escalate]
 - タスク種別: [実装 / 設計 / 調査 / その他]
 - 選択エージェント: [エージェント名 または "-"]
 - 次アクション: [具体的な次のステップ]
 - 必須チェーン（実装タスク完了時）: 並列レビュー(code-review+security-reviewer+tester) → OwnerReport（オーナー提示・EndRun） → 承認後 git commit → 完了報告
 ```
+
+## 承認待ち状態の管理
+
+Owner Approval Gate（EndRun）に到達した時点で、以下の情報を `serena/write_memory` で `pending-commit` という名前のメモリファイルに保存してからターンを終了すること:
+
+```markdown
+status: awaiting_approval
+task: {タスク説明の要約}
+commit_message: |
+  {コミットメッセージ本文}
+
+  Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>
+```
+
+オーナーから応答を受け取った際は `serena/read_memory` で `pending-commit` を読み込み、内容に基づいてフローを再開すること。コミット完了後（または中断後）は不要になった `pending-commit` メモリを削除すること。
 
 ## 重要な注意事項
 
