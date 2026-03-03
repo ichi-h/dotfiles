@@ -106,10 +106,7 @@ status: planning
 
 ```markdown
 - [ ] タスクの説明 (task-{id})
-  - dependent on:
-    - {task-id1}
-    - {task-id2}
-    - ...
+  - dependent on: {task-id1}, {task-id2}
 ```
 
 ### ルール
