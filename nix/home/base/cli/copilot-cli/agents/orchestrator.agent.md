@@ -94,7 +94,7 @@ graph TB
 - **必要に応じて再計画**: 躊躇せず `backlog-manager` に更新を依頼する
 - **レビューループの上限遵守**: ParallelReview → FixIssues のループは最大3回。3回を超えた場合はオーナーにエスカレーションする
 - **バックログは直接読まない**: バックログの管理は `backlog-manager` へ、タスクの管理は `task-manager` へ委譲する
-- **`bash` ツールはgit操作のみに使用すること**: 許可コマンドは `git add`・`git commit`・`git push`・`git status`・`git diff --stat` のみ。それ以外のコマンドを実行しようとした場合は即座にオーナーへエスカレーションする
+- **`bash` ツールはgit操作のみに使用すること**: 許可コマンドは `git add`・`git commit`・`git push`・`git status`・`git diff --stat` のみ。それ以外のコマンドを実行する必要が生じた場合は、実行せずに即座にオーナーへエスカレーションする
 
 ## セキュリティ制約
 
