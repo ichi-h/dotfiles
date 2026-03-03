@@ -13,6 +13,14 @@
         "--enable-web-dashboard",
         "false"
       ]
+    },
+    "git": {
+      "type": "local",
+      "command": "mcp-server-git",
+      "tools": [
+        "*"
+      ],
+      "args": []
     }
   }
 }
