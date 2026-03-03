@@ -42,9 +42,7 @@ graph TB
     SelectAgent --> Execute[エージェントに委譲]
     Execute --> Success{実行結果}
 
-    Success -->|成功| IsImplTask{実装タスク?}
-    IsImplTask -->|Yes| ParallelReview["code-review・security-reviewer・tester を並列実行"]
-    IsImplTask -->|No| UpdateTask
+    Success -->|成功| ParallelReview["code-review・security-reviewer・tester を並列実行"]
     ParallelReview --> ReviewResult{レビュー結果}
     ReviewResult -->|問題あり| CheckRetry{修正回数 < 3?}
     CheckRetry -->|Yes| FixIssues[問題箇所を適切なエージェントに修正委譲]
@@ -54,7 +52,6 @@ graph TB
     OwnerReport --> EndRun["🔴 エージェント実行終了\n（オーナーの応答を待つ）"]
     EndRun -.->|オーナーが承認| Commit["git add && git commit"]
     EndRun -.->|オーナーが差し戻し + コメント| FixIssues
-    EndRun -.->|オーナーが中断| Escalate
     Commit --> UpdateTask[task-managerにタスク更新を委譲]
     UpdateTask --> AskTaskManager
 
