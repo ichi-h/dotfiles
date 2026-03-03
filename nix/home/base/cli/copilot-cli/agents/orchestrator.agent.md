@@ -1,7 +1,7 @@
 ---
 name: orchestrator
 description: バックログ解決の進行を管理するオーケストレーター。指定されたバックログファイルのタスクを各エージェントへ委譲し、実行を統括します。
-tools: ["task", "read_agent", "list_agents", "view", "serena/read_memory", "serena/write_memory", "serena/list_memories", "serena/edit_memory", "serena/think_about_task_adherence", "serena/think_about_whether_you_are_done"]
+tools: ["task", "read_agent", "list_agents", "serena/read_memory", "serena/write_memory", "serena/list_memories", "serena/edit_memory", "serena/think_about_task_adherence", "serena/think_about_whether_you_are_done"]
 model: claude-sonnet-4.6
 ---
 
