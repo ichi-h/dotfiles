@@ -85,7 +85,7 @@ graph TB
 
 ```
 ワークフロー状態:
-- フェーズ: [AskTaskManager|SelectAgent|Execute|ParallelReview|FixIssues|UpdateTask|CallInvestigator|Replan|Report|Escalate]
+- フェーズ: [AskTaskManager|SelectAgent|Execute|ParallelReview|FixIssues|OwnerReport|AwaitingOwnerApproval|Commit|UpdateTask|CallInvestigator|Replan|Report|Escalate]
 - 現在のタスク: [現在のタスク + task-id または "-"]
 - 次アクション: [具体的な次のステップ]
 - 必須チェーン（実装タスク完了時）: 並列レビュー(code-review+security-reviewer+tester) → バックログ[x]更新 → 次タスク
