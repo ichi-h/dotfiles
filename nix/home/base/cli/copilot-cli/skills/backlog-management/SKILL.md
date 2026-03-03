@@ -89,13 +89,12 @@ status: planning
 ```markdown
 - [ ] 認証システムのアーキテクチャを設計する (task-a1b2)
 - [ ] JWTトークンの生成と検証を実装する (task-c3d4)
-- [ ] 認証エンドポイントのユニットテストを追加する (task-e5f6)
 ```
 
 
 ### ベストプラクティス
 
-- **動作動詞を使用**: 実装、設計、修正、追加、レビュー、テスト
+- **動作動詞を使用**: 実装、設計、修正、追加
 - **具体的に**: 何をするかを明確に
 - **必要に応じてコンテキストを含める**
 - **簡潔かつ明確に**
@@ -131,7 +130,7 @@ status: planning
   - dependent on: task-a1b2
 - [ ] バックエンド実装 (task-e5f6)
   - dependent on: task-a1b2
-- [ ] 統合テスト (task-g7h8)
+- [ ] フロントエンドとバックエンドの結合 (task-g7h8)
   - dependent on: task-c3d4, task-e5f6
 ```
 
@@ -185,58 +184,6 @@ status: planning
 
 ## バックログファイルの例
 
-### 例1: 機能実装
-
-```markdown
-# user-authentication-system
-
-status: planned
-
-## 概要
-
-サインアップ、ログイン、パスワードハッシュ化、セッション管理を含む、安全なJWTベースの認証システムを実装します。
-
-## タスク
-
-- [ ] JWT認証のアーキテクチャとデータモデルを設計 (task-a1b2)
-- [ ] ユーザーモデルとデータベースマイグレーションを実装 (task-e5f6)
-  - dependent on: task-a1b2
-- [ ] JWT生成と検証ユーティリティを実装 (task-g7h8)
-  - dependent on: task-a1b2
-- [ ] ログインAPIエンドポイントを実装 (task-i9j0)
-  - dependent on: task-g7h8
-- [ ] サインアップAPIエンドポイントを実装 (task-k1l2)
-  - dependent on: task-e5f6
-- [ ] 保護されたルート用の認証ミドルウェアを追加 (task-m3n4)
-  - dependent on: task-g7h8
-- [ ] 認証フロー用のユニットテストと統合テストを追加 (task-o5p6)
-  - dependent on: task-i9j0, task-k1l2, task-m3n4
-```
-
-### 例2: バグ修正
-
-```markdown
-# fix-memory-leak-data-processing
-
-status: planned
-
-## 概要
-
-データ処理モジュールのメモリリークを調査・修正し、将来のリークを防ぐためのモニタリングを追加します。
-
-## タスク
-
-- [ ] データ処理モジュールのメモリリーク原因を調査 (task-a1b2)
-- [ ] 特定されたメモリリークを修正 (task-c3d4)
-  - dependent on: task-a1b2
-- [ ] メモリ使用量のモニタリングとアラートを追加 (task-e5f6)
-  - dependent on: task-c3d4
-- [ ] メモリが適切に解放されることを検証する回帰テストを追加 (task-g7h8)
-  - dependent on: task-c3d4
-```
-
-### 例3: 更新されたバックログファイル（テスト中にバグ発見後）
-
 ```markdown
 # user-authentication-system
 
@@ -253,25 +200,21 @@ status: in-progress
   - dependent on: task-a1b2
 - [x] JWT生成と検証ユーティリティを実装 (task-g7h8)
   - dependent on: task-a1b2
-- [x] ログインAPIエンドポイントを実装 (task-i9j0)
+- [ ] ログインAPIエンドポイントを実装 (task-i9j0)
+  - dependent on: task-e5f6, task-g7h8
+- [ ] サインアップAPIエンドポイントを実装 (task-k1l2)
+  - dependent on: task-e5f6, task-g7h8
+- [ ] 保護されたルート用の認証ミドルウェアを追加 (task-m3n4)
   - dependent on: task-g7h8
-- [x] サインアップAPIエンドポイントを実装 (task-k1l2)
-  - dependent on: task-e5f6
-- [x] 保護されたルート用の認証ミドルウェアを追加 (task-m3n4)
-  - dependent on: task-g7h8
-- [x] 認証フロー用のユニットテストと統合テストを追加（バグ発見） (task-o5p6)
-  - dependent on: task-i9j0, task-k1l2, task-m3n4
 - [ ] パスワードハッシュのソルト生成のバグを修正 (task-u1v2)
-  - dependent on: task-o5p6
-- [ ] ソルト生成を検証するテストを更新 (task-w3x4)
-  - dependent on: task-u1v2
+  - dependent on: task-g7h8
 ```
 
-**注意**:
+**ポイント**:
 
+- `task-i9j0`、`task-k1l2`、`task-m3n4`、`task-u1v2` は依存タスクがすべて完了しているため並列実行可能
 - 完了したタスクは `[x]` で保持
-- 新しいタスクには新しいIDを使用
-- 依存関係を適切に更新
+- 進行中に発見されたバグ対応として `task-u1v2` を追加（新しいIDを使用、依存関係を適切に設定）
 
 ## 重要な注意事項
 
@@ -279,6 +222,5 @@ status: in-progress
 2. **完了タスクは保持**: 更新時に `[x]` マーカーを保持
 3. **一意のタスクID**: 同じバックログ内で重複しないようにする
 4. **依存関係を最小化**: 不必要な順次実行を避け、並列性を最大化
-5. **テストを含める**: 実装タスクには対応するテストタスクを含める
-6. **並列実行の最適化**: 同時実行可能なタスクを特定して有効化
-7. **シンプルに保つ**: orchestratorが解析・実行しやすい形式
+5. **並列実行の最適化**: 同時実行可能なタスクを特定して有効化
+6. **シンプルに保つ**: orchestratorが解析・実行しやすい形式
