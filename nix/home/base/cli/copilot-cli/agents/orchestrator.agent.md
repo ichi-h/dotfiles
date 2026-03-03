@@ -38,7 +38,7 @@ graph TB
     CheckRetry -->|Yes| FixIssues[問題箇所を適切なエージェントに修正委譲]
     CheckRetry -->|No| Escalate
     FixIssues --> ParallelReview
-    ReviewResult -->|問題なし| UpdateTask[backlog-updaterにバックログ更新を委譲]
+    ReviewResult -->|問題なし| UpdateTask[task-managerにタスク更新を委譲]
     UpdateTask --> LoadBacklog
 
     Success -->|失敗| Investigate{調査必要?}
