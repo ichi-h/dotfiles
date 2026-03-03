@@ -3,7 +3,7 @@ name: security-reviewer
 description: セキュリティ脆弱性の検出とセキュアコーディングのレビューに特化したエージェント。コードのセキュリティ監査と改善提案を行います。
 tools:
   [
-    "serena/*",
+    "serena/find_file", "serena/list_dir", "serena/search_for_pattern", "serena/get_symbols_overview", "serena/find_symbol", "serena/find_referencing_symbols", "serena/read_memory", "serena/write_memory", "serena/activate_project", "serena/check_onboarding_performed", "serena/initial_instructions", "serena/think_about_collected_information", "serena/think_about_task_adherence", "serena/think_about_whether_you_are_done",
     "bash",
     "grep",
     "glob",

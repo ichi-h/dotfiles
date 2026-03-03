@@ -1,7 +1,7 @@
 ---
 name: tester
 description: テスト実行エージェント。静的解析（linting、型チェック）、テスト、ビルドを実行し、結果を報告します。
-tools: ["serena/*", "bash", "grep", "glob", "view"]
+tools: ["serena/find_file", "serena/list_dir", "serena/search_for_pattern", "serena/get_symbols_overview", "serena/find_symbol", "serena/read_memory", "serena/write_memory", "serena/activate_project", "serena/check_onboarding_performed", "serena/initial_instructions", "serena/think_about_collected_information", "serena/think_about_task_adherence", "serena/think_about_whether_you_are_done", "bash", "grep", "glob", "view"]
 model: claude-sonnet-4.6
 ---
 
