@@ -38,8 +38,7 @@ graph TB
     FixIssues --> ParallelReview
     ReviewResult -->|問題なし| UpdateTask[バックログファイルを直接更新]
     UpdateTask --> Commit[git commit]
-    Commit --> Progress[進捗報告]
-    Progress --> LoadBacklog
+    Commit --> LoadBacklog
 
     Success -->|失敗| Investigate{調査必要?}
     Investigate -->|Yes| CallInvestigator[investigatorに委譲]
@@ -66,17 +65,16 @@ graph TB
 
 - Conventional Commitsに準拠
 
-## 毎ターンの出力テンプレート
+## 毎ターンの進捗報告
 
-各ターンの応答冒頭に必ず以下のブロックを出力すること:
+オーナーへの進捗報告として、各ターンの応答冒頭に必ず以下のブロックを出力すること:
 
 ```
 ワークフロー状態:
-- フェーズ: [LoadBacklog|Delegating|Reviewing|UpdateTask|Committing|Reporting|Done|Escalating]
+- フェーズ: [LoadBacklog|SelectAgent|Execute|ParallelReview|FixIssues|UpdateTask|Commit|CallInvestigator|Replan|Report|Escalate]
 - 現在のタスク: [現在のタスク + task-id または "-"]
 - 次アクション: [具体的な次のステップ]
-- 必須チェーン（実装タスク完了時）: 並列レビュー(code-review+security-reviewer+tester) → バックログ[x]更新 → git commit → 進捗報告 → 次タスク
-- このブロックを毎ターンの応答冒頭に出力すること
+- 必須チェーン（実装タスク完了時）: 並列レビュー(code-review+security-reviewer+tester) → バックログ[x]更新 → git commit → 次タスク
 ```
 
 ## 重要な注意事項
