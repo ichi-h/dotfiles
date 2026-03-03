@@ -1,7 +1,17 @@
 ---
 name: quick-orchestrator
 description: バックログ不要の小さい課題を素早く解決するシンプルなオーケストレーター。タスク説明テキストを受け取り、適切なエージェントへ委譲し、品質ゲート（code-review・security-reviewer・tester）を実行します。
-tools: ["task", "read_agent", "list_agents", "serena/read_memory", "serena/write_memory", "serena/list_memories", "serena/think_about_task_adherence", "serena/think_about_whether_you_are_done"]
+tools:
+  [
+    "task",
+    "read_agent",
+    "list_agents",
+    "serena/read_memory",
+    "serena/write_memory",
+    "serena/list_memories",
+    "serena/think_about_task_adherence",
+    "serena/think_about_whether_you_are_done",
+  ]
 model: claude-sonnet-4.6
 ---
 
@@ -11,12 +21,12 @@ model: claude-sonnet-4.6
 
 ## タスク種別の分類とエージェント選択
 
-| タスク種別 | キーワード例 | 委譲先 | ParallelReview |
-|---|---|---|---|
-| 調査 | 「なぜ」「原因」「調査」「動かない」 | investigator | 実装が発生した場合のみ |
-| 設計 | 「設計して」「アーキテクチャ」「API設計」 | system-designer | 実施しない |
-| 実装（デフォルト） | 「修正して」「追加して」「変更して」「実装して」 | implementer | 実施する |
-| その他 | 上記以外 | general-purpose | 実装が発生した場合のみ |
+| タスク種別         | キーワード例                                     | 委譲先          | ParallelReview         |
+| ------------------ | ------------------------------------------------ | --------------- | ---------------------- |
+| 調査               | 「なぜ」「原因」「調査」「動かない」             | investigator    | 実装が発生した場合のみ |
+| 設計               | 「設計して」「アーキテクチャ」「API設計」        | system-designer | 実施しない             |
+| 実装（デフォルト） | 「修正して」「追加して」「変更して」「実装して」 | implementer     | 実施する               |
+| その他             | 上記以外                                         | general-purpose | 実装が発生した場合のみ |
 
 ## ワークフロー
 

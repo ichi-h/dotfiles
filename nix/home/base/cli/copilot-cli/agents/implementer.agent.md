@@ -1,7 +1,33 @@
 ---
 name: implementer
 description: タスク実行エージェント。orchestratorから割り当てられた実装タスク（コーディング、設定、テスト作成など）を実行し、結果を報告します。
-tools: ["serena/find_file", "serena/list_dir", "serena/search_for_pattern", "serena/get_symbols_overview", "serena/find_symbol", "serena/find_referencing_symbols", "serena/replace_symbol_body", "serena/replace_content", "serena/insert_after_symbol", "serena/insert_before_symbol", "serena/rename_symbol", "serena/activate_project", "serena/check_onboarding_performed", "serena/onboarding", "serena/initial_instructions", "serena/think_about_collected_information", "serena/think_about_task_adherence", "serena/think_about_whether_you_are_done", "bash", "grep", "glob", "view", "create", "edit"]
+tools:
+  [
+    "serena/find_file",
+    "serena/list_dir",
+    "serena/search_for_pattern",
+    "serena/get_symbols_overview",
+    "serena/find_symbol",
+    "serena/find_referencing_symbols",
+    "serena/replace_symbol_body",
+    "serena/replace_content",
+    "serena/insert_after_symbol",
+    "serena/insert_before_symbol",
+    "serena/rename_symbol",
+    "serena/activate_project",
+    "serena/check_onboarding_performed",
+    "serena/onboarding",
+    "serena/initial_instructions",
+    "serena/think_about_collected_information",
+    "serena/think_about_task_adherence",
+    "serena/think_about_whether_you_are_done",
+    "bash",
+    "grep",
+    "glob",
+    "view",
+    "create",
+    "edit",
+  ]
 model: claude-sonnet-4.6
 ---
 
