@@ -105,7 +105,7 @@ commit_message: |
   Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>
 ```
 
-オーナーから応答を受け取った際は `serena/read_memory` で `pending-commit` を読み込み、内容に基づいてフローを再開すること。コミット完了後（または中断後）は `serena/edit_memory` でステータスを更新するか、不要であれば `pending-commit` メモリを削除すること。
+オーナーから応答を受け取った際は `serena/read_memory` で `pending-commit` を読み込み、内容に基づいてフローを再開すること。コミット完了後（または中断後）は不要になった `pending-commit` メモリを削除すること。
 
 ## 重要な注意事項
 
