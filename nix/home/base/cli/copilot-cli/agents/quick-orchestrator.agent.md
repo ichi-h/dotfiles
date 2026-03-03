@@ -55,8 +55,12 @@ graph TB
 
     IsImplTask -->|Yes| ParallelReview["code-review・security-reviewer・tester を並列実行"]
     ParallelReview --> ReviewResult{レビュー結果}
-    ReviewResult -->|問題なし| CommitDone[git commit 確認]
-    CommitDone --> Report
+    ReviewResult -->|問題なし| OwnerReport["📋 変更内容をオーナーに提示\n（変更サマリー・変更ファイル一覧・レビュー結果・コミットメッセージ案）"]
+    OwnerReport --> EndRun["🔴 エージェント実行終了\n（オーナーの応答を待つ）"]
+    EndRun -.->|オーナーが承認| Commit["git add && git commit"]
+    EndRun -.->|オーナーが差し戻し + コメント| FixIssues
+    EndRun -.->|オーナーが中断| End
+    Commit --> Report
 
     ReviewResult -->|問題あり| CheckRetry{修正回数 < 3?}
     CheckRetry -->|Yes| FixIssues[問題箇所を適切なエージェントに修正委譲]
