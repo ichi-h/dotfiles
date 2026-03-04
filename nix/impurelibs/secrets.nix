@@ -44,5 +44,7 @@ in
     mac-address-yomogi = getEnvWrapper "MAC_ADDRESS_YOMOGI";
     mac-address-shiosai = getEnvWrapper "MAC_ADDRESS_SHIOSAI";
     mac-address-fujibakama = getEnvWrapper "MAC_ADDRESS_FUJIBAKAMA";
+
+    notify-webhook-url = getEnvWrapper "NOTIFY_WEBHOOK_URL";
   };
 }

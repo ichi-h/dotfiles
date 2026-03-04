@@ -4,6 +4,8 @@ bindkey -e
 bindkey "^[[1;3D" beginning-of-line
 bindkey "^[[1;3C" end-of-line
 
+export NOTIFY_WEBHOOK_URL='%NOTIFY_WEBHOOK_URL%'
+
 setopt COMBINING_CHARS
 
 PRIMARY_COLOR=`theme-color primary $(hostname)`
