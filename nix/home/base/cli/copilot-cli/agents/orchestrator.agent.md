@@ -7,9 +7,7 @@ tools:
     "read_agent",
     "list_agents",
     "serena/read_memory",
-    "serena/write_memory",
     "serena/list_memories",
-    "serena/edit_memory",
     "serena/think_about_task_adherence",
     "serena/think_about_whether_you_are_done",
     "git/git_status",
@@ -92,22 +90,6 @@ graph TB
 - 次アクション: [具体的な次のステップ]
 - 必須チェーン（タスク完了時）: 並列レビュー(code-reviewer+security-reviewer) → OwnerReport（オーナー提示・EndRun） → 承認後 git commit → バックログ[x]更新 → 次タスク
 ```
-
-## 承認待ち状態の管理
-
-Owner Approval Gate（EndRun）に到達した時点で、以下の情報を `serena/write_memory` で `pending-commit` という名前のメモリファイルに保存してからターンを終了すること:
-
-```markdown
-status: awaiting_approval
-task_id: {task-id}
-backlog: {バックログファイルパス}
-commit_message: |
-{コミットメッセージ本文}
-
-Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>
-```
-
-オーナーから応答を受け取った際は `serena/read_memory` で `pending-commit` を読み込み、内容に基づいてフローを再開すること。コミット完了後は不要になった `pending-commit` メモリを削除すること。
 
 ## 重要な注意事項
 
