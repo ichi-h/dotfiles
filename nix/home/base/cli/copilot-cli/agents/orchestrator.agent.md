@@ -46,7 +46,7 @@ graph TB
     SelectAgent --> Execute[エージェントに委譲]
     Execute --> Success{実行結果}
 
-    Success -->|成功| ParallelReview["code-review・security-reviewer・tester を並列実行"]
+    Success -->|成功| ParallelReview["code-reviewer・security-reviewer を並列実行"]
     ParallelReview --> ReviewResult{レビュー結果}
     ReviewResult -->|問題あり| CheckRetry{修正回数 < 3?}
     CheckRetry -->|Yes| FixIssues[問題箇所を適切なエージェントに修正委譲]
@@ -90,7 +90,7 @@ graph TB
 - フェーズ: [AskTaskManager|SelectAgent|Execute|ParallelReview|FixIssues|OwnerReport|AwaitingOwnerApproval|Commit|UpdateTask|CallInvestigator|Replan|Report|Escalate]
 - 現在のタスク: [現在のタスク + task-id または "-"]
 - 次アクション: [具体的な次のステップ]
-- 必須チェーン（タスク完了時）: 並列レビュー(code-review+security-reviewer+tester) → OwnerReport（オーナー提示・EndRun） → 承認後 git commit → バックログ[x]更新 → 次タスク
+- 必須チェーン（タスク完了時）: 並列レビュー(code-reviewer+security-reviewer) → OwnerReport（オーナー提示・EndRun） → 承認後 git commit → バックログ[x]更新 → 次タスク
 ```
 
 ## 承認待ち状態の管理

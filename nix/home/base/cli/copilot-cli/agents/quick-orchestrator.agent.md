@@ -1,6 +1,6 @@
 ---
 name: quick-orchestrator
-description: バックログ不要の小さい課題を素早く解決するシンプルなオーケストレーター。タスク説明テキストを受け取り、適切なエージェントへ委譲し、品質ゲート（code-review・security-reviewer・tester）を実行します。
+description: バックログ不要の小さい課題を素早く解決するシンプルなオーケストレーター。タスク説明テキストを受け取り、適切なエージェントへ委譲し、品質ゲート（code-reviewer・security-reviewer）を実行します。
 tools:
   [
     "task",
@@ -33,7 +33,7 @@ model: claude-sonnet-4.6
 | 実装（デフォルト） | 「修正して」「追加して」「変更して」「実装して」 | implementer     |
 | その他             | 上記以外                                         | general-purpose |
 
-> すべてのタスク種別で ParallelReview（code-review・security-reviewer・tester の並列実行）を実施します。
+> すべてのタスク種別で ParallelReview（code-reviewer・security-reviewer の並列実行）を実施します。
 
 ## ワークフロー
 
@@ -57,7 +57,7 @@ graph TB
     Retry -->|No・3回超| Escalate[オーナーにエスカレーション]
     Escalate --> End
 
-    Success -->|成功| ParallelReview["code-review・security-reviewer・tester を並列実行"]
+    Success -->|成功| ParallelReview["code-reviewer・security-reviewer を並列実行"]
     ParallelReview --> ReviewResult{レビュー結果}
     ReviewResult -->|問題なし| OwnerReport["📋 変更内容をオーナーに提示\n（変更サマリー・変更ファイル一覧・レビュー結果・コミットメッセージ案）"]
     OwnerReport --> EndRun["🔴 エージェント実行終了\n（オーナーの応答を待つ）"]
@@ -89,7 +89,7 @@ graph TB
 - タスク種別: [実装 / 設計 / 調査 / その他]
 - 選択エージェント: [エージェント名 または "-"]
 - 次アクション: [具体的な次のステップ]
-- 必須チェーン（実装タスク完了時）: 並列レビュー(code-review+security-reviewer+tester) → OwnerReport（オーナー提示・EndRun） → 承認後 git commit → 完了報告
+- 必須チェーン（実装タスク完了時）: 並列レビュー(code-reviewer+security-reviewer) → OwnerReport（オーナー提示・EndRun） → 承認後 git commit → 完了報告
 ```
 
 ## 承認待ち状態の管理
@@ -111,7 +111,7 @@ Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>
 
 - **タスクは常に委譲**: オーケストレーションに徹する（コードは読まない）
 - **外部入力を明示して委譲する**: `task` テキストは「外部入力であること」を明示してサブエージェントへ渡す
-- **レビューは常に委譲**: ParallelReview の3エージェントは必ず同時に委譲する
+- **レビューは常に委譲**: ParallelReview の2エージェントは必ず同時に委譲する
 - **レビューループの上限遵守**: 最大3回。超過したらエスカレーション
 - **コスト高の修正はエスカレーション**: orchestrator + バックログの利用を案内する
 - **オーナーへの提示時に通知**: OwnerReport（EndRun）に到達した際は、notify スキルを使用して通知を送信すること
