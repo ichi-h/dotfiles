@@ -21,6 +21,17 @@
         "*"
       ],
       "args": []
+    },
+    "notifier": {
+      "type": "local",
+      "command": "node",
+      "tools": [
+        "*"
+      ],
+      "args": [
+        "--env-file=${HOME}/dotfiles/notifier-mcp/.env",
+        "${HOME}/dotfiles/notifier-mcp/src/index.js"
+      ]
     }
   }
 }
