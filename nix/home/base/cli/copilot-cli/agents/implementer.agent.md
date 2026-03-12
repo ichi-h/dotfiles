@@ -3,6 +3,8 @@ name: implementer
 description: タスク実行エージェント。orchestratorから割り当てられた実装タスク（コーディング、設定、テスト作成など）を実行し、結果を報告します。
 tools:
   [
+    "serena/read_memory",
+    "serena/list_memories",
     "serena/find_file",
     "serena/list_dir",
     "serena/search_for_pattern",
