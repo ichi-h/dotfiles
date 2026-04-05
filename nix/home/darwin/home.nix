@@ -7,8 +7,9 @@
 
   home = {
     homeDirectory = "/Users/${vars.username}";
-    file = {
-      ".config/karabiner/karabiner.json".source = ./karabiner.json;
+    file.".config/karabiner/karabiner.json" = {
+      source = ./karabiner.json;
+      force = true;
     };
   };
 }
