@@ -20,6 +20,10 @@ nix run nixpkgs#home-manager -- switch --flake .#darwin --impure
 
 # Rebuild NixOS
 sudo direnv exec . nixos-rebuild switch --flake .#(environment) --impure
+
+# Rebuild nix-darwin
+sudo nix run nix-darwin/nix-darwin-25.11#darwin-rebuild -- switch --flake .#(environment) # install nix-darwin if you haven't already
+sudo darwin-rebuild switch --flake .#(environment)
 ```
 
 ## Why not use sops-nix, agenix and so on?

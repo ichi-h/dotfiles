@@ -4,6 +4,11 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/25.11";
 
+    nix-darwin = {
+      url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
+      inputs.nixpkgs.follows = "nixpkgs"
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -21,6 +26,7 @@
     {
       self,
       nixpkgs,
+      nix-darwin,
       home-manager,
       # xremap,
       ...
@@ -109,6 +115,23 @@
             mcp-servers-nix = inputs.mcp-servers-nix;
           };
           modules = [ ./home/darwin/home.nix ];
+        };
+      };
+
+      darwinConfigurations = {
+        koharubi = nix-darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
+          specialArgs = {
+            inherit inputs outputs;
+          };
+          modules = [ ./hosts/koharubi/configuration.nix ];
+        };
+        ukigumo = nix-darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
+          specialArgs = {
+            inherit inputs outputs;
+          };
+          modules = [ ./hosts/ukigumo/configuration.nix ];
         };
       };
     };
