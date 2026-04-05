@@ -106,16 +106,16 @@
           };
           modules = [ ./home/linux/home-for-cui.nix ];
         };
-        "darwin" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.aarch64-darwin;
-          extraSpecialArgs = {
-            inherit inputs outputs;
-            vars = import ./vars;
-            impurelibs = import ./impurelibs;
-            mcp-servers-nix = inputs.mcp-servers-nix;
-          };
-          modules = [ ./home/darwin/home.nix ];
-        };
+        # "darwin" = home-manager.lib.homeManagerConfiguration {
+        #   pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+        #   extraSpecialArgs = {
+        #     inherit inputs outputs;
+        #     vars = import ./vars;
+        #     impurelibs = import ./impurelibs;
+        #     mcp-servers-nix = inputs.mcp-servers-nix;
+        #   };
+        #   modules = [ ./home/darwin/home.nix ];
+        # };
       };
 
       darwinConfigurations = {
@@ -123,6 +123,9 @@
           system = "aarch64-darwin";
           specialArgs = {
             inherit inputs outputs;
+            vars = import ./vars;
+            impurelibs = import ./impurelibs;
+            mcp-servers-nix = inputs.mcp-servers-nix;
           };
           modules = [ ./hosts/koharubi/configuration.nix ];
         };
@@ -130,6 +133,9 @@
           system = "aarch64-darwin";
           specialArgs = {
             inherit inputs outputs;
+            vars = import ./vars;
+            impurelibs = import ./impurelibs;
+            mcp-servers-nix = inputs.mcp-servers-nix;
           };
           modules = [ ./hosts/ukigumo/configuration.nix ];
         };

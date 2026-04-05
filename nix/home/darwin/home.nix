@@ -2,8 +2,13 @@
 {
   imports = [
     ../base/cli
-    ../base/gui
     ../base/home.nix
   ];
-  home.homeDirectory = "/Users/${vars.username}";
+
+  home = {
+    homeDirectory = "/Users/${vars.username}";
+    file = {
+      ".config/karabiner/karabiner.json".source = ./karabiner.json;
+    };
+  };
 }
