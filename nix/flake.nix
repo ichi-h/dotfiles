@@ -112,7 +112,7 @@
         koharubi = nix-darwin.lib.darwinSystem {
           system = "aarch64-darwin";
           specialArgs = {
-            inherit inputs outputs;
+            inherit inputs outputs self;
             vars = import ./vars;
             impurelibs = import ./impurelibs;
             mcp-servers-nix = inputs.mcp-servers-nix;
@@ -125,7 +125,7 @@
         ukigumo = nix-darwin.lib.darwinSystem {
           system = "aarch64-darwin";
           specialArgs = {
-            inherit inputs outputs;
+            inherit inputs outputs self;
             vars = import ./vars;
             impurelibs = import ./impurelibs;
             mcp-servers-nix = inputs.mcp-servers-nix;

@@ -1,11 +1,21 @@
-{ ... }:
+{ vars, impurelibs, mcp-servers-nix, ... }:
 {
   imports = [
-    ../../home/darwin/home.nix
     ../../modules/darwin/core.nix
     ../../modules/darwin/brew/core.nix
     ../../modules/darwin/brew/extra.nix
   ];
+
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    extraSpecialArgs = { inherit vars impurelibs mcp-servers-nix; };
+    users.${vars.username} = { ... }: {
+      imports = [ ../../home/darwin/home.nix ];
+    };
+  };
+
+  users.users.${vars.username}.home = "/Users/${vars.username}";
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog

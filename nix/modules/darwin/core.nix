@@ -1,12 +1,15 @@
-{ self, ... }:
+{ self, vars, ... }:
 {
   time.timeZone = "Asia/Tokyo";
 
   security.pam.services.sudo_local.touchIdAuth = true;
 
+  system.primaryUser = vars.username;
+
+  nixpkgs.config.allowUnfree = true;
+
   nix = {
     settings = {
-      auto-optimise-store = true;
       experimental-features = "nix-command flakes";
     };
     optimise.automatic = true;
