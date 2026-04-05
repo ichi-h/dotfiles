@@ -23,6 +23,7 @@
       "firefox"
       "karabiner-elements"
       "middleclick"
+      "obs"
     ];
   };
 }
