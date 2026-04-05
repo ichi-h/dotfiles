@@ -1,9 +1,10 @@
 { ... }:
 {
   imports = [
-    ../../darwin/core.nix
-    ../../darwin/brew/core.nix
-    ../../darwin/brew/extra.nix
+    ../../home/darwin/home.nix
+    ../../modules/darwin/core.nix
+    ../../modules/darwin/brew/core.nix
+    ../../modules/darwin/brew/extra.nix
   ];
 
   # Used for backwards compatibility, please read the changelog before changing.

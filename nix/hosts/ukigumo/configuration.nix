@@ -1,8 +1,9 @@
 { ... }:
 {
   imports = [
-    ../../darwin/core.nix
-    ../../darwin/brew/core.nix
+    ../../home/darwin/home.nix
+    ../../modules/darwin/core.nix
+    ../../modules/darwin/brew/core.nix
   ];
 
   # Used for backwards compatibility, please read the changelog before changing.
