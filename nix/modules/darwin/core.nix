@@ -1,4 +1,4 @@
-{ ... }:
+{ self, ... }:
 {
   time.timeZone = "Asia/Tokyo";
 
