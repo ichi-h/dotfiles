@@ -6,7 +6,7 @@
 
     nix-darwin = {
       url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
-      inputs.nixpkgs.follows = "nixpkgs"
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     home-manager = {
@@ -117,7 +117,10 @@
             impurelibs = import ./impurelibs;
             mcp-servers-nix = inputs.mcp-servers-nix;
           };
-          modules = [ ./hosts/koharubi/configuration.nix ];
+          modules = [
+            home-manager.darwinModules.home-manager
+            ./hosts/koharubi/configuration.nix
+          ];
         };
         ukigumo = nix-darwin.lib.darwinSystem {
           system = "aarch64-darwin";
@@ -127,7 +130,10 @@
             impurelibs = import ./impurelibs;
             mcp-servers-nix = inputs.mcp-servers-nix;
           };
-          modules = [ ./hosts/ukigumo/configuration.nix ];
+          modules = [
+            home-manager.darwinModules.home-manager
+            ./hosts/ukigumo/configuration.nix
+          ];
         };
       };
     };
