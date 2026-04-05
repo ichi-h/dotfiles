@@ -12,6 +12,7 @@
       "docker-compose"
     ];
     casks = [
+      "iterm2"
       "visual-studio-code"
       "font-hackgen-nerd"
       "google-japanese-ime"
