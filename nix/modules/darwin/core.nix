@@ -8,16 +8,7 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  nix = {
-    settings = {
-      experimental-features = "nix-command flakes";
-    };
-    optimise.automatic = true;
-    gc = {
-      automatic = true;
-      options = "--delete-older-than 7d";
-    };
-  };
+  nix.enable = false;
 
   system = {
     # Set Git commit hash for darwin-version.
