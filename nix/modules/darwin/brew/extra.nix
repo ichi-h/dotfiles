@@ -7,5 +7,7 @@
     "discord"
     "vlc"
     "nextcloud"
+    "bitwarden"
+    "balenaetcher"
   ];
 }

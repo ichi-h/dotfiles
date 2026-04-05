@@ -15,6 +15,7 @@
       "iterm2"
       "visual-studio-code"
       "font-hackgen-nerd"
+      "font-source-han-code-jp"
       "google-japanese-ime"
       "sequel-ace"
       "clipy"
