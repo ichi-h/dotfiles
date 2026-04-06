@@ -10,6 +10,7 @@
       "colima"
       "docker"
       "docker-compose"
+      "awscli"
     ];
     casks = [
       "iterm2"
