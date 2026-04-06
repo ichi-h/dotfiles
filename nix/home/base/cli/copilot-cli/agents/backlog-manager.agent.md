@@ -54,36 +54,11 @@ model: claude-sonnet-4.6
 
 ### 命名規則
 
-```
-.{username}/{year}-{month}-{day}-{backlog-name}.md
-```
-
-**パラメータ**:
-
-- `{username}`: ユーザー名（呼び出し元から提供、または環境から取得）
-- `{year}-{month}-{day}`: バックログ作成日（YYYY-MM-DD）
-- `{backlog-name}`: バックログ名（kebab-case）
-
-**例**:
-
-- `.ichi-h/2026-02-12-user-authentication.md`
-- `.ichi-h/2026-03-15-fix-memory-leak.md`
+命名規則の詳細は backlog-management スキルを参照。
 
 ### ファイル操作
 
-**新規作成**:
-
-1. 命名規則に従ってファイルパスを決定
-2. `create` ツールでファイルを作成
-3. backlog-managementスキルのフォーマットに従う
-
-**更新**:
-
-1. 現在の内容を読み込み
-2. **完了済みタスク (`[x]`) を保持**
-3. 新しいタスクを追加（新しいIDで）
-4. 依存関係を更新
-5. ファイルを更新
+ファイル操作の詳細は backlog-management スキルを参照。
 
 ### フォーマット詳細
 
@@ -124,10 +99,7 @@ model: claude-sonnet-4.6
 
 ## 重要な注意事項
 
-- **依存関係を最小化**: 並列性を最大化
-- **品質を計画**: 常にレビューとテストを含める
-- **セキュリティ優先**: セキュリティ機能には必須チェック
-- **backlog-managementスキルに従う**: すべての詳細はスキルファイルを参照
+詳細は backlog-management スキルを参照。
 
 ## セキュリティ制約
 
