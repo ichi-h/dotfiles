@@ -1,6 +1,11 @@
 { ... }:
 {
-  homebrew.casks = [
-    "aws-vault"
-  ];
+  homebrew = {
+    brews = [
+      "volta"
+    ];
+    casks = [
+      "aws-vault"
+    ];
+  };
 }
