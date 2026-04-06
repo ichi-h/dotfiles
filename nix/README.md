@@ -12,15 +12,14 @@ sudo direnv allow # to reference environment variables during NixOS rebuilds.
 ```
 
 ```sh
-# For Linux
-nix run nixpkgs#home-manager -- switch --flake .#linux-[cui|gui]-[x86|aarch64] --impure
+# Home Manager
+nix run nixpkgs#home-manager -- switch --flake .#(environment) --impure
 
 # Rebuild NixOS
 sudo direnv exec . nixos-rebuild switch --flake .#(environment) --impure
 
 # Rebuild nix-darwin
-sudo direnv exec .  sudo nix run nix-darwin/nix-darwin-25.11#darwin-rebuild -- switch --flake .#(environment) --impure # install nix-darwin if you haven't already
-sudo direnv exec .  sudo darwin-rebuild switch --flake .#(environment) --impure
+sudo direnv exec . nix run nix-darwin/nix-darwin-25.11#darwin-rebuild -- switch --flake .#(environment) --impure
 ```
 
 ## Why not use sops-nix, agenix and so on?
