@@ -264,7 +264,7 @@ status: in-progress
 - [ ] パスワードハッシュのソルト生成のバグを修正 (task-u1v2)
   - dependent on: task-g7h8
 - [ ] 認証フロー全体のコードレビューを実施する (task-o5p6)
-  - dependent on: task-i9j0, task-k1l2, task-m3n4, task-u1v2
+  - dependent on: task-i9j0, task-k1l2, task-m3n4, task-u1v2, task-q7r8
 - [ ] JWTトークンの改ざん・期限切れ・無効化検証をチェックする (task-q7r8)
   - dependent on: task-g7h8
 ```
