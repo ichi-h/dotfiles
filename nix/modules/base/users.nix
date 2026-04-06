@@ -1,13 +1,13 @@
-{ pkgs, vars, ... }:
+{ pkgs, vars, impurelibs, ... }:
 {
   users.mutableUsers = false;
 
-  users.users."${vars.username}" = {
-    home = "/home/${vars.username}";
+  users.users."${impurelibs.secrets.username}" = {
+    home = "/home/${impurelibs.secrets.username}";
     isNormalUser = true;
     description = "ichi";
     extraGroups = [
-      vars.username
+      impurelibs.secrets.username
       "networkmanager"
       "wheel"
       "docker"

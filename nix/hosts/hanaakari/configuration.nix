@@ -31,5 +31,5 @@ in
     nameservers = [ vars.default-gateway "8.8.8.8" ];
   };
 
-  users.users."${vars.username}".hashedPassword = impurelibs.secrets.hashed-user-passwd-hanaakari;
+  users.users."${impurelibs.secrets.username}".hashedPassword = impurelibs.secrets.hashed-user-passwd-hanaakari;
 }

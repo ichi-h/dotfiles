@@ -1,7 +1,7 @@
-{ vars, ... }:
+{ vars, impurelibs, ... }:
 {
   services.xremap = {
-    userName = vars.username;
+    userName = impurelibs.secrets.username;
     serviceMode = "system";
     config = {
       virtual_modifiers = [ "CapsLock" ];

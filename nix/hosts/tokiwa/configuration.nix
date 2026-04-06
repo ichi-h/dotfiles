@@ -29,5 +29,5 @@ in
     nameservers = [ vars.default-gateway "8.8.8.8" ];
   };
 
-  users.users."${vars.username}".hashedPassword = impurelibs.secrets.hashed-user-passwd-tokiwa;
+  users.users."${impurelibs.secrets.username}".hashedPassword = impurelibs.secrets.hashed-user-passwd-tokiwa;
 }

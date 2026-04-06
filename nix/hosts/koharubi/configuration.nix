@@ -6,7 +6,7 @@
     ../../modules/darwin/brew/extra.nix
   ];
 
-  users.users.${vars.username}.home = "/Users/${vars.username}";
+  users.users.${impurelibs.secrets.username}.home = "/Users/${impurelibs.secrets.username}";
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog

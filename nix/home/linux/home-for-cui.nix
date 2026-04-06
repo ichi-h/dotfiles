@@ -1,9 +1,9 @@
-{ config, pkgs, vars, ... }:
+{ config, pkgs, vars, impurelibs, ... }:
 {
   imports = [
     ../base/cli
     ../base/home.nix
     ./base
   ];
-  home.homeDirectory = "/home/${vars.username}";
+  home.homeDirectory = "/home/${impurelibs.secrets.username}";
 }

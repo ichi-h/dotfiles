@@ -1,4 +1,4 @@
-{ config, pkgs, vars, ... }:
+{ config, pkgs, vars, impurelibs, ... }:
 {
   imports = [
     ../base/cli
@@ -7,5 +7,5 @@
     ./base
     ./gui
   ];
-  home.homeDirectory = "/home/${vars.username}";
+  home.homeDirectory = "/home/${impurelibs.secrets.username}";
 }
