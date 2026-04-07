@@ -1,6 +1,6 @@
 ---
 name: investigation
-description: investigatorへの調査委譲パターンを定義します。調査タイプの分類、分解手順、並列化戦略、委譲プロンプトテンプレートを提供します。
+description: 問題調査の委譲パターンと手順を定義するスキル。エラー・バグ・予期しない動作の調査が必要なときに参照する。問題を4タイプ（web-research / codebase-analysis / env-config / synthesis）に分解する方法・並列化戦略・委譲プロンプトテンプレート・スコープ厳守ルールを提供する。
 ---
 
 # Investigation スキル
