@@ -54,13 +54,18 @@ status: planning
 ## タスク
 
 - [ ] タスクの説明 (task-{id})
+  - agent: {agent-name}
 - [ ] タスクの説明 (task-{id})
+  - agent: {agent-name}
   - dependent on: {task-id1}
 - [ ] タスクの説明 (task-{id})
+  - agent: {agent-name}
   - dependent on: {task-id1}
 - [ ] タスクの説明 (task-{id})
+  - agent: {agent-name}
   - dependent on: {task-id1}
 - [ ] タスクの説明 (task-{id})
+  - agent: {agent-name}
   - dependent on: {task-id1}, {task-id2}
 ```
 
@@ -139,13 +144,16 @@ status: planning
 
 ```markdown
 - [ ] タスクの説明 (task-{id})
+  - agent: {agent-name}
 ```
 
 ### 例
 
 ```markdown
 - [ ] 認証システムのアーキテクチャを設計する (task-a1b2)
+  - agent: system-designer
 - [ ] JWTトークンの生成と検証を実装する (task-c3d4)
+  - agent: implementer
 ```
 
 ### タスク記述の品質基準
@@ -163,6 +171,7 @@ status: planning
 
 ```markdown
 - [ ] タスクの説明 (task-{id})
+  - agent: {agent-name}
   - dependent on: {task-id1}, {task-id2}
 ```
 
@@ -181,11 +190,15 @@ status: planning
 
 ```markdown
 - [x] システム設計 (task-a1b2)
+  - agent: system-designer
 - [ ] フロントエンド実装 (task-c3d4)
+  - agent: implementer
   - dependent on: task-a1b2
 - [ ] バックエンド実装 (task-e5f6)
+  - agent: implementer
   - dependent on: task-a1b2
 - [ ] フロントエンドとバックエンドの結合 (task-g7h8)
+  - agent: implementer
   - dependent on: task-c3d4, task-e5f6
 ```
 
@@ -251,21 +264,30 @@ status: in-progress
 ## タスク
 
 - [x] JWT認証のアーキテクチャとデータモデルを設計 (task-a1b2)
+  - agent: system-designer
 - [x] ユーザーモデルとデータベースマイグレーションを実装 (task-e5f6)
+  - agent: implementer
   - dependent on: task-a1b2
 - [x] JWT生成と検証ユーティリティを実装 (task-g7h8)
+  - agent: implementer
   - dependent on: task-a1b2
 - [ ] ログインAPIエンドポイントを実装 (task-i9j0)
+  - agent: implementer
   - dependent on: task-e5f6, task-g7h8
 - [ ] サインアップAPIエンドポイントを実装 (task-k1l2)
+  - agent: implementer
   - dependent on: task-e5f6, task-g7h8
 - [ ] 保護されたルート用の認証ミドルウェアを追加 (task-m3n4)
+  - agent: implementer
   - dependent on: task-g7h8
 - [ ] パスワードハッシュのソルト生成のバグを修正 (task-u1v2)
+  - agent: implementer
   - dependent on: task-g7h8
 - [ ] 認証フロー全体のコードレビューを実施する (task-o5p6)
+  - agent: istp-reviewer, intj-reviewer, entp-reviewer
   - dependent on: task-i9j0, task-k1l2, task-m3n4, task-u1v2, task-q7r8
 - [ ] JWTトークンの改ざん・期限切れ・無効化検証をチェックする (task-q7r8)
+  - agent: implementer
   - dependent on: task-g7h8
 ```
 

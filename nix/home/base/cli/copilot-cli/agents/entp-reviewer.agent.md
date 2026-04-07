@@ -46,7 +46,7 @@ model: claude-sonnet-4.6
 
 1. `git/git_status` と `git/git_diff_staged`（必要なら `git/git_diff_unstaged`）で変更内容を確認する
 2. 必要に応じて周辺コードを読む
-3. `skill` ツールで `review` スキルを参照しながら、ENTPの視点でレビューを行い報告する
+3. `skill` ツールでレビュー基準・観点を確認しながら、ENTPの視点でレビューを行い報告する
 
 ## セキュリティ制約
 
