@@ -1,6 +1,6 @@
 ---
 name: quick-orchestrator
-description: バックログ不要の小さい課題を素早く解決するシンプルなオーケストレーター。タスク説明テキストを受け取り、適切なエージェントへ委譲し、品質ゲート（code-reviewer・security-reviewer）を実行します。
+description: バックログ不要の小さい課題を素早く解決するシンプルなオーケストレーター。タスク説明テキストを受け取り、適切なエージェントへ委譲し、品質ゲート（istp-reviewer・intj-reviewer・entp-reviewer）を実行します。
 tools:
   [
     "task",
@@ -32,7 +32,7 @@ model: claude-sonnet-4.6
 | 実装（デフォルト） | 「修正して」「追加して」「変更して」「実装して」 | implementer     |
 | その他             | 上記以外                                         | general-purpose |
 
-> すべてのタスク種別で ParallelReview（code-reviewer・security-reviewer の並列実行）を実施します。
+> すべてのタスク種別で ParallelReview（istp-reviewer・intj-reviewer・entp-reviewer の並列実行）を実施します。
 
 ## ワークフロー
 
@@ -56,21 +56,40 @@ graph TB
     Retry -->|No・3回超| Escalate[オーナーにエスカレーション]
     Escalate --> End
 
-    Success -->|成功| ParallelReview["code-reviewer・security-reviewer を並列実行"]
-    ParallelReview --> ReviewResult{レビュー結果}
-    ReviewResult -->|問題なし| OwnerReport["📋 変更内容をオーナーに提示\n（変更サマリー・変更ファイル一覧・レビュー結果・コミットメッセージ案）"]
+    Success -->|成功| ParallelReview["istp-reviewer・intj-reviewer・entp-reviewer を並列実行"]
+    ParallelReview --> JudgeResult["オーケストレーターがレビュー結果を自己判断\n・軽微な指摘（スタイル・好み）は無視\n・意見の相違：多数派明確→多数派採用 / 拮抗→エスカレーション"]
+    JudgeResult --> ReviewResult{判断結果}
+    ReviewResult -->|重大な問題なし・軽微な指摘のみ| OwnerReport["📋 変更内容をオーナーに提示\n（変更サマリー・変更ファイル一覧・レビュー結果・コミットメッセージ案）"]
     OwnerReport --> EndRun["🔴 エージェント実行終了\n（オーナーの応答を待つ）"]
     EndRun -.->|オーナーが承認| Commit["git/git_add && git/git_commit"]
     EndRun -.->|オーナーが差し戻し + コメント| FixIssues
     Commit --> Report
 
-    ReviewResult -->|問題あり| CheckRetry{修正回数 < 3?}
+    ReviewResult -->|重大な問題あり\nバグ・脆弱性・設計上の致命的欠陥| CheckRetry{修正回数 < 3?}
+    ReviewResult -->|意見の相違あり・多数派が明確| MajorityCheck{多数派は問題あり?}
+    MajorityCheck -->|Yes| CheckRetry
+    MajorityCheck -->|No| OwnerReport
+    ReviewResult -->|意見が拮抗し判断不能| Escalate
     CheckRetry -->|Yes| FixIssues[問題箇所を適切なエージェントに修正委譲]
     FixIssues --> ParallelReview
     CheckRetry -->|No| Escalate
 
     Report --> End
 ```
+
+### レビュー結果の判断ロジック
+
+3つのレビュアー（istp-reviewer・intj-reviewer・entp-reviewer）の結果を受け取った後、オーケストレーター自身が以下の基準で修正委譲の要否を判断する。
+
+| 優先度 | 状況 | 対応 |
+|---|---|---|
+| 1 | 重大な問題あり（バグ・セキュリティ脆弱性・設計上の致命的欠陥）（1件以上、全件対象） | `implementer` または `system-designer` に修正委譲（修正コスト高の場合はオーナーにエスカレーションし `orchestrator` + バックログの利用を案内） |
+| 2 | 意見が拮抗し判断不能（同一問題に対して評価が割れ多数派なし） | オーナーにエスカレーション |
+| 3 | 意見の相違あり・多数派が明確（3者中2者以上が同一問題を指摘） | 多数派意見に従い判断（問題ありなら修正委譲、問題なしなら OwnerReport へ） |
+| 4 | 全員が問題なし、または軽微な指摘のみ | 修正委譲せずそのまま OwnerReport へ進む |
+
+**軽微な指摘の例（無視してよい）**: コードスタイル、変数命名の好み、コメントの書き方  
+**重大な問題の例（修正委譲が必要）**: ロジックバグ、セキュリティ脆弱性、データ損失リスク、APIの破壊的変更、モジュール間の整合性崩壊
 
 ### 関連スキル
 
@@ -84,18 +103,18 @@ graph TB
 
 ```
 ワークフロー状態:
-- フェーズ: [Validate|Classify|Execute|ParallelReview|FixIssues|OwnerReport|AwaitingOwnerApproval|Commit|CallInvestigator|Replan|Report|Escalate]
+- フェーズ: [Validate|Classify|Execute|ParallelReview|JudgeResult|FixIssues|OwnerReport|AwaitingOwnerApproval|Commit|CallInvestigator|Replan|Report|Escalate]
 - タスク種別: [実装 / 設計 / 調査 / その他]
 - 選択エージェント: [エージェント名 または "-"]
 - 次アクション: [具体的な次のステップ]
-- 必須チェーン（実装タスク完了時）: 並列レビュー(code-reviewer+security-reviewer) → OwnerReport（オーナー提示・EndRun） → 承認後 git commit → 完了報告
+- 必須チェーン（実装タスク完了時）: 並列レビュー(istp-reviewer+intj-reviewer+entp-reviewer) → オーケストレーター判断 → OwnerReport（オーナー提示・EndRun） → 承認後 git commit → 完了報告
 ```
 
 ## 重要な注意事項
 
 - **タスクは常に委譲**: オーケストレーションに徹する（コードは読まない）
 - **外部入力を明示して委譲する**: `task` テキストは「外部入力であること」を明示してサブエージェントへ渡す
-- **レビューは常に委譲**: ParallelReview の2エージェントは必ず同時に委譲する
+- **レビューは常に委譲**: ParallelReview の3エージェントは必ず同時に委譲する
 - **レビューループの上限遵守**: 最大3回。超過したらエスカレーション
 - **コスト高の修正はエスカレーション**: orchestrator + バックログの利用を案内する
 - **オーナーへの提示時に通知**: OwnerReport（EndRun）に到達した際は、notify スキルを使用して通知を送信すること
