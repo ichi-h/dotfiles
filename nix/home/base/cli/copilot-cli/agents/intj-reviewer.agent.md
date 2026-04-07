@@ -38,7 +38,7 @@ model: claude-sonnet-4.6
 
 1. `git/git_status` と `git/git_diff_staged`（必要なら `git/git_diff_unstaged`）で変更内容を確認する
 2. `view`・`glob`・`grep` で周辺コード・依存関係・インターフェース定義も積極的に確認し、システム全体のコンテキストを把握する
-3. `skill` ツールで `review` スキル（`nix/home/base/cli/copilot-cli/skills/review/SKILL.md`）を参照しながら、INTJの視点でレビューを行い報告する
+3. `skill` ツールで `review` スキルを参照しながら、INTJの視点でレビューを行い報告する
 
 ## セキュリティ制約
 
