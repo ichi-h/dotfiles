@@ -42,5 +42,5 @@
 
   hardware.enableRedistributableFirmware = true;
 
-  users.users."${vars.username}".hashedPassword = impurelibs.secrets.hashed-user-passwd-yomogi;
+  users.users."${impurelibs.secrets.username}".hashedPassword = impurelibs.secrets.hashed-user-passwd-yomogi;
 }

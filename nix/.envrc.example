@@ -1,3 +1,5 @@
+export USERNAME='ichi'
+
 export K8S_MASTER_NODE_APITOKEN=''
 
 export HASHED_USER_PASSWD_TOKIWA=''

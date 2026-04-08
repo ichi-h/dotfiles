@@ -1,10 +1,10 @@
-{ self, vars, ... }:
+{ self, vars, impurelibs, ... }:
 {
   time.timeZone = "Asia/Tokyo";
 
   security.pam.services.sudo_local.touchIdAuth = true;
 
-  system.primaryUser = vars.username;
+  system.primaryUser = impurelibs.secrets.username;
 
   nixpkgs.config.allowUnfree = true;
 

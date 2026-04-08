@@ -1,9 +1,9 @@
-{ vars, ... }:
+{ vars, impurelibs, ... }:
 {
   services.openssh = {
     enable = true;
     settings = {
-      AllowUsers = [ vars.username ];
+      AllowUsers = [ impurelibs.secrets.username ];
       LogLevel = "INFO";
       PermitRootLogin = "no";
       PasswordAuthentication = false;

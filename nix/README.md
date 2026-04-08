@@ -29,20 +29,23 @@ When calling environment variables in Nix expressions, if an empty string is obt
 
 ```nix
 let
-  getEnvWrapper = key:
+  getEnvWrapper = { key, default ? null }:
     let
       value = builtins.getEnv key;
     in
       if value == "" then
-        throw "`${key}` is empty, or you are running in pure mode."
+        if default != null then
+          default
+        else
+          throw "`${key}` is empty, or you are running in pure mode."
       else
         value;
 in
 {
   secrets = {
-    secret-1 = getEnvWrapper "SECRET_1";
-    secret-2 = getEnvWrapper "SECRET_2";
-    secret-3 = getEnvWrapper "SECRET_3";
+    secret-1 = getEnvWrapper { key = "SECRET_1"; };
+    secret-2 = getEnvWrapper { key = "SECRET_2"; };
+    secret-3 = getEnvWrapper { key = "SECRET_3"; };
     # ...
   };
 }

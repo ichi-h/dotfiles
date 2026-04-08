@@ -1,4 +1,4 @@
-{ config, pkgs, vars, ... }:
+{ config, pkgs, vars, impurelibs, ... }:
 {
   imports = [
     ../base/cli
@@ -6,7 +6,7 @@
   ];
 
   home = {
-    homeDirectory = "/Users/${vars.username}";
+    homeDirectory = "/Users/${impurelibs.secrets.username}";
     file.".config/karabiner/karabiner.json" = {
       source = ./karabiner.json;
     };
