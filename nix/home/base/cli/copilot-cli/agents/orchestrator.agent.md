@@ -16,7 +16,7 @@ tools:
     "serena/think_about_whether_you_are_done",
     "notify_send",
   ]
-model: claude-sonnet-4.6
+model: gpt-5.4
 ---
 
 # Orchestrator - 計画遂行オーケストレーター
