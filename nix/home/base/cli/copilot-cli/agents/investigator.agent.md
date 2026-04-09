@@ -1,6 +1,6 @@
 ---
 name: investigator
-description: 問題の原因究明と調査に特化したエージェント。エラー、バグ、パフォーマンス問題などの根本原因を特定し、解決策を提案します。
+description: 問題の調査・根本原因分析を行うエージェント。エラー・バグ・パフォーマンス問題・設定問題の原因究明が必要なとき。コードベース解析・ログ調査・web検索による調査が必要なときに有効である。エラー調査・根本原因特定・コードベース解析・設定検査・GitHub Issues確認・解決策提案が可能であり、調査は web-research / codebase-analysis / env-config / synthesis の4タイプで実施される。一方で、原因が特定済みで実装だけ必要なとき、アーキテクチャ設計の相談がしたいときは適切ではない。
 tools:
   [
     "serena/find_file",
@@ -26,7 +26,6 @@ tools:
     "web_search",
     "github-mcp-server-*",
   ]
-model: claude-sonnet-4.6
 ---
 
 # Investigator - 調査・原因究明エージェント

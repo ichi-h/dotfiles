@@ -28,19 +28,20 @@ Located at `nix/home/base/cli/copilot-cli/`:
 - `default.nix` - Installs copilot binary and symlinks config files to `~/.copilot/`
 - `copilot-instructions.md` - Main instructions (language settings, serena usage)
 - `agents/` - Custom agent definitions:
-  - `orchestrator` - バックログ解決の進行管理。MCP git tools でコミット・プッシュ
-  - `quick-orchestrator` - バックログ不要の小さい課題を素早く解決。MCP git tools でコミット
-  - `task-manager` - タスク管理（完了更新・次タスク特定）
-  - `backlog-manager` - バックログの作成・更新・管理
+  - `plan-orchestrator` - 計画立案・タスク分解・セキュリティレビュー。新しい課題の最初の窓口
+  - `orchestrator` - 承認済み計画の遂行管理。MCP git tools でコミット・プッシュ
+  - `quick-orchestrator` - 単一タスクを素早く解決する。MCP git tools でコミット
   - `implementer` - コーディング・設定・テスト作成（git操作はしない）
   - `investigator` - 問題調査・根本原因特定
-  - `security-reviewer` - セキュリティ脆弱性検出・レビュー
   - `system-designer` - アーキテクチャ設計・技術選定
-  - `tester` - 静的解析・テスト・ビルド実行
+  - `istp-reviewer` - ISTP型（実践的）レビュアー。実用性・実装品質の観点でレビュー
+  - `intj-reviewer` - INTJ型（戦略的）レビュアー。設計整合性・長期保守性の観点でレビュー
+  - `entp-reviewer` - ENTP型（創造的）レビュアー。代替案・トレードオフ・リスクの観点でレビュー
 - `skills/` - Skill definitions:
-  - `backlog-management` - バックログ管理方法
+  - `notify` - 通知パターン
+  - `review` - レビュー委譲パターン
   - `investigation` - 調査委譲パターン
-  - `agent-delegation` - サブエージェント選択ガイド
+  - `agent-delegation` - 【廃止済み】サブエージェント選択ガイド（各エージェントの description に移行済み）
 - `mcp-config.json` - MCP server configuration
   - `serena` MCP server
   - `git` MCP server (`mcp-server-git`) - git操作専用
