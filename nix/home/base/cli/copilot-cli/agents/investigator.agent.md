@@ -1,6 +1,6 @@
 ---
 name: investigator
-description: 問題の調査・根本原因分析を行うエージェント。エラー・バグ・パフォーマンス問題・設定問題の原因究明が必要なときに有効である。このエージェントはエラー調査・根本原因特定・コードベース解析・ログ調査・設定検査・web検索・GitHub Issues確認・解決策提案が可能であり、調査は web-research / codebase-analysis / env-config / synthesis の4タイプで実施される。一方で、原因が特定済みで実装だけ必要なとき、アーキテクチャ設計の相談がしたいときは適切ではない。
+description: 問題の調査・根本原因分析を行うエージェント。エラー・バグ・パフォーマンス問題・設定問題の原因究明が必要なときに有効である。このエージェントはエラー調査・根本原因特定・コードベース解析・ログ調査・設定検査・web検索・GitHub Issues確認・解決策提案が可能であり、調査は web-research / codebase-analysis / env-config / synthesis の4タイプで実施される。
 tools:
   [
     "serena/find_file",
