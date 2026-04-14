@@ -7,5 +7,6 @@
     wakeonlan
     nodejs_24
     nodePackages.pnpm
+    bashInteractive
   ];
 }

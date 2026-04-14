@@ -1,6 +1,8 @@
-exec copilot \
+env SHELL=$(which bash) copilot \
   --allow-tool "write" \
   --allow-tool "shell(pnpm:*)" \
+  --allow-tool "shell(npm:*)" \
+  --allow-tool "shell(yarn:*)" \
   --allow-tool "shell(gh:*)" \
   --allow-tool "shell(echo:*)" \
   --allow-tool "shell(wc:*)" \
@@ -18,8 +20,7 @@ exec copilot \
   --allow-tool "shell(uniq:*)" \
   --allow-tool "shell(diff:*)" \
   --allow-tool "shell(tee:*)" \
-  --allow-tool "shell(python3:*)" \
-  --allow-tool "shell(node:*)" \
+  --allow-tool "shell(mkdir:*)" \
   --allow-tool "serena" \
   --allow-tool "git(git_status)" \
   --allow-tool "git(git_diff)" \
@@ -48,4 +49,6 @@ exec copilot \
   --deny-tool "shell(security:*)" \
   --deny-tool "shell(pbcopy:*)" \
   --deny-tool "shell(pbpaste:*)" \
+  --deny-tool "shell(python3:*)" \
+  --deny-tool "shell(node:*)" \
   "$@"
