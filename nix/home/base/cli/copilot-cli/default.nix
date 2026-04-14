@@ -2,13 +2,13 @@
 let
   copilotCli = pkgs.stdenv.mkDerivation {
     pname = "github-copilot-cli";
-    version = "1.0.22";
+    version = "1.0.25";
     src = pkgs.fetchzip (if !pkgs.stdenv.hostPlatform.isDarwin then {
-      url = "https://github.com/github/copilot-cli/releases/download/v1.0.22/copilot-linux-x64.tar.gz";
-      sha256 = "sha256-GkMu9j5jzTcWWNe4eDdga4BTvKUmentg90UvDetwkT4=";
+      url = "https://github.com/github/copilot-cli/releases/download/v1.0.25/copilot-linux-x64.tar.gz";
+      sha256 = "sha256-aDkVZzKoKQ7x96Kl6w/s/lKmlpQyMBYEzPdvoBi4F+I=";
     } else {
-      url = "https://github.com/github/copilot-cli/releases/download/v1.0.22/copilot-darwin-arm64.tar.gz";
-      sha256 = "sha256-FT40Gjj1ZWu5BVqGbwX7uRzVFFPcc+BANRonw+YD0r8=";
+      url = "https://github.com/github/copilot-cli/releases/download/v1.0.25/copilot-darwin-arm64.tar.gz";
+      sha256 = "sha256-GCY4oBed0tiRBT3DiCtlirKFN4lbYOkNSxcTgMVs5Og=";
     });
     phases = [ "installPhase" ];
     dontBuild = true;
