@@ -27,6 +27,7 @@
       "karabiner-elements"
       "middleclick"
       "obs"
+      "cmux"
     ];
   };
 }
