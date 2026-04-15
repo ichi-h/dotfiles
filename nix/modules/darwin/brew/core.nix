@@ -13,7 +13,6 @@
       "awscli"
     ];
     casks = [
-      "iterm2"
       "visual-studio-code"
       "font-hackgen-nerd"
       "font-source-han-code-jp"

@@ -6,6 +6,8 @@
     ];
     casks = [
       "aws-vault"
+      "metals"
+      "coursier"
     ];
   };
 }
