@@ -3,6 +3,7 @@
   "permissions": {
     "allow": [
       "mcp__serena__*",
+      "mcp__metals__*",
       "Edit",
       "Write",
       "Bash(pnpm *)",
