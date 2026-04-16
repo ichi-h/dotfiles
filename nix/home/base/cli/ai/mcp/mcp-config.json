@@ -2,9 +2,6 @@
   "serena": {
     "type": "stdio",
     "command": "serena",
-    "tools": [
-      "*"
-    ],
     "args": [
       "start-mcp-server",
       "--context",
@@ -16,17 +13,11 @@
   "git": {
     "type": "stdio",
     "command": "mcp-server-git",
-    "tools": [
-      "*"
-    ],
     "args": []
   },
   "notifier": {
     "type": "stdio",
     "command": "node",
-    "tools": [
-      "*"
-    ],
     "args": [
       "--env-file=${HOME}/dotfiles/notifier-mcp/.env",
       "${HOME}/dotfiles/notifier-mcp/src/index.js"
