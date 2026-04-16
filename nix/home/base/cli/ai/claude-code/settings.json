@@ -2,6 +2,7 @@
   "alwaysThinkingEnabled": true,
   "permissions": {
     "allow": [
+      "mcp__serena__*",
       "Edit",
       "Write",
       "Bash(pnpm *)",
