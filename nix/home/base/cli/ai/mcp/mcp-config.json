@@ -1,6 +1,6 @@
 {
   "serena": {
-    "type": "local",
+    "type": "stdio",
     "command": "serena",
     "tools": [
       "*"
@@ -14,7 +14,7 @@
     ]
   },
   "git": {
-    "type": "local",
+    "type": "stdio",
     "command": "mcp-server-git",
     "tools": [
       "*"
@@ -22,7 +22,7 @@
     "args": []
   },
   "notifier": {
-    "type": "local",
+    "type": "stdio",
     "command": "node",
     "tools": [
       "*"
