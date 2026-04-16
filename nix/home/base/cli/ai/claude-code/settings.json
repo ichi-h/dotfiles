@@ -29,7 +29,12 @@
       "Bash(git diff *)",
       "Bash(git log *)",
       "Bash(git show *)",
-      "Bash(git branch *)"
+      "Bash(git branch *)",
+      "WebSearch",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:github.com)",
+      "Bash(npm view:*)",
+      "Bash(nix-prefetch-url:*)"
     ],
     "deny": [
       "Bash(rm *)",
