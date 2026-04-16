@@ -42,6 +42,13 @@ in
   home.packages = [ claudeCode ];
 
   home.file = {
-    ".claude/settings.json".source = ./settings.json;
+    ".claude/CLAUDE.md".source = ../AGENTS.md;
+    ".claude/skills".source = ../skills;
+    ".claude/agents".source = ../agents;
+    ".claude/settings.json".text = 
+        builtins.replaceStrings
+          [ "\"%MCP_SERVERS%\"" ]
+          [ (builtins.readFile ../mcp/mcp-config.json ) ]
+          (builtins.readFile ./settings.json);
   };
 }
