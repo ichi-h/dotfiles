@@ -1,11 +1,9 @@
 {
   imports = [
-    ./claude-code
-    ./copilot-cli
+    ./ai
     ./direnv
     ./git
     ./neovim
-    ./mcp
     ./theme-color
     ./tmux
     ./zsh
