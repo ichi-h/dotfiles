@@ -5,7 +5,7 @@
     "args": [
       "start-mcp-server",
       "--context",
-      "ide",
+      "ide-assistant",
       "--enable-web-dashboard",
       "false"
     ]
