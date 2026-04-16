@@ -12,7 +12,7 @@
     ".copilot/agents".source = ./agents;
 
     ".claude/CLAUDE.md".source = ./AGENTS.md;
-    ".claude/mcp-config.json".source = ./mcp/mcp-config.json;
+    ".claude/.mcp.json".source = ./mcp/mcp-config.json;
     ".claude/skills".source = ./skills;
     ".claude/agents".source = ./agents;
   };
