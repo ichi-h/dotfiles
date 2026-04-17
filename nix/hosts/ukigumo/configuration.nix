@@ -2,6 +2,7 @@
 {
   imports = [
     ../../modules/darwin/core.nix
+    ../../modules/darwin/netskope-ssl.nix
     ../../modules/darwin/brew/core.nix
     ../../modules/darwin/brew/works.nix
   ];
