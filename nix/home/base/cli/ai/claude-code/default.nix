@@ -1,15 +1,12 @@
 { pkgs, ... }:
 let
-  # npm view @anthropic-ai/claude-code version
-  # nix-prefetch-url --type sha256 https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-X.X.X.tgz
-
   claudeCode = pkgs.stdenv.mkDerivation {
     pname = "claude-code";
-    version = "2.1.110";
+    version = "2.1.112";
 
     src = pkgs.fetchurl {
-      url = "https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-2.1.110.tgz";
-      sha256 = "0n3ayyavi1nsl6fj1g3wjjsrvb0pckzrq09vw6z96y5jwax8vrm9";
+      url = "https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-2.1.112.tgz";
+      sha256 = "02fylpn9lgyk22fq1x3iv5yv2z2cpvg7g3qs4gyyb82kx9lrjdw4";
     };
 
     nativeBuildInputs = [ pkgs.makeWrapper ];
