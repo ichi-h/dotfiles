@@ -2,11 +2,11 @@
 let
   claudeCode = pkgs.stdenv.mkDerivation {
     pname = "claude-code";
-    version = "2.1.112";
+    version = "2.1.114";
 
     src = pkgs.fetchurl {
-      url = "https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-2.1.112.tgz";
-      sha256 = "02fylpn9lgyk22fq1x3iv5yv2z2cpvg7g3qs4gyyb82kx9lrjdw4";
+      url = "https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-2.1.114.tgz";
+      sha256 = "1bxrhx5n213hggjixybwyccq40vjr1fjsrk1p535y4g7danab4i0";
     };
 
     nativeBuildInputs = [ pkgs.makeWrapper ];
