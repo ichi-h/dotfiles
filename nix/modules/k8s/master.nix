@@ -1,5 +1,10 @@
-
-{ pkgs, lib, config, impurelibs, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  impurelibs,
+  ...
+}:
 let
   cfg = import ./config.nix { inherit impurelibs; };
 in
@@ -20,7 +25,10 @@ in
   ];
 
   services.kubernetes = {
-    roles = ["master" "node"];
+    roles = [
+      "master"
+      "node"
+    ];
     masterAddress = cfg.kubeMasterHostname;
     apiserverAddress = "https://${cfg.kubeMasterHostname}:${toString cfg.kubeMasterAPIServerPort}";
     easyCerts = true;
@@ -62,11 +70,11 @@ in
 
   systemd.services.k8s-setup = {
     description = "Kubernetes setup";
-    wants = ["kubelet.service"];
-    wantedBy = ["multi-user.target"];
-    requires = ["kubelet.service"];
-    requiredBy = ["kubelet.service"];
-    after = ["kubelet.service"];
+    wants = [ "kubelet.service" ];
+    wantedBy = [ "multi-user.target" ];
+    requires = [ "kubelet.service" ];
+    requiredBy = [ "kubelet.service" ];
+    after = [ "kubelet.service" ];
     serviceConfig = {
       User = "root";
       Type = "oneshot";

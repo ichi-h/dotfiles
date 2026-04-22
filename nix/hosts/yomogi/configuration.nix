@@ -1,4 +1,10 @@
-{ config, pkgs, vars, impurelibs, ... }:
+{
+  config,
+  pkgs,
+  vars,
+  impurelibs,
+  ...
+}:
 {
   imports = [
     ../../modules/base
@@ -15,12 +21,19 @@
 
   boot = {
     kernelPackages = pkgs.linuxKernel.packages.linux_rpi4;
-    kernelModules = [ "ceph" "rbd" ];
+    kernelModules = [
+      "ceph"
+      "rbd"
+    ];
     kernelParams = [
       "systemd.unified_cgroup_hierarchy=1"
       "cgroup_enable=memory"
     ];
-    initrd.availableKernelModules = [ "xhci_pci" "usbhid" "usb_storage" ];
+    initrd.availableKernelModules = [
+      "xhci_pci"
+      "usbhid"
+      "usb_storage"
+    ];
     loader = {
       grub.enable = false;
       generic-extlinux-compatible.enable = true;
@@ -31,16 +44,22 @@
     hostName = "yomogi"; # Define your hostname.
     networkmanager.unmanaged = [ "end0" ];
     interfaces.end0 = {
-      ipv4.addresses = [{
-        address = impurelibs.secrets.ip-address-yomogi.private;
-        prefixLength = 24;
-      }];
+      ipv4.addresses = [
+        {
+          address = impurelibs.secrets.ip-address-yomogi.private;
+          prefixLength = 24;
+        }
+      ];
     };
     defaultGateway = vars.default-gateway;
-    nameservers = [ vars.default-gateway "8.8.8.8" ];
+    nameservers = [
+      vars.default-gateway
+      "8.8.8.8"
+    ];
   };
 
   hardware.enableRedistributableFirmware = true;
 
-  users.users."${impurelibs.secrets.username}".hashedPassword = impurelibs.secrets.hashed-user-passwd-yomogi;
+  users.users."${impurelibs.secrets.username}".hashedPassword =
+    impurelibs.secrets.hashed-user-passwd-yomogi;
 }

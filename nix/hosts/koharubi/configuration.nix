@@ -1,4 +1,9 @@
-{ vars, impurelibs, mcp-servers-nix, ... }:
+{
+  vars,
+  impurelibs,
+  mcp-servers-nix,
+  ...
+}:
 {
   imports = [
     ../../modules/darwin/core.nix

@@ -1,4 +1,10 @@
-{ config, pkgs, vars, impurelibs, ... }:
+{
+  config,
+  pkgs,
+  vars,
+  impurelibs,
+  ...
+}:
 {
   imports = [
     ../base/cli

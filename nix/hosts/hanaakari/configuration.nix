@@ -1,4 +1,10 @@
-{ config, pkgs, vars, impurelibs, ... }:
+{
+  config,
+  pkgs,
+  vars,
+  impurelibs,
+  ...
+}:
 let
   interface = "enp1s0";
   wolModule = (import ../../modules/network/wakeonlan.nix) interface;
@@ -16,20 +22,29 @@ in
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelModules = [ "ceph" "rbd" ];
+  boot.kernelModules = [
+    "ceph"
+    "rbd"
+  ];
 
   networking = {
     hostName = "hanaakari"; # Define your hostname.
     networkmanager.unmanaged = [ interface ];
     interfaces.enp1s0 = {
-      ipv4.addresses = [{
-        address = impurelibs.secrets.ip-address-hanaakari.private;
-        prefixLength = 24;
-      }];
+      ipv4.addresses = [
+        {
+          address = impurelibs.secrets.ip-address-hanaakari.private;
+          prefixLength = 24;
+        }
+      ];
     };
     defaultGateway = vars.default-gateway;
-    nameservers = [ vars.default-gateway "8.8.8.8" ];
+    nameservers = [
+      vars.default-gateway
+      "8.8.8.8"
+    ];
   };
 
-  users.users."${impurelibs.secrets.username}".hashedPassword = impurelibs.secrets.hashed-user-passwd-hanaakari;
+  users.users."${impurelibs.secrets.username}".hashedPassword =
+    impurelibs.secrets.hashed-user-passwd-hanaakari;
 }

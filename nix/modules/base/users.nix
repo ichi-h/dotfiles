@@ -1,4 +1,9 @@
-{ pkgs, vars, impurelibs, ... }:
+{
+  pkgs,
+  vars,
+  impurelibs,
+  ...
+}:
 {
   users.mutableUsers = false;
 

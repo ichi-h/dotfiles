@@ -1,4 +1,9 @@
-{ pkgs, lib, impurelibs, ... }:
+{
+  pkgs,
+  lib,
+  impurelibs,
+  ...
+}:
 let
   cfg = import ./config.nix { inherit impurelibs; };
 in
@@ -17,23 +22,24 @@ in
     kubernetes
   ];
 
-  services.kubernetes = let
-    api = "https://${cfg.kubeMasterHostname}:${toString cfg.kubeMasterAPIServerPort}";
-  in
-  {
-    roles = ["node"];
-    masterAddress = cfg.kubeMasterHostname;
-    easyCerts = true;
+  services.kubernetes =
+    let
+      api = "https://${cfg.kubeMasterHostname}:${toString cfg.kubeMasterAPIServerPort}";
+    in
+    {
+      roles = [ "node" ];
+      masterAddress = cfg.kubeMasterHostname;
+      easyCerts = true;
 
-    # point kubelet and other services to kube-apiserver
-    kubelet.kubeconfig.server = api;
-    apiserverAddress = api;
+      # point kubelet and other services to kube-apiserver
+      kubelet.kubeconfig.server = api;
+      apiserverAddress = api;
 
-    # use coredns
-    addons.dns.enable = true;
+      # use coredns
+      addons.dns.enable = true;
 
-    kubelet.extraOpts = "--fail-swap-on=false --root-dir=/var/lib/kubelet";
-  };
+      kubelet.extraOpts = "--fail-swap-on=false --root-dir=/var/lib/kubelet";
+    };
 
   systemd.tmpfiles.rules = [
     "d /var/lib/kubelet 0755 root root -"

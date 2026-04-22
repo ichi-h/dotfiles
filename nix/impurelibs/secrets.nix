@@ -1,19 +1,23 @@
 let
-  getEnvWrapper = { key, default ? null }:
+  getEnvWrapper =
+    {
+      key,
+      default ? null,
+    }:
     let
       value = builtins.getEnv key;
     in
-      if value == "" then
-        if default != null then
-          default
-        else
-          throw "`${key}` is empty, or you are running in pure mode."
-      else
-        value;
+    if value == "" then
+      if default != null then default else throw "`${key}` is empty, or you are running in pure mode."
+    else
+      value;
 in
 {
   secrets = {
-    username = getEnvWrapper { key = "USERNAME"; default = "ichi"; };
+    username = getEnvWrapper {
+      key = "USERNAME";
+      default = "ichi";
+    };
 
     k8s-master-node-apitoken = getEnvWrapper { key = "K8S_MASTER_NODE_APITOKEN"; };
 
@@ -50,6 +54,9 @@ in
     mac-address-shiosai = getEnvWrapper { key = "MAC_ADDRESS_SHIOSAI"; };
     mac-address-fujibakama = getEnvWrapper { key = "MAC_ADDRESS_FUJIBAKAMA"; };
 
-    notify-webhook-url = getEnvWrapper { key = "NOTIFY_WEBHOOK_URL"; default = ""; };
+    notify-webhook-url = getEnvWrapper {
+      key = "NOTIFY_WEBHOOK_URL";
+      default = "";
+    };
   };
 }

@@ -6,7 +6,7 @@
     viAlias = true;
     vimAlias = true;
     plugins = with pkgs.vimPlugins; [
-      nvim-lspconfig	
+      nvim-lspconfig
     ];
     extraLuaConfig = builtins.readFile ./init.lua;
   };

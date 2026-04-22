@@ -1,4 +1,9 @@
-{ self, vars, impurelibs, ... }:
+{
+  self,
+  vars,
+  impurelibs,
+  ...
+}:
 {
   time.timeZone = "Asia/Tokyo";
 
@@ -33,7 +38,7 @@
       };
       menuExtraClock = {
         Show24Hour = true;
-        
+
         ShowDate = 0;
       };
     };

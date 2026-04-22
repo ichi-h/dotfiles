@@ -11,7 +11,10 @@ let
 
     nativeBuildInputs = [ pkgs.makeWrapper ];
 
-    phases = [ "unpackPhase" "installPhase" ];
+    phases = [
+      "unpackPhase"
+      "installPhase"
+    ];
 
     unpackPhase = ''
       tar -xzf $src

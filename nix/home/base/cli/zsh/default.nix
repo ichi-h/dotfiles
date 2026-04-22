@@ -1,4 +1,9 @@
-{ pkgs, config, impurelibs, ... }:
+{
+  pkgs,
+  config,
+  impurelibs,
+  ...
+}:
 {
   programs.zsh = {
     enable = true;
@@ -27,10 +32,8 @@
       LC_ALL = "ja_JP.UTF-8";
     };
     envExtra = builtins.readFile ./.zshenv;
-    initContent = 
-      builtins.replaceStrings
-        [ "%NOTIFY_WEBHOOK_URL%" ]
-        [ impurelibs.secrets.notify-webhook-url ]
+    initContent =
+      builtins.replaceStrings [ "%NOTIFY_WEBHOOK_URL%" ] [ impurelibs.secrets.notify-webhook-url ]
         (builtins.readFile ./.zshrc);
     plugins = [
       {
