@@ -27,6 +27,7 @@
       ".env"
       ".ichi-h/"
       ".sisyphus/"
+      "CLAUDE.local.md"
     ];
   };
 }

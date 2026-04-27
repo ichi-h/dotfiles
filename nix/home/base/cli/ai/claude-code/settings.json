@@ -1,6 +1,8 @@
 {
   "alwaysThinkingEnabled": true,
+  "enableAllProjectMcpServers": false,
   "permissions": {
+    "disableBypassPermissionsMode": "disable",
     "allow": [
       "mcp__serena__*",
       "mcp__metals__*",
