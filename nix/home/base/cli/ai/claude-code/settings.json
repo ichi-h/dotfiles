@@ -61,7 +61,14 @@
       "Bash(pbcopy *)",
       "Bash(pbpaste *)",
       "Bash(python3 *)",
-      "Bash(node *)"
+      "Bash(node *)",
+      "Bash(* .env*)",
+      "Bash(* ~/.ssh/*)",
+      "Bash(* ~/.aws/*)",
+      "Bash(* ~/.config/gh/*)",
+      "Bash(* ~/.git-credentials)",
+      "Bash(* ~/.netrc)",
+      "Bash(* ~/.npmrc)"
     ],
     "ask": []
   }
