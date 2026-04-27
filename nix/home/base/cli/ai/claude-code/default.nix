@@ -1,38 +1,52 @@
 { pkgs, ... }:
 let
-  claudeCode = pkgs.stdenv.mkDerivation {
+  manifest = builtins.fromJSON (builtins.readFile ./manifest.json);
+  platformKey =
+    let
+      os = if pkgs.stdenv.hostPlatform.isDarwin then "darwin" else "linux";
+      arch = if pkgs.stdenv.hostPlatform.isAarch64 then "arm64" else "x64";
+    in
+    "${os}-${arch}";
+  platformEntry = manifest.platforms.${platformKey};
+  baseUrl = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases";
+
+  claudeCode = pkgs.stdenvNoCC.mkDerivation {
     pname = "claude-code";
-    version = "2.1.112";
+    inherit (manifest) version;
 
     src = pkgs.fetchurl {
-      url = "https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-2.1.112.tgz";
-      sha256 = "sha256-hDeZaepToOX9IxqPd96+THyxfdlx9ICdENM/muyl3gk=";
+      url = "${baseUrl}/${manifest.version}/${platformKey}/claude";
+      sha256 = platformEntry.checksum;
     };
 
-    nativeBuildInputs = [ pkgs.makeWrapper ];
+    dontUnpack = true;
+    dontBuild = true;
+    dontStrip = true;
 
-    phases = [
-      "unpackPhase"
-      "installPhase"
-    ];
-
-    unpackPhase = ''
-      tar -xzf $src
-    '';
+    nativeBuildInputs =
+      [ pkgs.makeBinaryWrapper ]
+      ++ pkgs.lib.optionals pkgs.stdenv.hostPlatform.isElf [ pkgs.autoPatchelfHook ];
 
     installPhase = ''
       runHook preInstall
 
-      mkdir -p $out/lib/claude-code
-      cp -r package/* $out/lib/claude-code/
+      install -Dm755 $src $out/bin/claude
 
-      mkdir -p $out/bin
-      makeWrapper ${pkgs.nodejs}/bin/node $out/bin/claude \
-        --add-flags "$out/lib/claude-code/cli.js" \
+      wrapProgram $out/bin/claude \
         --set DISABLE_AUTOUPDATER 1 \
         --set-default FORCE_AUTOUPDATE_PLUGINS 1 \
         --set DISABLE_INSTALLATION_CHECKS 1 \
-        --prefix PATH : ${pkgs.lib.makeBinPath [ pkgs.procps ]}
+        --set USE_BUILTIN_RIPGREP 0 \
+        --prefix PATH : ${pkgs.lib.makeBinPath (
+          [
+            pkgs.procps
+            pkgs.ripgrep
+          ]
+          ++ pkgs.lib.optionals pkgs.stdenv.hostPlatform.isLinux [
+            pkgs.bubblewrap
+            pkgs.socat
+          ]
+        )}
 
       runHook postInstall
     '';

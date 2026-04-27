@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-NIX_FILE="$(cd "$(dirname "$0")/.." && pwd)/nix/home/base/cli/ai/claude-code/default.nix"
+DIR="$(cd "$(dirname "$0")/.." && pwd)/nix/home/base/cli/ai/claude-code"
+MANIFEST_FILE="$DIR/manifest.json"
+BASE_URL="https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases"
 
-current_version=$(grep 'version = ' "$NIX_FILE" | sed 's/.*version = "\(.*\)";/\1/')
-latest_version=$(npm view @anthropic-ai/claude-code version)
+current_version=$(jq -r '.version' "$MANIFEST_FILE")
+latest_version=$(curl -fsSL "$BASE_URL/latest")
 
 if [ "$current_version" = "$latest_version" ]; then
   echo "already up to date: $current_version"
@@ -13,13 +15,6 @@ fi
 
 echo "updating claude-code: $current_version -> $latest_version"
 
-url="https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-${latest_version}.tgz"
-sha256=$(nix-prefetch-url --type sha256 "$url" 2>/dev/null)
-
-sed -i '' \
-  -e "s|version = \"${current_version}\";|version = \"${latest_version}\";|" \
-  -e "s|url = \"https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-${current_version}.tgz\";|url = \"${url}\";|" \
-  -e "s|sha256 = \".*\";|sha256 = \"${sha256}\";|" \
-  "$NIX_FILE"
+curl -fsSL "$BASE_URL/$latest_version/manifest.json" --output "$MANIFEST_FILE"
 
 echo "done"
