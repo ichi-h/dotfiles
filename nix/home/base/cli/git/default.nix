@@ -28,6 +28,9 @@
       ".ichi-h/"
       ".sisyphus/"
       "CLAUDE.local.md"
+      ".serena/language_servers/"
+      ".serena/serena_config.yml"
+      ".serena/logs"
     ];
   };
 }
