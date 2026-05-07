@@ -31,7 +31,6 @@ in
   home.file = {
     ".copilot/copilot-instructions.md".source = ../AGENTS.md;
     ".copilot/skills".source = ../skills;
-    ".copilot/agents".source = ../agents;
     ".copilot/mcp-config.json".text = ''
       {
         "mcpServers" : ${builtins.readFile ../mcp/mcp-config.json}

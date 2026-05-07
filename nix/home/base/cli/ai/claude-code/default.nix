@@ -23,9 +23,10 @@ let
     dontBuild = true;
     dontStrip = true;
 
-    nativeBuildInputs =
-      [ pkgs.makeBinaryWrapper ]
-      ++ pkgs.lib.optionals pkgs.stdenv.hostPlatform.isElf [ pkgs.autoPatchelfHook ];
+    nativeBuildInputs = [
+      pkgs.makeBinaryWrapper
+    ]
+    ++ pkgs.lib.optionals pkgs.stdenv.hostPlatform.isElf [ pkgs.autoPatchelfHook ];
 
     installPhase = ''
       runHook preInstall
@@ -37,16 +38,18 @@ let
         --set-default FORCE_AUTOUPDATE_PLUGINS 1 \
         --set DISABLE_INSTALLATION_CHECKS 1 \
         --set USE_BUILTIN_RIPGREP 0 \
-        --prefix PATH : ${pkgs.lib.makeBinPath (
-          [
-            pkgs.procps
-            pkgs.ripgrep
-          ]
-          ++ pkgs.lib.optionals pkgs.stdenv.hostPlatform.isLinux [
-            pkgs.bubblewrap
-            pkgs.socat
-          ]
-        )}
+        --prefix PATH : ${
+          pkgs.lib.makeBinPath (
+            [
+              pkgs.procps
+              pkgs.ripgrep
+            ]
+            ++ pkgs.lib.optionals pkgs.stdenv.hostPlatform.isLinux [
+              pkgs.bubblewrap
+              pkgs.socat
+            ]
+          )
+        }
 
       runHook postInstall
     '';
@@ -58,7 +61,6 @@ in
   home.file = {
     ".claude/CLAUDE.md".source = ../AGENTS.md;
     ".claude/skills".source = ../skills;
-    ".claude/agents".source = ../agents;
     ".claude/settings.json".source = ./settings.json;
   };
 }

@@ -3,5 +3,6 @@
     ./copilot-cli
     ./claude-code
     ./mcp
+    ./agents
   ];
 }
