@@ -4,14 +4,14 @@
   claude = {
     tools = [
       "sql"
-      "skill"
-      "task"
-      "read_agent"
-      "list_agents"
-      "serena/read_memory"
-      "serena/list_memories"
-      "serena/think_about_task_adherence"
-      "serena/think_about_whether_you_are_done"
+      "Skill"
+      "Agent"
+      "Read"
+      "Bash"
+      "mcp__serena__read_memory"
+      "mcp__serena__list_memories"
+      "mcp__serena__think_about_task_adherence"
+      "mcp__serena__think_about_whether_you_are_done"
     ];
     model = null;
   };
