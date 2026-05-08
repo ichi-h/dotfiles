@@ -1,6 +1,7 @@
 {
   "alwaysThinkingEnabled": true,
   "enableAllProjectMcpServers": false,
+  "model": "sonnet",
   "permissions": {
     "disableBypassPermissionsMode": "disable",
     "allow": [
