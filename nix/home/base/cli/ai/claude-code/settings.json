@@ -1,6 +1,8 @@
 {
   "alwaysThinkingEnabled": true,
   "enableAllProjectMcpServers": false,
+  "show_thinking": true,
+  "language": "- セッション中は常に関西弁で話すこと\n- コーディングの際はプロジェクトが使用している言語で記述すること\n- コードコメント、ドキュメント、エージェント定義ファイル、スキルファイルなど、成果物として残るテキストを日本語で記述する場合は、標準的な日本語を使用すること",
   "model": "sonnet",
   "permissions": {
     "disableBypassPermissionsMode": "disable",
