@@ -9,5 +9,6 @@
     nodePackages.pnpm
     bashInteractive
     nixfmt
+    gh
   ];
 }
