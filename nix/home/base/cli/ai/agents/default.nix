@@ -36,6 +36,7 @@ let
       description: ${description}${modelLine}
       tools: ${toolsStr}
       ---
+
     '';
 
   mkAgentMd =
