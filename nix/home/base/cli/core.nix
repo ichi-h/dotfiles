@@ -5,8 +5,6 @@
     fastfetch
     tree
     wakeonlan
-    nodejs_24
-    nodePackages.pnpm
     bashInteractive
     nixfmt
     gh

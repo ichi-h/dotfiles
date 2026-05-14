@@ -4,6 +4,7 @@
     ./direnv
     ./git
     ./neovim
+    ./node
     ./theme-color
     ./tmux
     ./zsh
