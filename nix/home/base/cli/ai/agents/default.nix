@@ -7,9 +7,12 @@ let
     (import ./system-designer)
     (import ./plan-orchestrator)
     (import ./quick-orchestrator)
-    (import ./entp-reviewer)
-    (import ./intj-reviewer)
-    (import ./istp-reviewer)
+    (import ./code-reviewer)
+    (import ./architecture-reviewer)
+    (import ./performance-reviewer)
+    (import ./security-reviewer)
+    (import ./test-reviewer)
+    (import ./domain-reviewer)
   ];
 
   # Claude Code用: "tool1, tool2, tool3" 形式
