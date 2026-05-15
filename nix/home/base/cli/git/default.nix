@@ -29,9 +29,9 @@
       "CLAUDE.local.md"
       "settings.local.json"
       ".mcp.json"
-      ".serena/language_servers/"
-      ".serena/serena_config.yml"
-      ".serena/logs"
+      "**/.serena/language_servers/"
+      "**/.serena/serena_config.yml"
+      "**/.serena/logs"
     ];
   };
 }
