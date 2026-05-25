@@ -11,6 +11,7 @@
       "docker"
       "docker-compose"
       "awscli"
+      "poppler"
     ];
     casks = [
       "visual-studio-code"
