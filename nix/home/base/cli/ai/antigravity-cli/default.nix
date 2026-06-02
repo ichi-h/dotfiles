@@ -29,9 +29,14 @@ in
   home.packages = [ copilotCli ];
 
   home.file = {
-    ".gemini/AGENTS.md".source = ../AGENTS.md;
+    ".gemini/AGENTS.md".text = ''
+      - セッション中は常に関西弁で話すこと
+        - コーディングの際はプロジェクトが使用している言語で記述すること
+        - コードコメント、ドキュメント、エージェント定義ファイル、スキルファイルなど、成果物として残るテキストを日本語で記述する場合は、標準的な日本語を使用すること
+      ${builtins.readFile ../AGENTS.md}
+    '';
     ".gemini/skills".source = ../skills;
-    ".gemini/mcp-config.json".text = ''
+    ".gemini/config/mcp_config.json".text = ''
       {
         "mcpServers" : ${builtins.readFile ../mcp/mcp-config.json}
       }
