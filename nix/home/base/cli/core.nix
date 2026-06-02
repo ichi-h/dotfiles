@@ -8,5 +8,6 @@
     bashInteractive
     nixfmt
     gh
+    mermaid-cli
   ];
 }
