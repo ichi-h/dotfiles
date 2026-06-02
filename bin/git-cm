@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if ! git diff --staged --quiet 2>/dev/null; then
+  DIFF=$(git diff --staged)
+else
+  DIFF=$(git diff)
+
+  # 未追跡の新規ファイルを含める
+  UNTRACKED=$(git ls-files --others --exclude-standard 2>/dev/null)
+  if [ -n "$UNTRACKED" ]; then
+    while IFS= read -r file; do
+      DIFF+=$'\n'"New file: ${file}"$'\n'
+      DIFF+=$(cat "$file")$'\n'
+    done <<< "$UNTRACKED"
+  fi
+fi
+
+if [ -z "$DIFF" ]; then
+  echo "No changes to generate a commit message for." >&2
+  exit 1
+fi
+
+RECENT_COMMITS=$(git log --oneline -20 2>/dev/null || true)
+
+PROMPT="You are an expert developer. Based on the following git diff, generate a commit message in Conventional Commits format.
+
+Rules:
+- First line: \`type(scope): short summary\` (50 chars or less)
+  - type: feat, fix, refactor, chore, docs, test, style, perf, ci, build
+  - scope: infer from changed file paths (omit if unclear)
+- Blank line after the first line
+- Body: bullet points (starting with \`- \`) describing what was changed and why, with enough detail to understand the change
+- Detect the language (Japanese or English) from the recent commit messages below and write the commit message in that same language. If no prior commits exist, use English.
+- Output ONLY the commit message, nothing else
+
+Recent commits (for language detection):
+${RECENT_COMMITS}
+
+Git diff:
+${DIFF}"
+
+claude -p "$PROMPT" --model claude-haiku-4-5-20251001
