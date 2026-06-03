@@ -60,6 +60,7 @@ in
 
   home.file = {
     ".claude/CLAUDE.md".source = ../AGENTS.md;
+    ".claude/commands".source = ../commands;
     ".claude/skills".source = ../skills;
     ".claude/settings.json".source = ./settings.json;
   };
