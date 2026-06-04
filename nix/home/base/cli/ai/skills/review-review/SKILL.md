@@ -1,3 +1,8 @@
+---
+name: review-review
+description: Evaluate whether review findings are genuinely valid before acting on them. Use when the user explicitly instructs to scrutinize, challenge, or second-guess review findings — either immediately after a review or when review content is provided as input. Do NOT invoke autonomously after a review; wait for an explicit instruction from the user.
+---
+
 Evaluate whether review findings are genuinely valid before acting on them.
 
 ## Input
