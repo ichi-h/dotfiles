@@ -59,7 +59,7 @@ in
   home.packages = [ claudeCode ];
 
   home.file = {
-    ".claude/CLAUDE.md".source = ../AGENTS.md;
+    # ".claude/CLAUDE.md".source = ../AGENTS.md;
     ".claude/skills".source = ../skills;
     ".claude/settings.json".source = ./settings.json;
   };
