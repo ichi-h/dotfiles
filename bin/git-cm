@@ -26,11 +26,10 @@ RECENT_COMMITS=$(git log --oneline -20 2>/dev/null || true)
 PROMPT="You are an expert developer. Based on the following git diff, generate a commit message in Conventional Commits format.
 
 Rules:
-- First line: \`type(scope): short summary\` (50 chars or less)
+- First line: \`type(scope): summary\` (72 chars or less). Be descriptive enough that the change is clear without needing a body, but stay concise
   - type: feat, fix, refactor, chore, docs, test, style, perf, ci, build
   - scope: infer from changed file paths (omit if unclear)
-- Blank line after the first line
-- Body: bullet points (starting with \`- \`) describing what was changed and why, with enough detail to understand the change
+- Body: omit in almost all cases. Add only when the first line cannot convey critical context (e.g. non-obvious reason, important caveat). One or two short bullet points at most
 - Detect the language (Japanese or English) from the recent commit messages below and write the commit message in that same language. If no prior commits exist, use English.
 - Output ONLY the commit message, nothing else
 
