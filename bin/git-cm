@@ -39,4 +39,4 @@ ${RECENT_COMMITS}
 Git diff:
 ${DIFF}"
 
-claude -p "$PROMPT" --model claude-haiku-4-5-20251001
+claude -p "$PROMPT" --model claude-haiku-4-5-20251001 --effort low
