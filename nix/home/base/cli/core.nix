@@ -9,5 +9,6 @@
     nixfmt
     gh
     mermaid-cli
+    jq
   ];
 }
