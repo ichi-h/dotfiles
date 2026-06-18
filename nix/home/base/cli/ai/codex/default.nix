@@ -1,26 +1,42 @@
 { pkgs, ... }:
 let
+  manifest = builtins.fromJSON (builtins.readFile ./manifest.json);
+  platformKey =
+    let
+      arch =
+        if pkgs.stdenv.hostPlatform.isAarch64 then
+          "aarch64"
+        else
+          "x86_64";
+      os =
+        if pkgs.stdenv.hostPlatform.isDarwin then
+          "apple-darwin"
+        else
+          "unknown-linux-musl";
+    in
+    "${arch}-${os}";
+  platformEntry = manifest.platforms.${platformKey};
+  baseUrl = "https://github.com/openai/codex/releases/download";
+
   codex = pkgs.stdenv.mkDerivation {
     pname = "codex";
-    version = "0.140.0";
-    src = pkgs.fetchzip (
-      if pkgs.stdenv.hostPlatform.isDarwin then
-        {
-          url = "https://github.com/openai/codex/releases/download/rust-v0.140.0/codex-aarch64-apple-darwin.tar.gz";
-          sha256 = "sha256-S2juKqJ1Ctlq/n4R/nPWouz9NYiThSa4QnF1MGZv+9E=";
-        }
-      else
-        {
-          url = "https://github.com/openai/codex/releases/download/rust-v0.140.0/codex-x86_64-unknown-linux-musl.tar.gz";
-          sha256 = "sha256-AQKv2s06eOFD3Q5p8lK7OBLbfzQko3W4xd1mGFj3rss=";
-        }
-    );
-    phases = [ "installPhase" ];
+    inherit (manifest) version;
+
+    src = pkgs.fetchurl {
+      url = "${baseUrl}/${manifest.tag}/${platformEntry.asset}";
+      sha256 = platformEntry.checksum;
+    };
+
+    phases = [ "unpackPhase" "installPhase" ];
+    sourceRoot = ".";
     dontBuild = true;
+
     installPhase = ''
       runHook preInstall
+
       mkdir -p $out/bin
-      install -Dm755 $src/codex-* $out/bin/codex
+      install -Dm755 ./codex-* $out/bin/codex
+
       runHook postInstall
     '';
   };

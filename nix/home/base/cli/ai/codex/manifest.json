@@ -1,0 +1,27 @@
+{
+  "version": "0.141.0",
+  "tag": "rust-v0.141.0",
+  "publishedAt": "2026-06-18T04:43:06Z",
+  "platforms": {
+    "aarch64-apple-darwin": {
+      "asset": "codex-aarch64-apple-darwin.tar.gz",
+      "checksum": "abdead5feebc259decaaec33465423bbb7904b3049fa28e92209cb924693c0f4",
+      "size": 90924841
+    },
+    "x86_64-apple-darwin": {
+      "asset": "codex-x86_64-apple-darwin.tar.gz",
+      "checksum": "7b7398b93dd16a3123c87286e312a7942be3c13f9619fc587dfc05563fcbc888",
+      "size": 99133997
+    },
+    "aarch64-unknown-linux-musl": {
+      "asset": "codex-aarch64-unknown-linux-musl.tar.gz",
+      "checksum": "8c9f31811d659fcc17c5f1a21bc0971984469c9e3a63c2b39b61cc7694f3a101",
+      "size": 93907736
+    },
+    "x86_64-unknown-linux-musl": {
+      "asset": "codex-x86_64-unknown-linux-musl.tar.gz",
+      "checksum": "f1e2bf9fa0ba6eb82119d621b6b71bc38edd33c06dc2867b31a027052358957d",
+      "size": 101616661
+    }
+  }
+}
