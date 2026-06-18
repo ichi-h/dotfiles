@@ -1,8 +1,9 @@
 {
   imports = [
     ./antigravity-cli
-    ./copilot-cli
     ./claude-code
+    ./codex
+    ./copilot-cli
     ./mcp
     ./agents
   ];
