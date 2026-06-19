@@ -1,0 +1,103 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# 現在のディレクトリが Git リポジトリ内かチェック
+if ! git rev-parse --git-dir > /dev/null 2>&1; then
+  echo "エラー: Git リポジトリ内で実行してください" >&2
+  exit 1
+fi
+
+# メイン worktree のパスを取得
+MAIN_WORKTREE=$(git worktree list --porcelain | awk 'NR==1 && /^worktree /{print substr($0, 10)}')
+
+# デフォルトブランチを特定
+resolve_default_branch() {
+  git -C "$MAIN_WORKTREE" symbolic-ref refs/remotes/origin/HEAD 2>/dev/null \
+    | sed 's|refs/remotes/origin/||' \
+    && return
+  git -C "$MAIN_WORKTREE" remote show origin 2>/dev/null \
+    | awk '/HEAD branch/{print $NF}' \
+    && return
+  echo "master"
+}
+
+echo "リモート情報を更新しています..."
+git -C "$MAIN_WORKTREE" fetch --prune origin
+
+DEFAULT_BRANCH=$(resolve_default_branch)
+echo "デフォルトブランチ: $DEFAULT_BRANCH"
+echo ""
+
+# リモートでマージ済みのブランチ一覧（デフォルトブランチ・HEAD を除く）
+MERGED_BRANCHES=$(
+  git -C "$MAIN_WORKTREE" branch -r --merged "origin/$DEFAULT_BRANCH" \
+    | grep -v "origin/$DEFAULT_BRANCH$" \
+    | grep -v "origin/HEAD" \
+    | sed 's|[[:space:]]*origin/||'
+)
+
+# worktree 一覧を解析してパスとブランチのペアを出力
+list_worktrees() {
+  local path="" branch=""
+  while IFS= read -r line; do
+    case "$line" in
+      "worktree "*)  path="${line#worktree }" ;;
+      "branch "*)    branch="${line#branch refs/heads/}" ;;
+      "")
+        if [[ -n "$path" && -n "$branch" ]]; then
+          printf '%s\t%s\n' "$path" "$branch"
+        fi
+        path="" branch=""
+        ;;
+    esac
+  done < <(git -C "$MAIN_WORKTREE" worktree list --porcelain; echo "")
+}
+
+# 削除候補を収集（メインworktree・デフォルトブランチは除外）
+CANDIDATES=()
+while IFS=$'\t' read -r path branch; do
+  [[ "$path" == "$MAIN_WORKTREE" ]] && continue
+  [[ "$branch" == "$DEFAULT_BRANCH" ]] && continue
+  if echo "$MERGED_BRANCHES" | grep -qx "$branch"; then
+    CANDIDATES+=("$path	$branch")
+  fi
+done < <(list_worktrees)
+
+if [[ ${#CANDIDATES[@]} -eq 0 ]]; then
+  echo "削除対象の worktree はありません（リモートでマージ済みのブランチがありません）"
+  exit 0
+fi
+
+echo "削除候補の worktree（リモートでマージ済み）:"
+for item in "${CANDIDATES[@]}"; do
+  IFS=$'\t' read -r path branch <<< "$item"
+  printf "  [%s] %s\n" "$branch" "$path"
+done
+
+echo ""
+read -r -p "これらの worktree をすべて削除しますか？ (y/N): " CONFIRM
+if [[ ! "$CONFIRM" =~ ^[Yy]$ ]]; then
+  echo "キャンセルしました"
+  exit 0
+fi
+
+for item in "${CANDIDATES[@]}"; do
+  IFS=$'\t' read -r path branch <<< "$item"
+  echo ""
+  echo "削除しています: $path (branch: $branch)"
+
+  git -C "$MAIN_WORKTREE" worktree remove --force "$path"
+
+  if git -C "$MAIN_WORKTREE" show-ref --verify --quiet "refs/heads/$branch"; then
+    if git -C "$MAIN_WORKTREE" branch -d "$branch" 2>/dev/null; then
+      echo "  ブランチを削除しました: $branch"
+    else
+      echo "  警告: ブランチ $branch の削除に失敗しました（スキップ）"
+    fi
+  fi
+
+  echo "  完了: $path"
+done
+
+echo ""
+echo "すべての削除が完了しました"
