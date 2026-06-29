@@ -8,6 +8,7 @@
     ];
     casks = [
       "aws-vault"
+      "claude"
     ];
   };
 }
