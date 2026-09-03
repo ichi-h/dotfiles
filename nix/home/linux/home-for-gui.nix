@@ -13,5 +13,8 @@
     ./base
     ./gui
   ];
+
+  nixpkgs.config.allowUnfree = true;
+
   home.homeDirectory = "/home/${impurelibs.secrets.username}";
 }
