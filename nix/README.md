@@ -19,7 +19,7 @@ nix run nixpkgs#home-manager -- switch --flake .#(environment) --impure
 sudo direnv exec . nixos-rebuild switch --flake .#(environment) --impure
 
 # Rebuild nix-darwin
-sudo direnv exec . nix run nix-darwin/nix-darwin-25.11#darwin-rebuild -- switch --flake .#(environment) --impure
+sudo direnv exec . nix run nix-darwin/nix-darwin-26.05#darwin-rebuild -- switch --flake .#(environment) --impure
 ```
 
 ## Why not use sops-nix, agenix and so on?
