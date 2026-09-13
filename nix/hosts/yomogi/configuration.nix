@@ -35,8 +35,7 @@
       "mdio_bcm_unimac"
     ];
     loader = {
-      grub.enable = false;
-      generic-extlinux-compatible.enable = true;
+      systemd-boot.enable = true;
     };
   };
 
