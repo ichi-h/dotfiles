@@ -1,5 +1,6 @@
 {
   config,
+  lib,
   pkgs,
   vars,
   impurelibs,
@@ -7,20 +8,13 @@
 }:
 {
   imports = [
+    ./hardware-configuration.nix
     ../../modules/base
     ../../modules/k8s/master.nix
   ];
 
-  fileSystems = {
-    "/" = {
-      device = "/dev/disk/by-label/NIXOS_SD";
-      fsType = "ext4";
-      options = [ "noatime" ];
-    };
-  };
-
   boot = {
-    kernelPackages = pkgs.linuxKernel.packages.linux_rpi4;
+    kernel.sysctl."vm.mmap_rnd_bits" = lib.mkForce 24;
     kernelModules = [
       "ceph"
       "rbd"
@@ -33,6 +27,12 @@
       "xhci_pci"
       "usbhid"
       "usb_storage"
+      "vc4"
+      "pcie_brcmstb"
+      "reset-raspberrypi"
+      "bcm_phy_lib"
+      "broadcom"
+      "mdio_bcm_unimac"
     ];
     loader = {
       grub.enable = false;

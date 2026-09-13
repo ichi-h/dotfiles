@@ -41,11 +41,11 @@ in
     # This config is necessary on arm64
     addons.dns = {
       enable = true;
-      coredns = {
-        finalImageTag = "1.10.1";
-        imageDigest = "sha256:a0ead06651cf580044aeb0a0feba63591858fb2e43ade8c9dea45a6a89ae7e5e";
+      corednsImage = pkgs.dockerTools.pullImage {
+        finalImageTag = "1.14.7";
         imageName = "coredns/coredns";
-        sha256 = "0c4vdbklgjrzi6qc5020dvi8x3mayq4li09rrq2w0hcjdljj0yf9";
+        imageDigest = "sha256:7efd3c635b03efd68c4e8398fc45f0d993d0e9ab016f72c1cefb0fd6d01aa286";
+        hash = "sha256-twsVR8lvUW49wJLm9Sdafq8GiEyYablFPSb9cVcHDXw=";
       };
     };
 
