@@ -56,7 +56,7 @@
   codex = {
     sandbox_mode = "read-only";
     web_search = "live";
-    agents.enabled = false;
+    agents.enabled = true;
     mcp_servers.serena.disabled_tools = [
       "write_memory"
       "onboarding"
