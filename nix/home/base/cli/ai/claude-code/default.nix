@@ -56,10 +56,13 @@ let
   };
 in
 {
+  imports = [
+    (import ../skills ".claude/skills")
+  ];
+
   home.packages = [ claudeCode ];
 
   home.file = {
-    ".claude/skills".source = ../skills;
     ".claude/settings.json".source = ./settings.json;
   };
 }

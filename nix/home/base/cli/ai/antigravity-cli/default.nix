@@ -26,11 +26,14 @@ let
   };
 in
 {
+  imports = [
+    (import ../skills ".gemini/skills")
+  ];
+
   home.packages = [ copilotCli ];
 
   home.file = {
     ".gemini/AGENTS.md".source = ../AGENTS.md;
-    ".gemini/skills".source = ../skills;
     ".gemini/config/mcp_config.json".text = ''
       {
         "mcpServers" : ${builtins.readFile ../mcp/mcp-config.json}

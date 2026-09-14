@@ -52,6 +52,10 @@ let
   };
 in
 {
+  imports = [
+    (import ../skills ".codex/skills")
+  ];
+
   home.packages = [ codex ];
 
   home.file = {

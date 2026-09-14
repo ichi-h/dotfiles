@@ -26,11 +26,14 @@ let
   };
 in
 {
+  imports = [
+    (import ../skills ".copilot/skills")
+  ];
+
   home.packages = [ copilotCli ];
 
   home.file = {
     ".copilot/copilot-instructions.md".source = ../AGENTS.md;
-    ".copilot/skills".source = ../skills;
     ".copilot/mcp-config.json".text = ''
       {
         "mcpServers" : ${builtins.readFile ../mcp/mcp-config.json}
