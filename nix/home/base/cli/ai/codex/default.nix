@@ -1,21 +1,15 @@
 { pkgs, ... }:
 let
   manifest = builtins.fromJSON (builtins.readFile ./manifest.json);
+  manifestCodeModeHost = builtins.fromJSON (builtins.readFile ./manifest-code-mode-host.json);
   platformKey =
     let
-      arch =
-        if pkgs.stdenv.hostPlatform.isAarch64 then
-          "aarch64"
-        else
-          "x86_64";
-      os =
-        if pkgs.stdenv.hostPlatform.isDarwin then
-          "apple-darwin"
-        else
-          "unknown-linux-musl";
+      arch = if pkgs.stdenv.hostPlatform.isAarch64 then "aarch64" else "x86_64";
+      os = if pkgs.stdenv.hostPlatform.isDarwin then "apple-darwin" else "unknown-linux-musl";
     in
     "${arch}-${os}";
   platformEntry = manifest.platforms.${platformKey};
+  codeModeHostPlatformEntry = manifestCodeModeHost.platforms.${platformKey};
   baseUrl = "https://github.com/openai/codex/releases/download";
 
   codex = pkgs.stdenv.mkDerivation {
@@ -27,7 +21,15 @@ let
       sha256 = platformEntry.checksum;
     };
 
-    phases = [ "unpackPhase" "installPhase" ];
+    codeModeHostSrc = pkgs.fetchurl {
+      url = "${baseUrl}/${manifestCodeModeHost.tag}/${codeModeHostPlatformEntry.asset}";
+      sha256 = codeModeHostPlatformEntry.checksum;
+    };
+
+    phases = [
+      "unpackPhase"
+      "installPhase"
+    ];
     sourceRoot = ".";
     dontBuild = true;
 
@@ -36,6 +38,9 @@ let
 
       mkdir -p $out/bin
       install -Dm755 ./codex-* $out/bin/codex
+
+      tar xzf $codeModeHostSrc
+      install -Dm755 ./codex-code-mode-host-* $out/bin/codex-code-mode-host
 
       runHook postInstall
     '';
