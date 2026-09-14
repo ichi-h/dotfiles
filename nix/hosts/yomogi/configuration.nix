@@ -41,8 +41,8 @@
 
   networking = {
     hostName = "yomogi"; # Define your hostname.
-    networkmanager.unmanaged = [ "end0" ];
-    interfaces.end0 = {
+    networkmanager.unmanaged = [ "enabcm6e4ei0" ];
+    interfaces.enabcm6e4ei0 = {
       ipv4.addresses = [
         {
           address = impurelibs.secrets.ip-address-yomogi.private;
