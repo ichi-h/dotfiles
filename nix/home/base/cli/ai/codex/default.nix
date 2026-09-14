@@ -54,9 +54,13 @@ in
 {
   home.packages = [ codex ];
 
-  # /agents starts app-server from this fixed standalone path, not from PATH.
-  # Keep it on the same Nix-managed release as the CLI across HM switches.
-  # Use daemon start/restart; daemon bootstrap enables the upstream installer
-  # updater, which would replace this Home Manager-managed link.
-  home.file.".codex/packages/standalone/current".source = codex;
+  home.file = {
+    # /agents starts app-server from this fixed standalone path, not from PATH.
+    # Keep it on the same Nix-managed release as the CLI across HM switches.
+    # Use daemon start/restart; daemon bootstrap enables the upstream installer
+    # updater, which would replace this Home Manager-managed link.
+    ".codex/packages/standalone/current".source = codex;
+    ".codex/config.toml".source = ./config.toml;
+    ".codex/AGENTS.md".source = ../AGENTS.md;
+  };
 }
