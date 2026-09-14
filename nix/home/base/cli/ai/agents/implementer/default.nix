@@ -61,4 +61,9 @@
     ];
     model = null;
   };
+  codex = {
+    sandbox_mode = "workspace-write";
+    web_search = "disabled";
+    agents.enabled = false;
+  };
 }

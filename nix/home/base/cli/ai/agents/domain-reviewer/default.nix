@@ -30,4 +30,9 @@
     ];
     model = null;
   };
+  codex = {
+    sandbox_mode = "read-only";
+    web_search = "disabled";
+    agents.enabled = false;
+  };
 }
