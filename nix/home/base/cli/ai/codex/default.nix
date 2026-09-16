@@ -1,7 +1,6 @@
 { pkgs, ... }:
 let
   manifest = builtins.fromJSON (builtins.readFile ./manifest.json);
-  manifestCodeModeHost = builtins.fromJSON (builtins.readFile ./manifest-code-mode-host.json);
   platformKey =
     let
       arch = if pkgs.stdenv.hostPlatform.isAarch64 then "aarch64" else "x86_64";
@@ -9,7 +8,6 @@ let
     in
     "${arch}-${os}";
   platformEntry = manifest.platforms.${platformKey};
-  codeModeHostPlatformEntry = manifestCodeModeHost.platforms.${platformKey};
   baseUrl = "https://github.com/openai/codex/releases/download";
 
   codex = pkgs.stdenv.mkDerivation {
@@ -21,31 +19,52 @@ let
       sha256 = platformEntry.checksum;
     };
 
-    codeModeHostSrc = pkgs.fetchurl {
-      url = "${baseUrl}/${manifestCodeModeHost.tag}/${codeModeHostPlatformEntry.asset}";
-      sha256 = codeModeHostPlatformEntry.checksum;
-    };
-
     phases = [
       "unpackPhase"
       "installPhase"
     ];
-    sourceRoot = ".";
     dontBuild = true;
+
+    unpackPhase = ''
+      runHook preUnpack
+      mkdir source
+      tar xzf "$src" -C source
+      cd source
+      runHook postUnpack
+    '';
 
     installPhase = ''
       runHook preInstall
 
-      mkdir -p $out/bin
-      install -Dm755 ./codex-* $out/bin/codex
-
-      tar xzf $codeModeHostSrc
-      install -Dm755 ./codex-code-mode-host-* $out/bin/codex-code-mode-host
+      # Keep the upstream layout: Codex resolves bundled tools/resources
+      # relative to its executable and codex-package.json.
+      test -f codex-package.json
+      mkdir -p "$out"
+      cp -R ./. "$out/"
+      chmod 0755 "$out/bin/codex" "$out/bin/codex-code-mode-host" "$out/codex-path/rg"
+      ${pkgs.lib.optionalString pkgs.stdenv.hostPlatform.isLinux ''
+        chmod 0755 "$out/codex-resources/bwrap"
+      ''}
+      ln -s bin/codex "$out/codex"
 
       runHook postInstall
     '';
   };
 in
 {
+  imports = [
+    (import ../skills ".codex/skills")
+  ];
+
   home.packages = [ codex ];
+
+  home.file = {
+    # /agents starts app-server from this fixed standalone path, not from PATH.
+    # Keep it on the same Nix-managed release as the CLI across HM switches.
+    # Use daemon start/restart; daemon bootstrap enables the upstream installer
+    # updater, which would replace this Home Manager-managed link.
+    ".codex/packages/standalone/current".source = codex;
+    ".codex/config.toml".source = ./config.toml;
+    ".codex/AGENTS.md".source = ../AGENTS.md;
+  };
 }

@@ -36,7 +36,15 @@ in
       apiserverAddress = api;
 
       # use coredns
-      addons.dns.enable = true;
+      addons.dns = {
+        enable = true;
+        corednsImage = pkgs.dockerTools.pullImage {
+          finalImageTag = "1.14.7";
+          imageName = "coredns/coredns";
+          imageDigest = "sha256:7efd3c635b03efd68c4e8398fc45f0d993d0e9ab016f72c1cefb0fd6d01aa286";
+          hash = "sha256-sTDGI3KRCsB8Q8G5QHfDc2nDsg8FYNJ4fIxuGhsRUFU=";
+        };
+      };
 
       kubelet.extraOpts = "--fail-swap-on=false --root-dir=/var/lib/kubelet";
     };

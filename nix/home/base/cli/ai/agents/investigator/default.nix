@@ -53,4 +53,14 @@
     ];
     model = null;
   };
+  codex = {
+    sandbox_mode = "read-only";
+    web_search = "live";
+    agents.enabled = true;
+    mcp_servers.serena.disabled_tools = [
+      "write_memory"
+      "onboarding"
+    ];
+    developer_instructions = "メモリの保存やオンボーディングが必要な場合は、変更せず呼び出し元へ依頼する。";
+  };
 }

@@ -1,5 +1,8 @@
-{ lib, ... }:
+{ lib, pkgs, ... }:
 let
+  tomlFormat = pkgs.formats.toml { };
+  serena = (builtins.fromJSON (builtins.readFile ../mcp/mcp-config.json)).serena;
+
   agents = [
     (import ./orchestrator)
     (import ./implementer)
@@ -84,7 +87,38 @@ let
     }) agents
   );
 
+  # MCP のツール制限と sandbox は別の制約。接続設定は共通定義を再利用する。
+  codexAgentFiles = map (agent: {
+    name = "${agent.name}.toml";
+    source = tomlFormat.generate "${agent.name}.toml" (
+      lib.recursiveUpdate {
+        inherit (agent) name description;
+        mcp_servers.serena = {
+          inherit (serena) command args;
+          enabled_tools = map (lib.removePrefix "mcp__serena__") (
+            builtins.filter (lib.hasPrefix "mcp__serena__") agent.claude.tools
+          );
+        };
+      } agent.codex
+      // {
+        developer_instructions = builtins.readFile (./. + "/${agent.name}/content.md");
+      }
+    );
+  }) agents;
+
+  # Codex はセキュリティ上、シンボリックリンクされたエージェント定義を読み込まない。
+  # Home Manager の home.file はシンボリックリンクを作成するため、通常ファイルとして配置する。
+  installCodexAgentFiles = lib.concatMapStringsSep "\n" (agentFile: ''
+    $DRY_RUN_CMD rm -f "$HOME/.codex/agents/${agentFile.name}"
+    $DRY_RUN_CMD cp "${agentFile.source}" "$HOME/.codex/agents/${agentFile.name}"
+  '') codexAgentFiles;
+
 in
 {
   home.file = claudeAgentEntries // copilotAgentEntries;
+
+  home.activation.installCodexAgentFiles = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    $DRY_RUN_CMD mkdir -p "$HOME/.codex/agents"
+    ${installCodexAgentFiles}
+  '';
 }

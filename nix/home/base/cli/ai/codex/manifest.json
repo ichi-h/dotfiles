@@ -4,24 +4,24 @@
   "publishedAt": "2026-09-09T22:35:38Z",
   "platforms": {
     "aarch64-apple-darwin": {
-      "asset": "codex-aarch64-apple-darwin.tar.gz",
-      "checksum": "344310a0a591c1b192e04feff304321a69907c9498baaac331ca7e16ebcef9d7",
-      "size": 88080735
+      "asset": "codex-package-aarch64-apple-darwin.tar.gz",
+      "checksum": "427ca74c027049e0cd1a330d611e7f8d1fe0f1eb6a6d85ac16f61bcf2cb4a485",
+      "size": 112327068
     },
     "x86_64-apple-darwin": {
-      "asset": "codex-x86_64-apple-darwin.tar.gz",
-      "checksum": "1219c837d8f813b493a424c125c0038b5d9ca16279bc6d3fe6ce037a3e18a6e7",
-      "size": 95929450
+      "asset": "codex-package-x86_64-apple-darwin.tar.gz",
+      "checksum": "8052c6accbe0361bfbd424a10aa5f2226636ed8afb6dcbd5e6437993e57b16d8",
+      "size": 121834320
     },
     "aarch64-unknown-linux-musl": {
-      "asset": "codex-aarch64-unknown-linux-musl.tar.gz",
-      "checksum": "583b48df32804213bdcd338c2e5adb06b34340821fa757a726cc0a524fa33c27",
-      "size": 91768360
+      "asset": "codex-package-aarch64-unknown-linux-musl.tar.gz",
+      "checksum": "97d93e11df72d3c26772db019e6ea8bb72c246500d46b98c760839f3240355e6",
+      "size": 118112884
     },
     "x86_64-unknown-linux-musl": {
-      "asset": "codex-x86_64-unknown-linux-musl.tar.gz",
-      "checksum": "d7e18b2597ae8f242f5f31ee9e90deef48dbc9edd634d9868fb6435d08c07f02",
-      "size": 98981886
+      "asset": "codex-package-x86_64-unknown-linux-musl.tar.gz",
+      "checksum": "fc6e3e3b85f2cf7d664520ee5c66a7fe4aa12bae7d46834f47e2f165fd0d6f78",
+      "size": 126585776
     }
   }
 }

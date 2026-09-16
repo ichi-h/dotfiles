@@ -23,4 +23,8 @@
     ];
     model = null;
   };
+  codex = {
+    web_search = "disabled";
+    agents.enabled = true;
+  };
 }
