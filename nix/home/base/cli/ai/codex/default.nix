@@ -56,7 +56,12 @@ in
     (import ../skills ".codex/skills")
   ];
 
-  home.packages = [ codex ];
+  home.packages = [
+    codex
+
+    # dependencies
+    pkgs.bubblewrap  
+  ];
 
   home.file = {
     # /agents starts app-server from this fixed standalone path, not from PATH.
