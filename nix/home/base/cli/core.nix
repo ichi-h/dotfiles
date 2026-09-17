@@ -10,5 +10,6 @@
     gh
     mermaid-cli
     jq
+    sqlite
   ];
 }
