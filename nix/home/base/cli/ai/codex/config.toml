@@ -11,3 +11,9 @@ trust_level = "trusted"
 
 [projects."/Users/ichi/dev"]
 trust_level = "trusted"
+
+[projects."/home/ichi/dotfiles"]
+trust_level = "trusted"
+
+[projects."/home/ichi/dev"]
+trust_level = "trusted"
