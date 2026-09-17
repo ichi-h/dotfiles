@@ -50,6 +50,28 @@ let
       runHook postInstall
     '';
   };
+
+  codexWrapper = pkgs.writers.writePython3Bin "codex" { } ''
+    import json
+    import os
+    import sys
+    from pathlib import Path
+
+
+    def main() -> None:
+        project = json.dumps(str(Path.cwd()))
+        config = f'projects={{{project}={{trust_level="trusted"}}}}'
+        codex_root = Path(
+            "${codex}"
+        )
+        codex_path = codex_root / "bin" / "codex"
+        arguments = ["codex", "-c", config, *sys.argv[1:]]
+        os.execv(codex_path, arguments)
+
+
+    if __name__ == "__main__":
+        main()
+  '';
 in
 {
   imports = [
@@ -57,7 +79,9 @@ in
   ];
 
   home.packages = [
-    codex
+    # Expose the wrapper as `codex`; it invokes the packaged CLI by absolute
+    # path so that it cannot recurse into itself.
+    codexWrapper
 
     # dependencies
     pkgs.bubblewrap  
