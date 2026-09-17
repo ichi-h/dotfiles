@@ -32,9 +32,7 @@
       LC_ALL = "ja_JP.UTF-8";
     };
     envExtra = builtins.readFile ./.zshenv;
-    initContent =
-      builtins.replaceStrings [ "%NOTIFY_WEBHOOK_URL%" ] [ impurelibs.secrets.notify-webhook-url ]
-        (builtins.readFile ./.zshrc);
+    initContent = builtins.readFile ./.zshrc;
     plugins = [
       {
         name = "zsh-nix-shell";

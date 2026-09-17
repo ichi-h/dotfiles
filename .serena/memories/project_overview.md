@@ -38,7 +38,6 @@ Located at `nix/home/base/cli/copilot-cli/`:
   - `intj-reviewer` - INTJ型（戦略的）レビュアー。設計整合性・長期保守性の観点でレビュー
   - `entp-reviewer` - ENTP型（創造的）レビュアー。代替案・トレードオフ・リスクの観点でレビュー
 - `skills/` - Skill definitions:
-  - `notify` - 通知パターン
   - `review` - レビュー委譲パターン
   - `investigation` - 調査委譲パターン
   - `agent-delegation` - 【廃止済み】サブエージェント選択ガイド（各エージェントの description に移行済み）

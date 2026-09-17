@@ -53,10 +53,5 @@ in
     mac-address-yomogi = getEnvWrapper { key = "MAC_ADDRESS_YOMOGI"; };
     mac-address-shiosai = getEnvWrapper { key = "MAC_ADDRESS_SHIOSAI"; };
     mac-address-fujibakama = getEnvWrapper { key = "MAC_ADDRESS_FUJIBAKAMA"; };
-
-    notify-webhook-url = getEnvWrapper {
-      key = "NOTIFY_WEBHOOK_URL";
-      default = "";
-    };
   };
 }

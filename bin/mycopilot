@@ -29,7 +29,6 @@ env SHELL=$(which bash) copilot \
   --allow-tool "git(git_log)" \
   --allow-tool "git(git_show)" \
   --allow-tool "git(git_branch)" \
-  --allow-tool "notifier" \
   --deny-tool "shell(rm:*)" \
   --deny-tool "shell(rmdir:*)" \
   --deny-tool "shell(unlink:*)" \

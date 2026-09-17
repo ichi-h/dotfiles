@@ -1,4 +1,0 @@
-[submodule "notifier-mcp"]
-	path = notifier-mcp
-	url = https://github.com/ichi-h/notifer-mcp.git
-	branch = main
