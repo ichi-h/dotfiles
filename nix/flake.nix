@@ -19,6 +19,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    pi.url = "github:earendil-works/pi/stable";
+
     # xremap.url = "github:xremap/nix-flake";
   };
 
@@ -28,6 +30,8 @@
       nixpkgs,
       nix-darwin,
       home-manager,
+      mcp-servers-nix,
+      pi,
       # xremap,
       ...
     }@inputs:
@@ -79,40 +83,36 @@
         "linux-cui-x86" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = {
-            inherit inputs outputs;
+            inherit inputs outputs mcp-servers-nix pi;
             vars = import ./vars;
             impurelibs = import ./impurelibs;
-            mcp-servers-nix = inputs.mcp-servers-nix;
           };
           modules = [ ./home/linux/home-for-cui.nix ];
         };
         "linux-gui-x86" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = {
-            inherit inputs outputs;
+            inherit inputs outputs mcp-servers-nix pi;
             vars = import ./vars;
             impurelibs = import ./impurelibs;
-            mcp-servers-nix = inputs.mcp-servers-nix;
           };
           modules = [ ./home/linux/home-for-gui.nix ];
         };
         "linux-cui-aarch64" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.aarch64-linux;
           extraSpecialArgs = {
-            inherit inputs outputs;
+            inherit inputs outputs mcp-servers-nix pi;
             vars = import ./vars;
             impurelibs = import ./impurelibs;
-            mcp-servers-nix = inputs.mcp-servers-nix;
           };
           modules = [ ./home/linux/home-for-cui.nix ];
         };
         "darwin" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.aarch64-darwin;
           extraSpecialArgs = {
-            inherit inputs outputs;
+            inherit inputs outputs mcp-servers-nix pi;
             vars = import ./vars;
             impurelibs = import ./impurelibs;
-            mcp-servers-nix = inputs.mcp-servers-nix;
           };
           modules = [ ./home/darwin/home.nix ];
         };
@@ -125,7 +125,6 @@
             inherit inputs outputs self;
             vars = import ./vars;
             impurelibs = import ./impurelibs;
-            mcp-servers-nix = inputs.mcp-servers-nix;
           };
           modules = [
             ./hosts/koharubi/configuration.nix
@@ -137,7 +136,6 @@
             inherit inputs outputs self;
             vars = import ./vars;
             impurelibs = import ./impurelibs;
-            mcp-servers-nix = inputs.mcp-servers-nix;
           };
           modules = [
             ./hosts/ukigumo/configuration.nix

@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1789267039,
-        "narHash": "sha256-LWiBv9yAYFi2LPbUhDGHPGKYskJQjj2fw12OlyO1uQo=",
+        "lastModified": 1792274446,
+        "narHash": "sha256-AM1HmBeDnB2B3dSiXuCYeu7Me+lHNpz/P39lVxGJBuQ=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "ec172013fa62135f58fb58dd17ae9651e8f39727",
+        "rev": "ab3823b4b24c0c3ca984c1f3ee577fd6d667424c",
         "type": "github"
       },
       "original": {
@@ -28,11 +28,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1789641954,
-        "narHash": "sha256-L/2T45vxO/ZXsF8ESC5RwiQ6+q2PbzxNqWNAP074MQA=",
+        "lastModified": 1792146727,
+        "narHash": "sha256-WMw+liSrSoEkWKYOYjgLi2/vMdow216UkkgaLPdsDks=",
         "owner": "natsukium",
         "repo": "mcp-servers-nix",
-        "rev": "6cd5039064d0315bd6bdce84363dbb837c2197e8",
+        "rev": "1cba7df106cb8ddf92f73c09ea725283bd470675",
         "type": "github"
       },
       "original": {
@@ -78,12 +78,65 @@
         "type": "github"
       }
     },
+    "nixpkgs-darwin-x64": {
+      "locked": {
+        "lastModified": 1788334797,
+        "narHash": "sha256-nskSa8kDimM7F0VFSP8IdoSNo4G0vKzOtxwvOFpoGDI=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "c19db427a1fdfc7591c0b0baeb4665dcef2c61da",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-26.05-darwin",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1788316716,
+        "narHash": "sha256-bc7rSpXIdn9QWGNqfWcPZWOhEVF8NoeAZkWq0XWnf/k=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "3ed67ec0a4d3c7ab4ae1f04f8ee8df07bfa506a2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "pi": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_2",
+        "nixpkgs-darwin-x64": "nixpkgs-darwin-x64"
+      },
+      "locked": {
+        "lastModified": 1792090647,
+        "narHash": "sha256-AsutbwnjiwwLkB5tqLW+1GdGZyLmXsU0W+SNdNhJu7U=",
+        "owner": "earendil-works",
+        "repo": "pi",
+        "rev": "71023aec1546d6d677a65669c5665c0927ce0dd0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "earendil-works",
+        "ref": "stable",
+        "repo": "pi",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "home-manager": "home-manager",
         "mcp-servers-nix": "mcp-servers-nix",
         "nix-darwin": "nix-darwin",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "pi": "pi"
       }
     }
   },
