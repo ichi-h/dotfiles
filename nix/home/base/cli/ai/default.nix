@@ -5,6 +5,7 @@
     ./codex
     ./copilot-cli
     ./mcp
+    ./pi
     ./agents
   ];
 }
