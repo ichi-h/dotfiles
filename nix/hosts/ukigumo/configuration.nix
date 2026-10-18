@@ -1,7 +1,6 @@
 {
   vars,
   impurelibs,
-  mcp-servers-nix,
   ...
 }:
 {
