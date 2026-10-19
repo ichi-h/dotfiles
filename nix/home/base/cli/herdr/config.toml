@@ -4,7 +4,7 @@ onboarding = false
 prefix = "ctrl+t"
 
 split_vertical = "prefix+percent"
-split_horizontal = "prefix+quote"
+split_horizontal = 'prefix+"'
 
 [theme]
 name = "terminal"
