@@ -1,0 +1,18 @@
+onboarding = false
+
+[keys]
+prefix = "ctrl+t"
+
+split_vertical = "prefix+percent"
+split_horizontal = "prefix+quote"
+
+[theme]
+name = "terminal"
+auto_switch = false
+
+[ui]
+status_indicators = "dots"
+prompt_new_tab_name = false
+tab_bar_right = [
+  { type = "hostname" },
+]
