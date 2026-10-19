@@ -83,8 +83,10 @@ in
     # path so that it cannot recurse into itself.
     codexWrapper
 
+  ]
+  ++ pkgs.lib.optionals pkgs.stdenv.hostPlatform.isLinux [
     # dependencies
-    pkgs.bubblewrap  
+    pkgs.bubblewrap
   ];
 
   home.file = {
