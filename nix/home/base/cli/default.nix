@@ -3,6 +3,7 @@
     ./ai
     ./direnv
     ./git
+    ./herdr
     ./neovim
     ./node
     ./theme-color

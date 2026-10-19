@@ -21,6 +21,8 @@
 
     pi.url = "github:earendil-works/pi/stable";
 
+    herdr.url = "github:herdrdev/herdr";
+
     # xremap.url = "github:xremap/nix-flake";
   };
 
@@ -32,6 +34,7 @@
       home-manager,
       mcp-servers-nix,
       pi,
+      herdr,
       # xremap,
       ...
     }@inputs:
@@ -83,7 +86,13 @@
         "linux-cui-x86" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = {
-            inherit inputs outputs mcp-servers-nix pi;
+            inherit
+              inputs
+              outputs
+              mcp-servers-nix
+              pi
+              herdr
+              ;
             vars = import ./vars;
             impurelibs = import ./impurelibs;
           };
@@ -92,7 +101,13 @@
         "linux-gui-x86" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = {
-            inherit inputs outputs mcp-servers-nix pi;
+            inherit
+              inputs
+              outputs
+              mcp-servers-nix
+              pi
+              herdr
+              ;
             vars = import ./vars;
             impurelibs = import ./impurelibs;
           };
@@ -101,7 +116,13 @@
         "linux-cui-aarch64" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.aarch64-linux;
           extraSpecialArgs = {
-            inherit inputs outputs mcp-servers-nix pi;
+            inherit
+              inputs
+              outputs
+              mcp-servers-nix
+              pi
+              herdr
+              ;
             vars = import ./vars;
             impurelibs = import ./impurelibs;
           };
@@ -110,7 +131,13 @@
         "darwin" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.aarch64-darwin;
           extraSpecialArgs = {
-            inherit inputs outputs mcp-servers-nix pi;
+            inherit
+              inputs
+              outputs
+              mcp-servers-nix
+              pi
+              herdr
+              ;
             vars = import ./vars;
             impurelibs = import ./impurelibs;
           };
