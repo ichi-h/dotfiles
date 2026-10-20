@@ -25,5 +25,10 @@ in
       skills = [ "grilling" ];
       agents = allAgents;
     }
+    {
+      repository = "herdrdev/herdr";
+      skills = [ "herdr" ];
+      agents = allAgents;
+    }
   ];
 }

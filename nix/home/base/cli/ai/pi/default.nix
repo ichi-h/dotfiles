@@ -24,6 +24,10 @@ in
       packages = [
         "npm:billion-context"
         "npm:pi-web-access"
+        "npm:pi-subagents"
+        "npm:@juicesharp/rpiv-ask-user-question"
+        "npm:@juicesharp/rpiv-todo"
+        "npm:cc-safety-net"
       ];
     };
 
