@@ -1,3 +1,12 @@
+let
+  allAgents = [
+    "antigravity-cli"
+    "claude-code"
+    "codex"
+    "github-copilot"
+    "pi"
+  ];
+in
 {
   imports = [
     ./antigravity-cli
@@ -8,5 +17,13 @@
     ./pi
     ./agents
     ./agent-skills-manager
+  ];
+
+  agentSkillsManager.sources = [
+    {
+      repository = "mattpocock/skills";
+      skills = [ "grilling" ];
+      agents = allAgents;
+    }
   ];
 }

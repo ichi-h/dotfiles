@@ -26,10 +26,6 @@ let
   };
 in
 {
-  imports = [
-    (import ../skills ".gemini/skills")
-  ];
-
   home.packages = [ copilotCli ];
 
   home.file = {

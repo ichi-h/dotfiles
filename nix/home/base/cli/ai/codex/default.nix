@@ -74,10 +74,6 @@ let
   '';
 in
 {
-  imports = [
-    (import ../skills ".codex/skills")
-  ];
-
   home.packages = [
     # Expose the wrapper as `codex`; it invokes the packaged CLI by absolute
     # path so that it cannot recurse into itself.

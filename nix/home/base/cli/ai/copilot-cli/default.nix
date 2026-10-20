@@ -26,10 +26,6 @@ let
   };
 in
 {
-  imports = [
-    (import ../skills ".copilot/skills")
-  ];
-
   home.packages = [ copilotCli ];
 
   home.file = {

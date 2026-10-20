@@ -56,10 +56,6 @@ let
   };
 in
 {
-  imports = [
-    (import ../skills ".claude/skills")
-  ];
-
   home.packages = [ claudeCode ];
 
   home.file = {
