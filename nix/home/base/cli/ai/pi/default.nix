@@ -33,5 +33,7 @@ in
         key = impurelibs.secrets.openrouter-api-key-for-pi;
       };
     };
+
+    ".pi/agent/AGENTS.md".text = ../AGENTS.md;
   };
 }
