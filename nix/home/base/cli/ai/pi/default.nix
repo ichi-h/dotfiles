@@ -38,6 +38,12 @@ in
       };
     };
 
+    ".pi/agent/mcp.json".text = ''
+      {
+        "mcpServers" : ${builtins.readFile ../mcp/mcp-config.json}
+      }
+    '';
+
     ".pi/agent/AGENTS.md".source = ../AGENTS.md;
   };
 }

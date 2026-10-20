@@ -9,10 +9,5 @@
       "--enable-web-dashboard",
       "false"
     ]
-  },
-  "git": {
-    "type": "stdio",
-    "command": "mcp-server-git",
-    "args": []
   }
 }
