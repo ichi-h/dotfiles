@@ -7,5 +7,6 @@
     ./mcp
     ./pi
     ./agents
+    ./agent-skills-manager
   ];
 }
