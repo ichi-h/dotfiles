@@ -34,6 +34,6 @@ in
       };
     };
 
-    ".pi/agent/AGENTS.md".text = ../AGENTS.md;
+    ".pi/agent/AGENTS.md".source = ../AGENTS.md;
   };
 }
