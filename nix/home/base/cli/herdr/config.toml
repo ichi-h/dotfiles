@@ -16,3 +16,8 @@ prompt_new_tab_name = false
 tab_bar_right = [
   { type = "hostname" },
 ]
+
+[ui.sound]
+enabled = true
+# 相対パスはこの設定ファイルのディレクトリ基準で解決される
+path = "call-bell.mp3"
