@@ -8,6 +8,10 @@ let
   piDefault = pi.packages.${pkgs.system}.default;
 in
 {
+  imports = [
+    (import ./extensions ".pi/agent/extensions")
+  ];
+
   home.packages = [
     piDefault
   ];
@@ -17,6 +21,10 @@ in
       lastChangelogVersion = piDefault.version;
       defaultProvider = "openrouter";
       defaultModel = "deepseek/deepseek-v4.1-flash-1017";
+      packages = [
+        "npm:billion-context"
+        "npm:pi-web-access"
+      ];
     };
 
     ".pi/agent/auth.json".text = builtins.toJSON {
