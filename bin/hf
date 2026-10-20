@@ -1,0 +1,130 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# tf（tmux 版）の Herdr 版。
+# 現在のペインを 2x2 のグリッドに分割し、タブ名をディレクトリ名にする。
+#
+# 使い方:
+#   hf              # 現在のディレクトリのまま 2x2 に分割
+#   hf <directory>  # 指定ディレクトリで 2x2 に分割
+
+usage() {
+  cat <<'EOS'
+Usage: hf [<directory>]
+
+Herdr の現在のペインを 2x2 のグリッドに分割する。
+タブ名は常にディレクトリ名に変更する。
+<directory> を指定すると、各ペインの作業ディレクトリもそこに設定する。
+
+Options:
+  -h, --help  このヘルプを表示する
+EOS
+}
+
+if [ "${HERDR_ENV:-}" != 1 ]; then
+  echo "hf: Herdr のペイン内で実行してください（HERDR_ENV=1 が必要）" >&2
+  exit 1
+fi
+
+for arg in "$@"; do
+  case "$arg" in
+    -h | --help)
+      usage
+      exit 0
+      ;;
+  esac
+done
+
+target_dir=""
+if [ $# -gt 0 ]; then
+  if [ ! -d "$1" ]; then
+    echo "hf: ディレクトリではありません: $1" >&2
+    exit 1
+  fi
+  target_dir=$(cd -- "$1" && pwd -P)
+fi
+
+root_pane="${HERDR_PANE_ID}"
+tab_id="${HERDR_TAB_ID}"
+
+# タブ名に使うディレクトリを決める。
+# 引数があればそのディレクトリ、なければ現在のペインの cwd。
+label_dir="$target_dir"
+if [ -z "$label_dir" ]; then
+  # ペインの cwd は herdr pane get から取る（$PWD は実行経路でずれることがある）
+  pane_json=$(herdr pane get "$root_pane" 2>/dev/null || true)
+  if [ -n "$pane_json" ] && command -v jq >/dev/null 2>&1; then
+    label_dir=$(printf '%s' "$pane_json" | jq -r '.result.pane.cwd // empty' 2>/dev/null || true)
+  elif [ -n "$pane_json" ]; then
+    label_dir=$(printf '%s' "$pane_json" | sed -n 's/.*"cwd":"\([^"]*\)".*/\1/p' | head -n 1)
+  fi
+  [ -z "$label_dir" ] && label_dir="$PWD"
+fi
+
+# Herdr の応答 JSON から新しいペインの ID を取り出す
+# $1: herdr pane split の出力
+parse_pane_id() {
+  local json="$1" id=""
+  if command -v jq >/dev/null 2>&1; then
+    id=$(printf '%s' "$json" | jq -r '.result.pane.pane_id // empty' 2>/dev/null || true)
+  fi
+  if [ -z "$id" ]; then
+    id=$(printf '%s' "$json" | sed -n 's/.*"pane_id":"\([^"]*\)".*/\1/p' | head -n 1)
+  fi
+  printf '%s' "$id"
+}
+
+# $1: 分割対象のペイン ID, $2: 分割方向(right|down)
+split_pane() {
+  local target="$1" direction="$2" output pane_id
+  if [ -n "$target_dir" ]; then
+    output=$(herdr pane split "$target" --direction "$direction" --cwd "$target_dir" --no-focus)
+  else
+    output=$(herdr pane split "$target" --direction "$direction" --no-focus)
+  fi
+  pane_id=$(parse_pane_id "$output")
+  if [ -z "$pane_id" ]; then
+    echo "hf: ペインの分割に失敗しました: $output" >&2
+    exit 1
+  fi
+  printf '%s' "$pane_id"
+}
+
+# 左上 -> 右上 -> 左下 -> 右下 の順に分割する
+right_pane=$(split_pane "$root_pane" right)
+split_pane "$root_pane" down >/dev/null
+split_pane "$right_pane" down >/dev/null
+
+# 分割元のペインは cwd を引き継げないので、cd はシェルに送る。
+# 前面にエージェント等がいる場合は誤入力を避けて何もしない。
+is_shell_pane() {
+  local info name pid
+  info=$(herdr pane process-info --pane "$1" 2>/dev/null) || return 1
+  if command -v jq >/dev/null 2>&1; then
+    name=$(printf '%s' "$info" | jq -r '.result.process_info.foreground_processes[0].name // empty')
+    pid=$(printf '%s' "$info" | jq -r '.result.process_info.foreground_processes[0].pid // empty')
+  else
+    name=$(printf '%s' "$info" | sed -n 's/.*"name":"\([^"]*\)".*/\1/p' | head -n 1)
+    pid=$(printf '%s' "$info" | sed -n 's/.*"pid":\([0-9]*\).*/\1/p' | head -n 1)
+  fi
+  # 自分自身（hf）が前面プロセスならシェルからの呼び出しなので安全
+  [ -n "$pid" ] && [ "$pid" = "$$" ] && return 0
+  case "$name" in
+    sh | bash | zsh | fish | dash | ksh | nu | xonsh) return 0 ;;
+    *) return 1 ;;
+  esac
+}
+
+if [ -n "$target_dir" ]; then
+  if is_shell_pane "$root_pane"; then
+    printf -v quoted_dir '%q' "$target_dir"
+    herdr pane run "$root_pane" "cd -- $quoted_dir" >/dev/null
+  else
+    echo "hf: 現在のペインはシェルではないため、このペインだけ cd をスキップしました" >&2
+  fi
+fi
+
+# タブ名は常にディレクトリ名へ変更する
+if [ -n "$label_dir" ]; then
+  herdr tab rename "$tab_id" "$(basename -- "$label_dir")" >/dev/null
+fi
