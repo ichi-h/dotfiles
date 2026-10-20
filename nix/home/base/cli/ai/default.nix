@@ -21,6 +21,11 @@ in
 
   agentSkillsManager.sources = [
     {
+      repository = "ichi-h/skills";
+      skills = [ "task-management" ];
+      agents = allAgents;
+    }
+    {
       repository = "mattpocock/skills";
       skills = [ "grilling" ];
       agents = allAgents;
