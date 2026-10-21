@@ -23,7 +23,10 @@ in
   agentSkillsManager.sources = [
     {
       repository = "ichi-h/task-management";
-      skills = [ "task-management" ];
+      skills = [
+        "task-management"
+        "commit-per-task"
+      ];
       agents = allAgents;
     }
     {
