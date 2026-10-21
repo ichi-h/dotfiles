@@ -45,5 +45,6 @@ in
     '';
 
     ".pi/agent/AGENTS.md".source = ../AGENTS.md;
+    ".pi/agent/router-rules.json".source = ./router-rules.json;
   };
 }

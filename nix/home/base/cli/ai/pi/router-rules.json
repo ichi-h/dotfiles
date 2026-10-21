@@ -1,0 +1,25 @@
+{
+	"$schema": "https://pi.dev/schemas/models.schema.json",
+	"default": "deepseek/deepseek-v4.1-flash-1017",
+	"defaultThinkingLevel": "medium",
+	"classifier": {
+		"model": "~typesafe/jev-latest"
+	},
+	"categories": {
+		"complex-reasoning": {
+			"description": "複雑な推論、設計判断、難しいデバッグ、アーキテクチャ決定",
+			"model": "z-ai/glm-5.3",
+			"thinkingLevel": "high"
+		},
+		"code-review": {
+			"description": "コードレビュー、PR の確認、差分の指摘、バグの読み取り",
+			"model": "z-ai/glm-5.3",
+			"thinkingLevel": "medium"
+		},
+		"implementation": {
+			"description": "コードの実装、機能追加、リファクタリング、テストコード記述",
+			"model": "deepseek/deepseek-v4.1-flash-1017",
+			"thinkingLevel": "low"
+		}
+	}
+}
