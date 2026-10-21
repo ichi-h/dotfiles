@@ -19,8 +19,8 @@ in
   home.file = {
     ".pi/agent/settings.json".text = builtins.toJSON {
       lastChangelogVersion = piDefault.version;
-      defaultProvider = "openrouter";
-      defaultModel = "deepseek/deepseek-v4.1-flash-1017";
+      defaultProvider = "router";
+      defaultModel = "auto";
       packages = [
         "npm:billion-context"
         "npm:pi-web-access"
