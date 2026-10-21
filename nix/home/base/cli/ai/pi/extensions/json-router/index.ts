@@ -24,6 +24,11 @@
  * Jev classifier はカテゴリ名をそのまま criteria の選択肢として渡し、
  * ルール JSON に定義したカテゴリ名と突き合わせて振り分け先を解決する。
  * カテゴリ判定はセッション (branch) ごとに 1 回だけで、以降は state に保持する。
+ *
+ * thinking effort の自動調整:
+ *   カテゴリの thinkingLevel が未指定のとき、同じ classify 呼び出しで
+ *   「このタスクに必要な推論深度」も聞いて (score)、その結果で補完する。
+ *   明示指定があるカテゴリは指定値を優先し、pi 側のクランプに任せる。
  */
 import type { Message } from "@earendil-works/pi-ai";
 import type {
@@ -92,13 +97,24 @@ function lastUserText(messages: readonly Message[]): string {
 		.join("\n");
 }
 
-/** Jev classifier にプロンプトを投げてカテゴリを判定する。失敗時は null。 */
-async function classifyCategory(
+/** classify の判定結果 (カテゴリ + 自動調整された thinking level)。 */
+interface Classification {
+	category: string | null;
+	/** Jev が判定した推論深度 (未指定の thinkingLevel を補う)。 */
+	thinkingLevel?: string;
+}
+
+/**
+ * Jev classifier にプロンプトを投げてカテゴリと推論深度を判定する。
+ * 1 回の classify 呼び出しで両方を聞くのでレイテンシ増はゼロ。
+ * thinkingLevel は thinking effort 未指定のカテゴリの補完に使う。
+ */
+async function classifyPrompt(
 	ctx: ExtensionContext,
 	rules: RouterRules,
 	prompt: string,
 	signal: AbortSignal | undefined,
-): Promise<string | null> {
+): Promise<Classification> {
 	const jevId = rules.classifier?.model ?? "~typesafe/jev-latest";
 	const jev = ctx.modelRegistry.findOfType(
 		"classifier",
@@ -107,10 +123,10 @@ async function classifyCategory(
 	);
 	if (!jev) {
 		console.error(`[json-router] classifier ${jevId} が見つかりません`);
-		return null;
+		return { category: null };
 	}
 	const categoryNames = Object.keys(rules.categories);
-	if (categoryNames.length === 0) return null;
+	if (categoryNames.length === 0) return { category: null };
 
 	const result = await ctx.modelRegistry.classify(
 		jev,
@@ -128,25 +144,60 @@ async function classifyCategory(
 						}),
 					),
 				},
+				/**
+				 * thinking effort の自動調整。
+				 * ルールで thinkingLevel が未指定のカテゴリにだけ使う。
+				 * score (0..3) → low..max に丸める。trivial 判定でも off には
+				 * 落とさない (off はルールで明示指定したときだけ)。
+				 */
+				depth: {
+					type: "score",
+					instructions:
+						"How much reasoning does completing this task require?",
+					criteria: [
+						"low: ordinary fixes, small features, or questions with a clear approach",
+						"medium: multi-file changes, design choices, or careful debugging",
+						"high: cross-cutting refactors, subtle bugs, or architectural decisions",
+						"max: research-level analysis, security reasoning, or novel design",
+					],
+				},
 			},
 		},
 		{ signal },
 	);
-	if (result.stopReason !== "stop") return null;
-	const answer = result.answers.category;
-	if (answer.type !== "choice") return null;
-	return categoryNames.includes(answer.choice) ? answer.choice : null;
+	if (result.stopReason !== "stop") return { category: null };
+
+	const categoryAnswer = result.answers.category;
+	const category =
+		categoryAnswer.type === "choice" && categoryNames.includes(categoryAnswer.choice)
+			? categoryAnswer.choice
+			: null;
+
+	// score (0..3) を pi の thinking level (low..max) へ丸める。
+	// off は自動調整では使わない: ルールでの明示指定のみ許可。
+	const LEVELS = ["low", "medium", "high", "max"];
+	const depthAnswer = result.answers.depth;
+	let thinkingLevel: string | undefined;
+	if (depthAnswer.type === "score") {
+		const idx = Math.round(depthAnswer.score);
+		thinkingLevel = LEVELS[Math.min(Math.max(idx, 0), LEVELS.length - 1)];
+	}
+	return { category, thinkingLevel };
 }
 
 /** ルールから振り分け先 (model, thinkingLevel) を引く。 */
 function resolveRoute(
 	rules: RouterRules,
 	category: string | null,
+	/** Jev が判定した推論深度 (未指定のカテゴリの補完に使う)。 */
+	autoThinkingLevel?: string,
 ): { modelId: string; thinkingLevel?: string } {
 	if (category && rules.categories[category]) {
+		const rule = rules.categories[category];
 		return {
-			modelId: rules.categories[category].model,
-			thinkingLevel: rules.categories[category].thinkingLevel,
+			modelId: rule.model,
+			// ルールで明示指定されていればそれを優先、未指定なら Jev 判定で補完
+			thinkingLevel: rule.thinkingLevel ?? autoThinkingLevel,
 		};
 	}
 	return {
@@ -192,11 +243,16 @@ export default function (pi: ExtensionAPI) {
 				}
 			}
 
-			// 新規ユーザーメッセージ: Jev classifier でカテゴリ判定。
+			// 新規ユーザーメッセージ: Jev classifier でカテゴリと推論深度を判定。
 			const rules = loadRules();
 			const prompt = lastUserText(request.messages);
-			const category = await classifyCategory(ctx, rules, prompt, request.signal);
-			const r = resolveRoute(rules, category);
+			const { category, thinkingLevel: autoLevel } = await classifyPrompt(
+				ctx,
+				rules,
+				prompt,
+				request.signal,
+			);
+			const r = resolveRoute(rules, category, autoLevel);
 			const model = ctx.modelRegistry.find("openrouter", r.modelId);
 			if (!model) throw new Error(`openrouter/${r.modelId} がカタログにありません`);
 			const state: RouterState = {
