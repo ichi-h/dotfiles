@@ -26,6 +26,11 @@ in
       skills = [
         "task-management"
         "commit-per-task"
+        "review-to-ticket"
+        "review-prepare"
+        "review-dispatch"
+        "review-integrate"
+        "file-ticket"
       ];
       agents = allAgents;
     }
