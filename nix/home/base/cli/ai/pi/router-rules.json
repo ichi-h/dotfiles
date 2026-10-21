@@ -1,7 +1,5 @@
 {
-	"$schema": "https://pi.dev/schemas/models.schema.json",
-	"default": "deepseek/deepseek-v4.1-flash-1017",
-	"defaultThinkingLevel": "medium",
+	"default": "z-ai/glm-5.3-flash",
 	"classifier": {
 		"model": "~typesafe/jev-latest"
 	},
@@ -13,13 +11,15 @@
 		},
 		"code-review": {
 			"description": "コードレビュー、PR の確認、差分の指摘、バグの読み取り",
-			"model": "z-ai/glm-5.3",
-			"thinkingLevel": "medium"
+			"model": "z-ai/glm-5.3"
 		},
-		"implementation": {
-			"description": "コードの実装、機能追加、リファクタリング、テストコード記述",
-			"model": "deepseek/deepseek-v4.1-flash-1017",
-			"thinkingLevel": "low"
+		"complex-implementation": {
+			"description": "複雑なコードの実装・機能追加・リファクタリング・テストコード記述",
+			"model": "z-ai/glm-5.3"
+		},
+		"simple-implementation": {
+			"description": "簡単なコードの実装・機能追加・リファクタリング・テストコード記述",
+			"model": "deepseek/deepseek-v4.1-flash-1017"
 		}
 	}
 }
