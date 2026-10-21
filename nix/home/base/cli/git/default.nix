@@ -26,6 +26,7 @@
       ".direnv/"
       ".env"
       ".ichi-h/"
+      ".ichi/"
       "CLAUDE.local.md"
       "settings.local.json"
       ".mcp.json"
