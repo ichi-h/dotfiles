@@ -21,6 +21,7 @@ in
       lastChangelogVersion = piDefault.version;
       defaultProvider = "router";
       defaultModel = "auto";
+      defaultThinkingLevel = "low";
       packages = [
         "npm:billion-context"
         "npm:pi-web-access"

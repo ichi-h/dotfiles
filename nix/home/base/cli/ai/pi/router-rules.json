@@ -6,8 +6,7 @@
 	"categories": {
 		"complex-reasoning": {
 			"description": "複雑な推論、設計判断、難しいデバッグ、アーキテクチャ決定",
-			"model": "z-ai/glm-5.3",
-			"thinkingLevel": "high"
+			"model": "z-ai/glm-5.3"
 		},
 		"code-review": {
 			"description": "コードレビュー、PR の確認、差分の指摘、バグの読み取り",
