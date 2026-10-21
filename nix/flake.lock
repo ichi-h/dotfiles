@@ -172,7 +172,8 @@
         "mcp-servers-nix": "mcp-servers-nix",
         "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs_2",
-        "pi": "pi"
+        "pi": "pi",
+        "task-management": "task-management"
       }
     },
     "rust-overlay": {
@@ -193,6 +194,26 @@
       "original": {
         "owner": "oxalica",
         "repo": "rust-overlay",
+        "type": "github"
+      }
+    },
+    "task-management": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1792546470,
+        "narHash": "sha256-q5Me82wzjr8Fr3uVtnEEAilwuesHIL9PBB3fh9OKSsQ=",
+        "owner": "ichi-h",
+        "repo": "task-management",
+        "rev": "92891b71783361891823fd2dcbc7dcfe8b3a5038",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ichi-h",
+        "repo": "task-management",
         "type": "github"
       }
     }

@@ -23,6 +23,10 @@
 
     herdr.url = "github:herdrdev/herdr";
 
+    task-management = {
+      url = "github:ichi-h/task-management";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # xremap.url = "github:xremap/nix-flake";
   };
 
@@ -35,6 +39,7 @@
       mcp-servers-nix,
       pi,
       herdr,
+      task-management,
       # xremap,
       ...
     }@inputs:
@@ -92,6 +97,7 @@
               mcp-servers-nix
               pi
               herdr
+              task-management
               ;
             vars = import ./vars;
             impurelibs = import ./impurelibs;
@@ -107,6 +113,7 @@
               mcp-servers-nix
               pi
               herdr
+              task-management
               ;
             vars = import ./vars;
             impurelibs = import ./impurelibs;
@@ -122,6 +129,7 @@
               mcp-servers-nix
               pi
               herdr
+              task-management
               ;
             vars = import ./vars;
             impurelibs = import ./impurelibs;
@@ -137,6 +145,7 @@
               mcp-servers-nix
               pi
               herdr
+              task-management
               ;
             vars = import ./vars;
             impurelibs = import ./impurelibs;

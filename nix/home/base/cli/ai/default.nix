@@ -1,3 +1,4 @@
+{ pkgs, task-management, ... }:
 let
   allAgents = [
     "antigravity-cli"
@@ -21,7 +22,7 @@ in
 
   agentSkillsManager.sources = [
     {
-      repository = "ichi-h/skills";
+      repository = "ichi-h/task-management";
       skills = [ "task-management" ];
       agents = allAgents;
     }
@@ -36,4 +37,7 @@ in
       agents = allAgents;
     }
   ];
+
+  nixpkgs.overlays = [ task-management.overlays.default ];
+  home.packages = [ pkgs.task-management-viewer ];
 }
