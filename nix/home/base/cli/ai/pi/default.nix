@@ -20,7 +20,7 @@ in
     ".pi/agent/settings.json".text = builtins.toJSON {
       lastChangelogVersion = piDefault.version;
       defaultProvider = "openrouter";
-      defaultModel = "deepseek/deepseek-v4.1-flash-1017";
+      defaultModel = "z-ai/glm-5.3-flash";
       defaultThinkingLevel = "low";
       packages = [
         "npm:billion-context"
