@@ -14,7 +14,7 @@ in
     ./hardware-configuration.nix
     ../../modules/base
     ../../modules/k8s/node.nix
-    ../../modules/desktop
+    # ../../modules/desktop
     wolModule
   ];
 

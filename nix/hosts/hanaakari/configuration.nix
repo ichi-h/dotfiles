@@ -16,7 +16,7 @@ in
     ../../modules/coredns
     ../../modules/k8s/node.nix
     ../../modules/nginx/k8s-port-forward
-    ../../modules/desktop
+    # ../../modules/desktop
     wolModule
   ];
 
